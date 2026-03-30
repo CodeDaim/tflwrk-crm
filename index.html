@@ -488,15 +488,6 @@ async function sendOtp(){
   document.getElementById('btn-send-otp').style.display='none';
 }
 
-
-  const btn=document.getElementById('btn-verify-otp');
-  btn.disabled=true;btn.textContent='Controleren...';
-  const{data,error}=await sb.auth.verifyOtp({email,token,type:'email'});
-  btn.disabled=false;btn.textContent='Inloggen';
-  if(error){showLoginMsg('otp','Ongeldige of verlopen code','error');return;}
-  showApp(data.user);
-}
-
 function showLoginMsg(step,msg,type){
   const el=document.getElementById('login-msg-'+step);
   el.textContent=msg;el.className='login-msg '+type;el.style.display='block';
