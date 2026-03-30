@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAFELWERK CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --tw-accent:#511E26;
+  --tw-accent-hover:#3d161c;
+  --tw-bg:#ffffff;
+  --tw-surface:#f7f7f7;
+  --tw-text:#130002;
+  --tw-text-body:#4a3035;
+  --tw-border:#e0d8d9;
+  --tw-border-strong:#c9bfc0;
+  --font-head:'Montserrat',sans-serif;
+  --font-body:'Quicksand',sans-serif;
+}
+html,body{height:100%;min-height:700px;}
+.app{display:flex;height:100vh;background:var(--tw-bg);color:var(--tw-text);font-family:var(--font-body);font-weight:500;}
+.sidebar{width:220px;background:var(--tw-surface);border-right:1px solid var(--tw-border);display:flex;flex-direction:column;flex-shrink:0;}
+.sidebar-logo{padding:22px 20px 18px;border-bottom:1px solid var(--tw-border);display:flex;align-items:center;gap:10px;}
+.logo-placeholder{width:32px;height:32px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-placeholder img{width:32px;height:32px;object-fit:contain;}
+.logo-placeholder span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;letter-spacing:0.05em;}
+.sidebar-brand{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--tw-text);letter-spacing:0.04em;}
+.nav-body{flex:1;padding:14px 10px;}
+.nav-lbl{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.5;padding:0 10px;margin-bottom:4px;letter-spacing:0.08em;text-transform:uppercase;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 10px;cursor:pointer;font-family:var(--font-body);font-weight:500;font-size:13px;color:var(--tw-text-body);transition:background 0.12s,color 0.12s;border:1px solid transparent;margin-bottom:2px;}
+.nav-item:hover{background:var(--tw-border);color:var(--tw-text);}
+.nav-item.active{background:var(--tw-accent);color:#fff;border-color:var(--tw-accent);}
+.nav-ic{width:15px;text-align:center;font-size:13px;flex-shrink:0;}
+.sidebar-foot{padding:12px 10px;border-top:1px solid var(--tw-border);}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--tw-bg);}
+.topbar{background:var(--tw-bg);border-bottom:1px solid var(--tw-border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;flex-shrink:0;}
+.topbar-title{font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--tw-text);letter-spacing:0.02em;}
+.search-trigger{display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--tw-border);background:var(--tw-surface);cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--tw-text-body);transition:border-color 0.12s;}
+.search-trigger:hover{border-color:var(--tw-border-strong);}
+.kbd{font-family:var(--font-head);font-size:10px;background:var(--tw-border);padding:2px 6px;color:var(--tw-text-body);font-weight:600;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:1px solid var(--tw-border);background:var(--tw-bg);cursor:pointer;font-size:13px;font-family:var(--font-body);font-weight:500;color:var(--tw-text);transition:all 0.12s;}
+.btn:hover{background:var(--tw-surface);border-color:var(--tw-border-strong);}
+.btn:active{transform:scale(0.98);}
+.btn-accent{background:var(--tw-accent);border-color:var(--tw-accent);color:#fff;font-family:var(--font-head);font-weight:600;letter-spacing:0.02em;}
+.btn-accent:hover{background:var(--tw-accent-hover);border-color:var(--tw-accent-hover);}
+.btn-sm{padding:5px 10px;font-size:12px;}
+.btn-ghost{border-color:transparent;background:transparent;}
+.btn-ghost:hover{background:var(--tw-surface);border-color:var(--tw-border);}
+.btn-danger{background:transparent;border-color:#c9bfc0;color:#a32d2d;}
+.btn-danger:hover{background:#fcebeb;}
+.content{flex:1;overflow-y:auto;padding:24px;}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-bottom:24px;border:1px solid var(--tw-border);background:var(--tw-border);}
+.stat-card{background:var(--tw-bg);padding:18px 20px;}
+.stat-lbl{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.6;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;}
+.stat-val{font-family:var(--font-head);font-size:26px;font-weight:700;color:var(--tw-text);line-height:1;}
+.stat-sub{font-size:12px;color:var(--tw-text-body);margin-top:4px;}
+.section{display:none;flex-direction:column;flex:1;overflow:hidden;}
+.section.active{display:flex;}
+.filter-bar{padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:1px solid var(--tw-border);background:var(--tw-bg);}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0;border:1px solid var(--tw-border);}
+.client-card{background:var(--tw-bg);padding:20px;border-right:1px solid var(--tw-border);border-bottom:1px solid var(--tw-border);cursor:pointer;transition:background 0.12s;}
+.client-card:hover{background:var(--tw-surface);}
+.client-card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.client-logo{width:44px;height:44px;background:var(--tw-surface);border:1px solid var(--tw-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+.client-logo img{width:100%;height:100%;object-fit:contain;}
+.client-logo-ini{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--tw-accent);}
+.client-name{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);line-height:1.2;}
+.client-city{font-size:12px;color:var(--tw-text-body);margin-top:2px;}
+.client-card-body{font-size:12px;color:var(--tw-text-body);line-height:1.7;}
+.client-card-body a{color:var(--tw-accent);text-decoration:none;}
+.client-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--tw-border);}
+.badge{display:inline-flex;align-items:center;padding:3px 8px;font-family:var(--font-head);font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;}
+.badge-open{background:#faeeda;color:#633806;}
+.badge-bezig{background:#e6f1fb;color:#0c447c;}
+.badge-klaar{background:#eaf3de;color:#27500a;}
+.prio-dot{width:6px;height:6px;display:inline-block;margin-right:5px;flex-shrink:0;}
+.prio-hoog .prio-dot{background:#E24B4A;}
+.prio-middel .prio-dot{background:#BA7517;}
+.prio-laag .prio-dot{background:#639922;}
+.prio-lbl{display:inline-flex;align-items:center;font-size:12px;}
+.emp-av{width:26px;height:26px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:10px;font-weight:700;color:#fff;flex-shrink:0;}
+.tbl-wrap{border:1px solid var(--tw-border);overflow:hidden;}
+.data-table{width:100%;border-collapse:collapse;font-size:13px;}
+.data-table th{padding:10px 16px;text-align:left;font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.7;border-bottom:1px solid var(--tw-border);text-transform:uppercase;letter-spacing:0.06em;background:var(--tw-surface);}
+.data-table td{padding:12px 16px;border-bottom:1px solid var(--tw-border);color:var(--tw-text);font-family:var(--font-body);font-size:13px;vertical-align:middle;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tbody tr:hover td{background:var(--tw-surface);cursor:pointer;}
+.panel{background:var(--tw-bg);border:1px solid var(--tw-border);margin-bottom:16px;}
+.panel-head{padding:14px 18px;border-bottom:1px solid var(--tw-border);display:flex;align-items:center;justify-content:space-between;background:var(--tw-surface);}
+.panel-head h3{font-family:var(--font-head);font-size:11px;font-weight:700;color:var(--tw-text);text-transform:uppercase;letter-spacing:0.07em;}
+.detail-hero{background:var(--tw-bg);border:1px solid var(--tw-border);padding:20px;margin-bottom:16px;}
+.detail-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+.detail-logo{width:56px;height:56px;background:var(--tw-surface);border:1px solid var(--tw-border);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.detail-logo img{width:100%;height:100%;object-fit:contain;}
+.detail-logo-ini{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--tw-accent);}
+.detail-name{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--tw-text);}
+.detail-sub{font-size:13px;color:var(--tw-text-body);margin-top:3px;}
+.fields-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:16px;background:var(--tw-border);}
+.field-block{background:var(--tw-surface);padding:10px 14px;}
+.field-lbl{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.6;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
+.field-val{font-size:13px;color:var(--tw-text);font-family:var(--font-body);}
+.field-val a{color:var(--tw-accent);text-decoration:none;}
+.drive-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--tw-accent);text-decoration:none;padding:5px 10px;border:1px solid var(--tw-accent);font-family:var(--font-head);font-weight:600;letter-spacing:0.03em;transition:all 0.12s;}
+.drive-btn:hover{background:var(--tw-accent);color:#fff;}
+.emp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0;border:1px solid var(--tw-border);}
+.emp-card{background:var(--tw-bg);padding:18px;border-right:1px solid var(--tw-border);border-bottom:1px solid var(--tw-border);}
+.emp-card-av{width:40px;height:40px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
+.back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--tw-text-body);cursor:pointer;margin-bottom:16px;font-family:var(--font-body);transition:color 0.12s;}
+.back-link:hover{color:var(--tw-text);}
+.modal-wrap{display:none;position:fixed;inset:0;background:rgba(19,0,2,0.45);z-index:200;align-items:center;justify-content:center;}
+.modal-wrap.open{display:flex;}
+.modal{background:var(--tw-bg);width:520px;max-width:95vw;max-height:90vh;overflow-y:auto;border:1px solid var(--tw-border-strong);}
+.modal-head{padding:18px 20px;border-bottom:1px solid var(--tw-border);background:var(--tw-surface);display:flex;align-items:center;justify-content:space-between;}
+.modal-head h3{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);letter-spacing:0.02em;}
+.modal-body{padding:20px;}
+.modal-foot{padding:14px 20px;border-top:1px solid var(--tw-border);display:flex;gap:8px;justify-content:flex-end;background:var(--tw-surface);}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;font-family:var(--font-head);font-size:11px;font-weight:600;color:var(--tw-text-body);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--tw-border);background:var(--tw-surface);color:var(--tw-text);font-size:13px;font-family:var(--font-body);font-weight:500;outline:none;transition:border-color 0.12s;border-radius:0;}
+input:focus,select:focus,textarea:focus{border-color:var(--tw-accent);}
+textarea{resize:vertical;min-height:70px;line-height:1.5;}
+.logo-upload-area{border:1px dashed var(--tw-border-strong);padding:16px;text-align:center;cursor:pointer;background:var(--tw-surface);transition:border-color 0.12s;}
+.logo-upload-area:hover{border-color:var(--tw-accent);}
+.logo-upload-area p{font-size:12px;color:var(--tw-text-body);margin-top:6px;font-family:var(--font-body);}
+.logo-preview-img{width:60px;height:60px;object-fit:contain;display:none;border:1px solid var(--tw-border);margin:8px auto 0;}
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(19,0,2,0.45);z-index:300;align-items:flex-start;justify-content:center;padding-top:80px;}
+.search-overlay.open{display:flex;}
+.search-box{background:var(--tw-bg);border:1px solid var(--tw-border-strong);width:540px;max-width:95vw;}
+.search-box-inner{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--tw-border);}
+.search-box-inner input{border:none;background:transparent;font-size:15px;font-family:var(--font-head);font-weight:600;padding:0;color:var(--tw-text);width:100%;}
+.search-box-inner input:focus{border:none;outline:none;}
+.search-results{padding:8px 0;max-height:320px;overflow-y:auto;}
+.search-result-item{padding:10px 16px;cursor:pointer;font-size:13px;color:var(--tw-text);display:flex;align-items:center;gap:10px;}
+.search-result-item:hover{background:var(--tw-surface);}
+.search-result-type{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.5;text-transform:uppercase;margin-left:auto;}
+.search-empty{padding:24px 16px;text-align:center;color:var(--tw-text-body);font-size:13px;font-family:var(--font-body);}
+.settings-section{margin-bottom:28px;}
+.settings-section h4{font-family:var(--font-head);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--tw-text-body);opacity:0.6;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--tw-border);}
+.settings-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--tw-border);}
+.settings-row:last-child{border-bottom:none;}
+.settings-lbl{font-family:var(--font-body);font-size:13px;color:var(--tw-text);font-weight:500;}
+.settings-sub{font-size:12px;color:var(--tw-text-body);margin-top:2px;}
+.logo-upload-row{border:1px dashed var(--tw-border-strong);padding:14px;display:flex;align-items:center;gap:14px;background:var(--tw-surface);width:100%;}
+.current-logo-preview{width:48px;height:48px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.current-logo-preview img{width:100%;height:100%;object-fit:contain;}
+.current-logo-preview span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:14px;}
+.hidden{display:none!important;}
+.late-badge{font-size:10px;font-family:var(--font-head);font-weight:600;background:#fcebeb;color:#a32d2d;padding:1px 5px;margin-left:4px;}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-placeholder" id="sidebar-logo-el"><span id="sidebar-logo-txt">TW</span></div>
+      <span class="sidebar-brand" id="sidebar-brand-txt">TAFELWERK</span>
+    </div>
+    <div class="nav-body">
+      <div class="nav-lbl">Menu</div>
+      <div class="nav-item active" id="nav-dash" onclick="go('dash')"><span class="nav-ic">▦</span>Dashboard</div>
+      <div class="nav-item" id="nav-clients" onclick="go('clients')"><span class="nav-ic">◉</span>Klanten</div>
+      <div class="nav-item" id="nav-tasks" onclick="go('tasks')"><span class="nav-ic">☑</span>Taken</div>
+      <div class="nav-item" id="nav-team" onclick="go('team')"><span class="nav-ic">♟</span>Team</div>
+    </div>
+    <div class="sidebar-foot">
+      <div class="nav-item" id="nav-settings" onclick="go('settings')"><span class="nav-ic">⚙</span>Instellingen</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <span class="topbar-title" id="topbar-title">Dashboard</span>
+      <div class="search-trigger" onclick="openSearch()">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
+        <span>Zoeken...</span>
+        <span class="kbd">⌘K</span>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="section active" id="sec-dash">
+      <div class="content">
+        <div class="stat-row" id="dash-stats"></div>
+        <div class="panel">
+          <div class="panel-head"><h3>Openstaande taken</h3><button class="btn btn-sm btn-accent" onclick="go('tasks')">Alle taken</button></div>
+          <div class="tbl-wrap" style="border:none;">
+            <table class="data-table"><thead><tr><th>Taak</th><th>Klant</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th></tr></thead>
+            <tbody id="dash-tasks-body"></tbody></table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KLANTEN -->
+    <div class="section" id="sec-clients">
+      <div class="filter-bar">
+        <input id="q-clients" placeholder="Filter klanten..." oninput="renderClients()" style="width:200px;">
+        <button class="btn btn-accent" onclick="openModal('client')">+ Klant toevoegen</button>
+      </div>
+      <div class="content">
+        <div id="clients-list-wrap">
+          <div class="card-grid" id="clients-grid"></div>
+        </div>
+        <div id="client-detail-wrap" class="hidden"></div>
+      </div>
+    </div>
+
+    <!-- TAKEN -->
+    <div class="section" id="sec-tasks">
+      <div class="filter-bar">
+        <div style="display:flex;gap:8px;">
+          <select id="f-status" onchange="renderTasks()" style="width:130px;">
+            <option value="">Alle statussen</option>
+            <option value="Open">Open</option>
+            <option value="Bezig">Bezig</option>
+            <option value="Klaar">Klaar</option>
+          </select>
+          <select id="f-prio" onchange="renderTasks()" style="width:130px;">
+            <option value="">Alle prioriteiten</option>
+            <option value="Hoog">Hoog</option>
+            <option value="Middel">Middel</option>
+            <option value="Laag">Laag</option>
+          </select>
+        </div>
+        <button class="btn btn-accent" onclick="openModal('task')">+ Taak toevoegen</button>
+      </div>
+      <div class="content">
+        <div class="tbl-wrap">
+          <table class="data-table"><thead><tr><th>Taak</th><th>Klant</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th><th></th></tr></thead>
+          <tbody id="tasks-body"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="section" id="sec-team">
+      <div class="filter-bar">
+        <span></span>
+        <button class="btn btn-accent" onclick="openModal('employee')">+ Teamlid toevoegen</button>
+      </div>
+      <div class="content">
+        <div class="emp-grid" id="emp-grid"></div>
+      </div>
+    </div>
+
+    <!-- INSTELLINGEN -->
+    <div class="section" id="sec-settings">
+      <div class="content">
+        <div style="max-width:560px;">
+          <div class="settings-section">
+            <h4>Bedrijfsidentiteit</h4>
+            <div class="settings-row">
+              <div><div class="settings-lbl">Bedrijfsnaam</div><div class="settings-sub">Getoond in de navigatiebalk</div></div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input id="s-brandname" style="width:160px;" placeholder="TAFELWERK">
+                <button class="btn btn-sm btn-accent" onclick="saveBrand()">Opslaan</button>
+              </div>
+            </div>
+            <div class="settings-row" style="flex-direction:column;align-items:flex-start;gap:12px;">
+              <div><div class="settings-lbl">Eigen logo</div><div class="settings-sub">Vervang de initialen in de navigatiebalk</div></div>
+              <div class="logo-upload-row">
+                <div class="current-logo-preview" id="settings-logo-preview"><span id="settings-logo-ini">TW</span></div>
+                <div style="flex:1;">
+                  <div style="font-size:13px;color:var(--tw-text);font-family:var(--font-body);margin-bottom:4px;">Huidig logo</div>
+                  <div style="font-size:12px;color:var(--tw-text-body);margin-bottom:10px;">PNG of SVG, bij voorkeur vierkant (min. 64×64px)</div>
+                  <label style="cursor:pointer;">
+                    <input type="file" id="logo-file-input" accept="image/*" style="display:none;width:auto;" onchange="handleLogoUpload(this)">
+                    <span class="btn btn-sm" style="display:inline-flex;">Logo uploaden</span>
+                  </label>
+                  <button class="btn btn-sm btn-danger" style="margin-left:8px;" onclick="removeLogo()">Verwijderen</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-section">
+            <h4>Informatie</h4>
+            <div class="settings-row">
+              <div class="settings-lbl">Versie</div>
+              <div style="font-size:13px;color:var(--tw-text-body);font-family:var(--font-body);">1.0 — TAFELWERK CRM</div>
+            </div>
+            <div class="settings-row">
+              <div class="settings-lbl">Sneltoets zoeken</div>
+              <div style="font-size:12px;color:var(--tw-text-body);font-family:var(--font-body);">⌘K of Ctrl+K</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: KLANT -->
+<div class="modal-wrap" id="mod-client">
+  <div class="modal">
+    <div class="modal-head"><h3 id="mod-client-title">Klant toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Bedrijfsnaam *</label><input id="c-name" placeholder="Naam van het bedrijf"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Contactpersoon</label><input id="c-contact" placeholder="Voor- en achternaam"></div>
+        <div class="form-group"><label>E-mailadres</label><input id="c-email" placeholder="naam@bedrijf.nl"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Telefoonnummer</label><input id="c-phone" placeholder="+31 6 12345678"></div>
+        <div class="form-group"><label>Stad</label><input id="c-city" placeholder="Amsterdam"></div>
+      </div>
+      <div class="form-group"><label>Adres</label><input id="c-address" placeholder="Straatnaam en huisnummer"></div>
+      <div class="form-group"><label>Google Drive map</label><input id="c-drive" placeholder="https://drive.google.com/drive/folders/..."></div>
+      <div class="form-group">
+        <label>Logo van de klant</label>
+        <div class="logo-upload-area" onclick="document.getElementById('c-logo-input').click()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto;display:block;color:var(--tw-text-body);opacity:0.5;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <p>Klik om een logo te uploaden (PNG, JPG, SVG)</p>
+          <img id="c-logo-preview" class="logo-preview-img">
+        </div>
+        <input type="file" id="c-logo-input" accept="image/*" style="display:none;width:auto;" onchange="previewClientLogo(this)">
+      </div>
+      <div class="form-group"><label>Notities</label><textarea id="c-notes" placeholder="Extra informatie..."></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModals()">Annuleren</button>
+      <button class="btn btn-accent" onclick="saveClient()">Opslaan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: TAAK -->
+<div class="modal-wrap" id="mod-task">
+  <div class="modal">
+    <div class="modal-head"><h3 id="mod-task-title">Taak toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Taakomschrijving *</label><input id="t-title" placeholder="Beschrijf de taak"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Klant</label><select id="t-client"></select></div>
+        <div class="form-group"><label>Toegewezen aan</label><select id="t-emp"></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Deadline</label><input type="date" id="t-deadline"></div>
+        <div class="form-group"><label>Prioriteit</label>
+          <select id="t-prio"><option value="Laag">Laag</option><option value="Middel" selected>Middel</option><option value="Hoog">Hoog</option></select>
+        </div>
+      </div>
+      <div class="form-group"><label>Status</label>
+        <select id="t-status"><option value="Open">Open</option><option value="Bezig">Bezig</option><option value="Klaar">Klaar</option></select>
+      </div>
+      <div class="form-group"><label>Notitie</label><textarea id="t-note" placeholder="Aanvullende beschrijving..."></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModals()">Annuleren</button>
+      <button class="btn btn-accent" onclick="saveTask()">Opslaan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: MEDEWERKER -->
+<div class="modal-wrap" id="mod-employee">
+  <div class="modal">
+    <div class="modal-head"><h3>Teamlid toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Voornaam *</label><input id="e-first" placeholder="Voornaam"></div>
+        <div class="form-group"><label>Achternaam *</label><input id="e-last" placeholder="Achternaam"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Functie</label><input id="e-role" placeholder="Designer, Copywriter..."></div>
+        <div class="form-group"><label>E-mailadres</label><input id="e-email" placeholder="naam@tafelwerk.nl"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModals()">Annuleren</button>
+      <button class="btn btn-accent" onclick="saveEmp()">Toevoegen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ZOEKEN -->
+<div class="search-overlay" id="search-overlay" onclick="maybeCloseSearch(event)">
+  <div class="search-box">
+    <div class="search-box-inner">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
+      <input id="search-input" placeholder="Zoek klant, taak of teamlid..." oninput="doSearch()" autocomplete="off">
+    </div>
+    <div class="search-results" id="search-results"><div class="search-empty">Begin met typen om te zoeken...</div></div>
+  </div>
+</div>
+
+<script>
+let eCid=null,eTid=null,clientLogoData=null;
+const SECTIONS=['dash','clients','tasks','team','settings'];
+const TITLES={dash:'Dashboard',clients:'Klanten',tasks:'Taken',team:'Team',settings:'Instellingen'};
+
+function db(){
+  try{return{c:JSON.parse(localStorage.getItem('tw_c')||'[]'),t:JSON.parse(localStorage.getItem('tw_t')||'[]'),e:JSON.parse(localStorage.getItem('tw_e')||'[]'),s:JSON.parse(localStorage.getItem('tw_s')||'{"brand":"TAFELWERK","logo":null}')};}
+  catch{return{c:[],t:[],e:[],s:{brand:'TAFELWERK',logo:null}};}
+}
+function save(d){localStorage.setItem('tw_c',JSON.stringify(d.c));localStorage.setItem('tw_t',JSON.stringify(d.t));localStorage.setItem('tw_e',JSON.stringify(d.e));localStorage.setItem('tw_s',JSON.stringify(d.s));}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function ini(n){if(!n)return'?';const p=n.trim().split(' ');return(p[0][0]+(p[1]?p[1][0]:'')).toUpperCase();}
+function fmtD(d){if(!d)return'—';return new Date(d+'T00:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'short'});}
+function sBadge(s){const m={Open:'badge-open',Bezig:'badge-bezig',Klaar:'badge-klaar'};return`<span class="badge ${m[s]||''}">${s}</span>`;}
+function pBadge(p){const cl=p.toLowerCase();return`<span class="prio-lbl prio-${cl}"><span class="prio-dot"></span>${p}</span>`;}
+
+function applyBranding(){
+  const d=db();const brand=d.s?.brand||'TAFELWERK';
+  document.getElementById('sidebar-brand-txt').textContent=brand;
+  document.title=brand+' CRM';
+  const logoEl=document.getElementById('sidebar-logo-el');
+  const settPrev=document.getElementById('settings-logo-preview');
+  if(d.s?.logo){
+    logoEl.innerHTML=`<img src="${d.s.logo}" style="width:32px;height:32px;object-fit:contain;">`;
+    settPrev.innerHTML=`<img src="${d.s.logo}" style="width:48px;height:48px;object-fit:contain;">`;
+  }else{
+    const ab=brand.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    logoEl.innerHTML=`<span style="color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;">${ab}</span>`;
+    settPrev.innerHTML=`<span>${ab}</span>`;
+  }
+  const si=document.getElementById('s-brandname');if(si)si.value=brand;
+}
+
+function saveBrand(){
+  const d=db();d.s=d.s||{};
+  d.s.brand=document.getElementById('s-brandname').value.trim()||'TAFELWERK';
+  save(d);applyBranding();
+}
+
+function handleLogoUpload(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=function(e){const d=db();d.s=d.s||{};d.s.logo=e.target.result;save(d);applyBranding();};
+  r.readAsDataURL(f);
+}
+
+function removeLogo(){const d=db();d.s=d.s||{};d.s.logo=null;save(d);applyBranding();}
+
+function previewClientLogo(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=function(e){
+    clientLogoData=e.target.result;
+    const prev=document.getElementById('c-logo-preview');prev.src=e.target.result;prev.style.display='block';
+  };r.readAsDataURL(f);
+}
+
+function go(sec){
+  SECTIONS.forEach(s=>{
+    const el=document.getElementById('sec-'+s);
+    if(el){el.classList.toggle('active',s===sec);}
+    const nav=document.getElementById('nav-'+s);
+    if(nav)nav.classList.toggle('active',s===sec);
+  });
+  document.getElementById('topbar-title').textContent=TITLES[sec]||'';
+  if(sec==='dash')renderDash();
+  if(sec==='clients'){document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');renderClients();}
+  if(sec==='tasks')renderTasks();
+  if(sec==='team')renderTeam();
+  if(sec==='settings')applyBranding();
+}
+
+function renderDash(){
+  const d=db();
+  const open=d.t.filter(t=>t.status!=='Klaar').length;
+  const bezig=d.t.filter(t=>t.status==='Bezig').length;
+  const klaar=d.t.filter(t=>t.status==='Klaar').length;
+  document.getElementById('dash-stats').innerHTML=`
+    <div class="stat-card"><div class="stat-lbl">Klanten</div><div class="stat-val">${d.c.length}</div><div class="stat-sub">totaal</div></div>
+    <div class="stat-card"><div class="stat-lbl">Open taken</div><div class="stat-val">${open}</div><div class="stat-sub">te doen</div></div>
+    <div class="stat-card"><div class="stat-lbl">In uitvoering</div><div class="stat-val">${bezig}</div><div class="stat-sub">bezig</div></div>
+    <div class="stat-card"><div class="stat-lbl">Afgerond</div><div class="stat-val">${klaar}</div><div class="stat-sub">klaar</div></div>`;
+  const rows=d.t.filter(t=>t.status!=='Klaar').sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);}).slice(0,8);
+  const tb=document.getElementById('dash-tasks-body');
+  if(!rows.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:28px;font-family:var(--font-body);">Geen openstaande taken</td></tr>';return;}
+  tb.innerHTML=rows.map(t=>{
+    const cl=d.c.find(c=>c.id===t.cid);const em=d.e.find(e=>e.id===t.eid);
+    const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();
+    return`<tr onclick="go('tasks')">
+      <td style="font-family:var(--font-head);font-weight:600;font-size:13px;">${t.title}</td>
+      <td>${cl?cl.name:'—'}</td>
+      <td>${em?em.first+' '+em.last:'—'}</td>
+      <td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td>
+      <td>${pBadge(t.prio)}</td>
+      <td>${sBadge(t.status)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderClients(){
+  const d=db();const q=(document.getElementById('q-clients')?.value||'').toLowerCase();
+  const list=d.c.filter(c=>!q||c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)||(c.city||'').toLowerCase().includes(q));
+  const grid=document.getElementById('clients-grid');
+  if(!list.length){grid.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;grid-column:1/-1;border:1px solid var(--tw-border);">Nog geen klanten toegevoegd</div>';return;}
+  grid.innerHTML=list.map(c=>{
+    const open=d.t.filter(t=>t.cid===c.id&&t.status!=='Klaar').length;
+    const total=d.t.filter(t=>t.cid===c.id).length;
+    const logoHtml=c.logo?`<img src="${c.logo}" style="width:44px;height:44px;object-fit:contain;">`:`<span class="client-logo-ini">${ini(c.name)}</span>`;
+    return`<div class="client-card" onclick="showClient('${c.id}')">
+      <div class="client-card-header">
+        <div class="client-logo">${logoHtml}</div>
+        <div><div class="client-name">${c.name}</div><div class="client-city">${c.city||'—'}</div></div>
+      </div>
+      <div class="client-card-body">
+        ${c.contact?`<div>${c.contact}</div>`:''}
+        ${c.email?`<div><a href="mailto:${c.email}" onclick="event.stopPropagation()">${c.email}</a></div>`:''}
+        ${c.phone?`<div>${c.phone}</div>`:''}
+      </div>
+      <div class="client-card-footer">
+        <span class="badge ${open>0?'badge-open':'badge-klaar'}">${open>0?open+' open':total+' taken'}</span>
+        ${c.drive?`<a href="${c.drive}" target="_blank" onclick="event.stopPropagation()" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Drive</a>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function showClient(id){
+  const d=db();const c=d.c.find(x=>x.id===id);if(!c)return;
+  document.getElementById('clients-list-wrap').classList.add('hidden');
+  const det=document.getElementById('client-detail-wrap');det.classList.remove('hidden');
+  const tasks=d.t.filter(t=>t.cid===id);
+  const logoHtml=c.logo?`<img src="${c.logo}" style="width:56px;height:56px;object-fit:contain;">`:`<span class="detail-logo-ini">${ini(c.name)}</span>`;
+  det.innerHTML=`
+    <div class="back-link" onclick="document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');">← Terug naar klanten</div>
+    <div class="detail-hero">
+      <div class="detail-hero-top">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div class="detail-logo">${logoHtml}</div>
+          <div>
+            <div class="detail-name">${c.name}</div>
+            <div class="detail-sub">${[c.address,c.city].filter(Boolean).join(', ')||'Geen adres'}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          ${c.drive?`<a href="${c.drive}" target="_blank" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Google Drive map</a>`:''}
+          <button class="btn btn-sm" onclick="editClient('${c.id}')">Bewerken</button>
+          <button class="btn btn-sm btn-danger" onclick="delClient('${c.id}')">Verwijderen</button>
+        </div>
+      </div>
+      <div class="fields-3">
+        <div class="field-block"><div class="field-lbl">Contactpersoon</div><div class="field-val">${c.contact||'—'}</div></div>
+        <div class="field-block"><div class="field-lbl">E-mail</div><div class="field-val"><a href="mailto:${c.email}">${c.email||'—'}</a></div></div>
+        <div class="field-block"><div class="field-lbl">Telefoon</div><div class="field-val">${c.phone||'—'}</div></div>
+      </div>
+      ${c.notes?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--tw-border);font-size:13px;color:var(--tw-text-body);font-family:var(--font-body);white-space:pre-wrap;">${c.notes}</div>`:''}
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Taken voor ${c.name}</h3><button class="btn btn-sm btn-accent" onclick="openTaskFor('${c.id}')">+ Taak toevoegen</button></div>
+      <div class="tbl-wrap" style="border:none;">
+        <table class="data-table"><thead><tr><th>Taak</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th><th></th></tr></thead>
+        <tbody>${tasks.length?tasks.map(t=>{const em=d.e.find(e=>e.id===t.eid);return`<tr>
+          <td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,60)}${t.note.length>60?'…':''}</div>`:''}</td>
+          <td>${em?em.first+' '+em.last:'—'}</td>
+          <td>${fmtD(t.deadline)}</td>
+          <td>${pBadge(t.prio)}</td>
+          <td>${sBadge(t.status)}</td>
+          <td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}','${c.id}')">✕</button></td>
+        </tr>`;}).join(''):`<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:28px;font-family:var(--font-body);">Geen taken voor deze klant</td></tr>`}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+function renderTasks(){
+  const d=db();
+  const sf=document.getElementById('f-status')?.value||'';
+  const pf=document.getElementById('f-prio')?.value||'';
+  let list=d.t;
+  if(sf)list=list.filter(t=>t.status===sf);
+  if(pf)list=list.filter(t=>t.prio===pf);
+  list.sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);});
+  const tb=document.getElementById('tasks-body');
+  if(!list.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--tw-text-body);padding:32px;font-family:var(--font-body);">Geen taken gevonden</td></tr>';return;}
+  tb.innerHTML=list.map(t=>{
+    const cl=d.c.find(c=>c.id===t.cid);const em=d.e.find(e=>e.id===t.eid);
+    const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();
+    return`<tr>
+      <td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,55)}${t.note.length>55?'…':''}</div>`:''}</td>
+      <td>${cl?`<span style="cursor:pointer;color:var(--tw-accent);font-family:var(--font-head);font-weight:600;" onclick="showClient('${cl.id}');go('clients')">${cl.name}</span>`:'—'}</td>
+      <td>${em?`<div style="display:flex;align-items:center;gap:7px;"><div class="emp-av" style="width:24px;height:24px;font-size:10px;">${ini(em.first+' '+em.last)}</div>${em.first} ${em.last}</div>`:'—'}</td>
+      <td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td>
+      <td>${pBadge(t.prio)}</td>
+      <td>${sBadge(t.status)}</td>
+      <td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}',null)">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderTeam(){
+  const d=db();const g=document.getElementById('emp-grid');
+  if(!d.e.length){g.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;">Nog geen teamleden toegevoegd</div>';return;}
+  g.innerHTML=d.e.map(e=>{
+    const name=e.first+' '+e.last;
+    const openT=d.t.filter(t=>t.eid===e.id&&t.status!=='Klaar').length;
+    return`<div class="emp-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div class="emp-card-av">${ini(name)}</div>
+        <div><div style="font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);">${name}</div><div style="font-size:12px;color:var(--tw-text-body);">${e.role||'—'}</div></div>
+      </div>
+      ${e.email?`<div style="font-size:12px;color:var(--tw-text-body);font-family:var(--font-body);margin-bottom:10px;">${e.email}</div>`:''}
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--tw-border);">
+        <span class="badge ${openT>0?'badge-open':'badge-klaar'}">${openT} open taken</span>
+        <button class="btn btn-sm btn-danger" style="padding:4px 8px;" onclick="delEmp('${e.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openModal(type){
+  if(type==='client'){eCid=null;clientLogoData=null;document.getElementById('mod-client-title').textContent='Klant toevoegen';['c-name','c-contact','c-email','c-phone','c-city','c-address','c-drive','c-notes'].forEach(i=>document.getElementById(i).value='');document.getElementById('c-logo-preview').style.display='none';}
+  if(type==='task'){eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';const d=db();fillSel(d,null,null);['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';}
+  if(type==='employee'){['e-first','e-last','e-role','e-email'].forEach(i=>document.getElementById(i).value='');}
+  document.getElementById('mod-'+type).classList.add('open');
+}
+
+function openTaskFor(cid){
+  eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';
+  const d=db();fillSel(d,cid,null);
+  ['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';
+  document.getElementById('mod-task').classList.add('open');
+}
+
+function fillSel(d,sc,se){
+  document.getElementById('t-client').innerHTML='<option value="">— Kies klant —</option>'+d.c.map(c=>`<option value="${c.id}"${c.id===sc?' selected':''}>${c.name}</option>`).join('');
+  document.getElementById('t-emp').innerHTML='<option value="">— Kies medewerker —</option>'+d.e.map(e=>`<option value="${e.id}"${e.id===se?' selected':''}>${e.first} ${e.last}</option>`).join('');
+}
+
+function closeModals(){document.querySelectorAll('.modal-wrap').forEach(m=>m.classList.remove('open'));eCid=null;eTid=null;}
+document.querySelectorAll('.modal-wrap').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)closeModals();}));
+
+function saveClient(){
+  const name=document.getElementById('c-name').value.trim();if(!name){alert('Vul een bedrijfsnaam in');return;}
+  const d=db();
+  const obj={id:eCid||uid(),name,contact:document.getElementById('c-contact').value,email:document.getElementById('c-email').value,phone:document.getElementById('c-phone').value,city:document.getElementById('c-city').value,address:document.getElementById('c-address').value,drive:document.getElementById('c-drive').value,notes:document.getElementById('c-notes').value,logo:clientLogoData};
+  if(eCid){const old=d.c.find(c=>c.id===eCid);if(!obj.logo&&old?.logo)obj.logo=old.logo;d.c=d.c.map(c=>c.id===eCid?obj:c);}else{d.c.push(obj);}
+  save(d);closeModals();renderClients();if(eCid)showClient(eCid);
+}
+
+function editClient(id){
+  const d=db();const c=d.c.find(x=>x.id===id);if(!c)return;
+  eCid=id;clientLogoData=null;
+  document.getElementById('mod-client-title').textContent='Klant bewerken';
+  ['name','contact','email','phone','city','address','drive','notes'].forEach(f=>document.getElementById('c-'+f).value=c[f]||'');
+  const prev=document.getElementById('c-logo-preview');
+  if(c.logo){prev.src=c.logo;prev.style.display='block';}else{prev.style.display='none';}
+  document.getElementById('mod-client').classList.add('open');
+}
+
+function delClient(id){if(!confirm('Klant verwijderen?'))return;const d=db();d.c=d.c.filter(c=>c.id!==id);save(d);document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');renderClients();}
+
+function saveTask(){
+  const title=document.getElementById('t-title').value.trim();if(!title){alert('Vul een taakomschrijving in');return;}
+  const d=db();
+  const obj={id:eTid||uid(),title,cid:document.getElementById('t-client').value,eid:document.getElementById('t-emp').value,deadline:document.getElementById('t-deadline').value,prio:document.getElementById('t-prio').value,status:document.getElementById('t-status').value,note:document.getElementById('t-note').value};
+  if(eTid)d.t=d.t.map(t=>t.id===eTid?obj:t);else d.t.push(obj);
+  save(d);closeModals();renderTasks();renderDash();
+}
+
+function editTask(id){
+  const d=db();const t=d.t.find(x=>x.id===id);if(!t)return;
+  eTid=id;document.getElementById('mod-task-title').textContent='Taak bewerken';
+  fillSel(d,t.cid,t.eid);
+  document.getElementById('t-title').value=t.title||'';
+  document.getElementById('t-deadline').value=t.deadline||'';
+  document.getElementById('t-prio').value=t.prio||'Middel';
+  document.getElementById('t-status').value=t.status||'Open';
+  document.getElementById('t-note').value=t.note||'';
+  document.getElementById('mod-task').classList.add('open');
+}
+
+function delTask(id,returnCid){if(!confirm('Taak verwijderen?'))return;const d=db();d.t=d.t.filter(t=>t.id!==id);save(d);if(returnCid)showClient(returnCid);else renderTasks();renderDash();}
+
+function saveEmp(){
+  const first=document.getElementById('e-first').value.trim(),last=document.getElementById('e-last').value.trim();
+  if(!first||!last){alert('Vul voor- en achternaam in');return;}
+  const d=db();d.e.push({id:uid(),first,last,role:document.getElementById('e-role').value,email:document.getElementById('e-email').value});
+  save(d);closeModals();renderTeam();
+}
+
+function delEmp(id){if(!confirm('Teamlid verwijderen?'))return;const d=db();d.e=d.e.filter(e=>e.id!==id);save(d);renderTeam();}
+
+function openSearch(){
+  document.getElementById('search-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('search-input').focus(),50);
+  doSearch();
+}
+function maybeCloseSearch(e){if(e.target===document.getElementById('search-overlay'))closeSearch();}
+function closeSearch(){document.getElementById('search-overlay').classList.remove('open');document.getElementById('search-input').value='';document.getElementById('search-results').innerHTML='<div class="search-empty">Begin met typen om te zoeken...</div>';}
+
+function doSearch(){
+  const q=document.getElementById('search-input').value.toLowerCase().trim();
+  const res=document.getElementById('search-results');
+  if(!q){res.innerHTML='<div class="search-empty">Begin met typen om te zoeken...</div>';return;}
+  const d=db();let hits=[];
+  d.c.filter(c=>c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)).forEach(c=>hits.push({type:'Klant',label:c.name,sub:c.contact||'',action:`showClient('${c.id}');go('clients');closeSearch()`}));
+  d.t.filter(t=>t.title.toLowerCase().includes(q)).forEach(t=>{const cl=d.c.find(c=>c.id===t.cid);hits.push({type:'Taak',label:t.title,sub:cl?cl.name:'',action:`go('tasks');closeSearch()`});});
+  d.e.filter(e=>(e.first+' '+e.last).toLowerCase().includes(q)||(e.role||'').toLowerCase().includes(q)).forEach(e=>hits.push({type:'Team',label:e.first+' '+e.last,sub:e.role||'',action:`go('team');closeSearch()`}));
+  if(!hits.length){res.innerHTML='<div class="search-empty">Geen resultaten gevonden</div>';return;}
+  res.innerHTML=hits.slice(0,10).map(h=>`<div class="search-result-item" onclick="${h.action}">
+    <div style="flex:1;"><div style="font-family:var(--font-head);font-weight:600;font-size:13px;">${h.label}</div>${h.sub?`<div style="font-size:11px;color:var(--tw-text-body);font-family:var(--font-body);">${h.sub}</div>`:''}</div>
+    <span class="search-result-type">${h.type}</span>
+  </div>`).join('');
+}
+
+document.addEventListener('keydown',function(e){
+  if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}
+  if(e.key==='Escape'){closeSearch();closeModals();}
+});
+
+applyBranding();
+renderDash();
+</script>
+</body>
+</html>
