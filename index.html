@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TAFELWERK CRM</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&family=Quicksand:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -29,7 +29,7 @@ html,body{height:100%;min-height:700px;}
 .login-logo{display:flex;align-items:center;gap:10px;margin-bottom:32px;}
 .login-logo-mark{width:36px;height:36px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .login-logo-mark span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:13px;}
-.login-logo-name{font-family:var(--font-head);font-weight:700;font-size:17px;color:var(--tw-text);letter-spacing:0.04em;}
+.login-logo-name{font-family:var(--font-head);font-weight:900;font-size:17px;color:var(--tw-text);letter-spacing:0.08em;text-transform:uppercase;}
 .login-title{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--tw-text);margin-bottom:6px;}
 .login-sub{font-size:13px;color:var(--tw-text-body);margin-bottom:28px;line-height:1.5;}
 .login-divider{display:flex;align-items:center;gap:12px;margin:20px 0;}
@@ -59,7 +59,7 @@ input:focus{border-color:var(--tw-accent);}
 .logo-placeholder{width:32px;height:32px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
 .logo-placeholder img{width:32px;height:32px;object-fit:contain;}
 .logo-placeholder span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;}
-.sidebar-brand{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--tw-text);letter-spacing:0.04em;}
+.sidebar-brand{font-family:var(--font-head);font-weight:900;font-size:15px;color:var(--tw-text);letter-spacing:0.08em;text-transform:uppercase;}
 .nav-body{flex:1;padding:14px 10px;}
 .nav-lbl{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.5;padding:0 10px;margin-bottom:4px;letter-spacing:0.08em;text-transform:uppercase;}
 .nav-item{display:flex;align-items:center;gap:9px;padding:9px 10px;cursor:pointer;font-family:var(--font-body);font-weight:500;font-size:13px;color:var(--tw-text-body);transition:background 0.12s,color 0.12s;border:1px solid transparent;margin-bottom:2px;}
@@ -200,7 +200,7 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
     <div class="login-box">
       <div class="login-logo">
         <div class="login-logo-mark" id="login-logo-mark"><span id="login-logo-ini">TW</span></div>
-        <span class="login-logo-name" id="login-logo-name">TAFELWERK</span>
+        <span class="login-logo-name" style="font-weight:900;text-transform:uppercase;letter-spacing:0.08em;" id="login-logo-name">TAFELWERK</span>
       </div>
       <div class="login-title">Inloggen</div>
       <div class="login-sub">Log in met je Google account of ontvang een eenmalige code per e-mail.</div>
@@ -221,21 +221,11 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
           <label>E-mailadres</label>
           <input type="email" id="login-email" placeholder="naam@tafelwerk.nl" onkeydown="if(event.key==='Enter')sendOtp()">
         </div>
-        <button class="btn-login" onclick="sendOtp()" id="btn-send-otp">Code versturen</button>
+        <button class="btn-login" onclick="sendOtp()" id="btn-send-otp">Link versturen</button>
         <div id="login-msg-email" class="login-msg" style="display:none;"></div>
       </div>
 
-      <div id="login-step-otp" class="login-step hide">
-        <div class="form-group">
-          <label>Eenmalige code</label>
-          <input type="text" id="login-otp" placeholder="12345678" maxlength="8" onkeydown="if(event.key==='Enter')verifyOtp()">
-        </div>
-        <button class="btn-login" onclick="verifyOtp()" id="btn-verify-otp">Inloggen</button>
-        <div id="login-msg-otp" class="login-msg" style="display:none;"></div>
-        <div style="margin-top:12px;text-align:center;">
-          <span style="font-size:12px;color:var(--tw-text-body);cursor:pointer;font-family:var(--font-body);" onclick="document.getElementById('login-step-otp').classList.add('hide');document.getElementById('login-step-email').classList.remove('hide');">← Ander e-mailadres</span>
-        </div>
-      </div>
+      
     </div>
   </div>
 
@@ -243,7 +233,7 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
   <div class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <div class="logo-placeholder" id="sidebar-logo-el"><span id="sidebar-logo-txt">TW</span></div>
-      <span class="sidebar-brand" id="sidebar-brand-txt">TAFELWERK</span>
+      <span class="sidebar-brand" style="font-weight:900;text-transform:uppercase;letter-spacing:0.08em;" id="sidebar-brand-txt">TAFELWERK</span>
     </div>
     <div class="nav-body">
       <div class="nav-lbl">Menu</div>
@@ -491,18 +481,14 @@ async function sendOtp(){
   if(!email){showLoginMsg('email','Vul een e-mailadres in','error');return;}
   const btn=document.getElementById('btn-send-otp');
   btn.disabled=true;btn.textContent='Versturen...';
-  const{error}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:true}});
-  btn.disabled=false;btn.textContent='Code versturen';
+  const{error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:'https://crm.tflwrk.nl',shouldCreateUser:true}});
+  btn.disabled=false;btn.textContent='Link versturen';
   if(error){showLoginMsg('email',error.message,'error');return;}
-  document.getElementById('login-step-email').classList.add('hide');
-  document.getElementById('login-step-otp').classList.remove('hide');
-  showLoginMsg('otp','Code verstuurd naar '+email+'. Controleer je inbox.','success');
+  showLoginMsg('email','Magic link verstuurd naar '+email+'. Klik op de link in de mail om in te loggen.','success');
+  document.getElementById('btn-send-otp').style.display='none';
 }
 
-async function verifyOtp(){
-  const email=document.getElementById('login-email').value.trim();
-  const token=document.getElementById('login-otp').value.trim();
-  if(!token){showLoginMsg('otp','Vul de code in','error');return;}
+
   const btn=document.getElementById('btn-verify-otp');
   btn.disabled=true;btn.textContent='Controleren...';
   const{data,error}=await sb.auth.verifyOtp({email,token,type:'email'});
@@ -537,7 +523,7 @@ function applyBranding(){
     loginMark.innerHTML=`<img src="${logo}" style="width:36px;height:36px;object-fit:contain;">`;
     settPrev.innerHTML=`<img src="${logo}" style="width:48px;height:48px;object-fit:contain;">`;
   }else{
-    logoEl.innerHTML=`<span style="color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;">${ab}</span>`;
+    logoEl.innerHTML=`<span style="color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;font-weight:900;">${ab}</span>`;
     loginMark.innerHTML=`<span style="color:#fff;font-family:var(--font-head);font-weight:700;font-size:13px;">${ab}</span>`;
     settPrev.innerHTML=`<span>${ab}</span>`;
   }
