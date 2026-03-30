@@ -22,11 +22,43 @@
 }
 html,body{height:100%;min-height:700px;}
 .app{display:flex;height:100vh;background:var(--tw-bg);color:var(--tw-text);font-family:var(--font-body);font-weight:500;}
-.sidebar{width:220px;background:var(--tw-surface);border-right:1px solid var(--tw-border);display:flex;flex-direction:column;flex-shrink:0;}
+
+/* LOGIN */
+.login-wrap{display:flex;align-items:center;justify-content:center;width:100%;background:var(--tw-surface);}
+.login-box{background:var(--tw-bg);border:1px solid var(--tw-border);width:400px;max-width:95vw;padding:40px;}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:32px;}
+.login-logo-mark{width:36px;height:36px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.login-logo-mark span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:13px;}
+.login-logo-name{font-family:var(--font-head);font-weight:700;font-size:17px;color:var(--tw-text);letter-spacing:0.04em;}
+.login-title{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--tw-text);margin-bottom:6px;}
+.login-sub{font-size:13px;color:var(--tw-text-body);margin-bottom:28px;line-height:1.5;}
+.login-divider{display:flex;align-items:center;gap:12px;margin:20px 0;}
+.login-divider span{font-size:11px;color:var(--tw-text-body);font-family:var(--font-head);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;}
+.login-divider-line{flex:1;height:1px;background:var(--tw-border);}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;font-family:var(--font-head);font-size:11px;font-weight:600;color:var(--tw-text-body);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px;}
+input{width:100%;padding:10px 12px;border:1px solid var(--tw-border);background:var(--tw-surface);color:var(--tw-text);font-size:13px;font-family:var(--font-body);font-weight:500;outline:none;transition:border-color 0.12s;border-radius:0;}
+input:focus{border-color:var(--tw-accent);}
+.btn-login{width:100%;padding:11px;border:none;background:var(--tw-accent);color:#fff;font-family:var(--font-head);font-weight:700;font-size:13px;letter-spacing:0.04em;cursor:pointer;transition:background 0.12s;}
+.btn-login:hover{background:var(--tw-accent-hover);}
+.btn-login:disabled{opacity:0.6;cursor:not-allowed;}
+.btn-google{width:100%;padding:11px;border:1px solid var(--tw-border);background:var(--tw-bg);color:var(--tw-text);font-family:var(--font-head);font-weight:600;font-size:13px;cursor:pointer;transition:all 0.12s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.btn-google:hover{background:var(--tw-surface);border-color:var(--tw-border-strong);}
+.otp-sent{display:none;}
+.otp-sent.show{display:block;}
+.login-step{display:block;}
+.login-step.hide{display:none;}
+.login-msg{font-size:12px;margin-top:10px;padding:10px 12px;font-family:var(--font-body);}
+.login-msg.success{background:#eaf3de;color:#27500a;}
+.login-msg.error{background:#fcebeb;color:#a32d2d;}
+
+/* APP */
+.sidebar{width:220px;background:var(--tw-surface);border-right:1px solid var(--tw-border);display:flex;flex-direction:column;flex-shrink:0;display:none;}
+.sidebar.visible{display:flex;}
 .sidebar-logo{padding:22px 20px 18px;border-bottom:1px solid var(--tw-border);display:flex;align-items:center;gap:10px;}
 .logo-placeholder{width:32px;height:32px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
 .logo-placeholder img{width:32px;height:32px;object-fit:contain;}
-.logo-placeholder span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;letter-spacing:0.05em;}
+.logo-placeholder span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;}
 .sidebar-brand{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--tw-text);letter-spacing:0.04em;}
 .nav-body{flex:1;padding:14px 10px;}
 .nav-lbl{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.5;padding:0 10px;margin-bottom:4px;letter-spacing:0.08em;text-transform:uppercase;}
@@ -35,10 +67,16 @@ html,body{height:100%;min-height:700px;}
 .nav-item.active{background:var(--tw-accent);color:#fff;border-color:var(--tw-accent);}
 .nav-ic{width:15px;text-align:center;font-size:13px;flex-shrink:0;}
 .sidebar-foot{padding:12px 10px;border-top:1px solid var(--tw-border);}
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--tw-bg);}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--tw-bg);display:none;}
+.main.visible{display:flex;}
 .topbar{background:var(--tw-bg);border-bottom:1px solid var(--tw-border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;flex-shrink:0;}
 .topbar-title{font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--tw-text);letter-spacing:0.02em;}
-.search-trigger{display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--tw-border);background:var(--tw-surface);cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--tw-text-body);transition:border-color 0.12s;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.user-badge{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--tw-text-body);font-family:var(--font-body);}
+.user-badge span{max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-logout{padding:5px 10px;border:1px solid var(--tw-border);background:transparent;cursor:pointer;font-size:12px;font-family:var(--font-head);font-weight:600;color:var(--tw-text-body);transition:all 0.12s;}
+.btn-logout:hover{background:var(--tw-surface);color:var(--tw-accent);}
+.search-trigger{display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--tw-border);background:var(--tw-surface);cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--tw-text-body);}
 .search-trigger:hover{border-color:var(--tw-border-strong);}
 .kbd{font-family:var(--font-head);font-size:10px;background:var(--tw-border);padding:2px 6px;color:var(--tw-text-body);font-weight:600;}
 .btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:1px solid var(--tw-border);background:var(--tw-bg);cursor:pointer;font-size:13px;font-family:var(--font-body);font-weight:500;color:var(--tw-text);transition:all 0.12s;}
@@ -120,8 +158,8 @@ html,body{height:100%;min-height:700px;}
 .form-group{margin-bottom:14px;}
 .form-group label{display:block;font-family:var(--font-head);font-size:11px;font-weight:600;color:var(--tw-text-body);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--tw-border);background:var(--tw-surface);color:var(--tw-text);font-size:13px;font-family:var(--font-body);font-weight:500;outline:none;transition:border-color 0.12s;border-radius:0;}
-input:focus,select:focus,textarea:focus{border-color:var(--tw-accent);}
+select,textarea{width:100%;padding:8px 10px;border:1px solid var(--tw-border);background:var(--tw-surface);color:var(--tw-text);font-size:13px;font-family:var(--font-body);font-weight:500;outline:none;transition:border-color 0.12s;border-radius:0;}
+select:focus,textarea:focus{border-color:var(--tw-accent);}
 textarea{resize:vertical;min-height:70px;line-height:1.5;}
 .logo-upload-area{border:1px dashed var(--tw-border-strong);padding:16px;text-align:center;cursor:pointer;background:var(--tw-surface);transition:border-color 0.12s;}
 .logo-upload-area:hover{border-color:var(--tw-accent);}
@@ -150,16 +188,59 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
 .current-logo-preview span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:14px;}
 .hidden{display:none!important;}
 .late-badge{font-size:10px;font-family:var(--font-head);font-weight:600;background:#fcebeb;color:#a32d2d;padding:1px 5px;margin-left:4px;}
-.loading{display:flex;align-items:center;justify-content:center;padding:40px;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;gap:8px;}
-.spinner{width:16px;height:16px;border:2px solid var(--tw-border);border-top-color:var(--tw-accent);border-radius:50%;animation:spin 0.6s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
 .toast{position:fixed;bottom:24px;right:24px;background:var(--tw-accent);color:#fff;padding:10px 18px;font-family:var(--font-head);font-size:13px;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all 0.3s;}
 .toast.show{transform:translateY(0);opacity:1;}
 </style>
 </head>
 <body>
 <div class="app" id="app">
-  <div class="sidebar">
+
+  <!-- LOGIN -->
+  <div class="login-wrap" id="login-wrap">
+    <div class="login-box">
+      <div class="login-logo">
+        <div class="login-logo-mark" id="login-logo-mark"><span id="login-logo-ini">TW</span></div>
+        <span class="login-logo-name" id="login-logo-name">TAFELWERK</span>
+      </div>
+      <div class="login-title">Inloggen</div>
+      <div class="login-sub">Log in met je Google account of ontvang een eenmalige code per e-mail.</div>
+
+      <button class="btn-google" onclick="loginGoogle()">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Inloggen met Google
+      </button>
+
+      <div class="login-divider">
+        <div class="login-divider-line"></div>
+        <span>of via e-mail</span>
+        <div class="login-divider-line"></div>
+      </div>
+
+      <div id="login-step-email" class="login-step">
+        <div class="form-group">
+          <label>E-mailadres</label>
+          <input type="email" id="login-email" placeholder="naam@tafelwerk.nl" onkeydown="if(event.key==='Enter')sendOtp()">
+        </div>
+        <button class="btn-login" onclick="sendOtp()" id="btn-send-otp">Code versturen</button>
+        <div id="login-msg-email" class="login-msg" style="display:none;"></div>
+      </div>
+
+      <div id="login-step-otp" class="login-step hide">
+        <div class="form-group">
+          <label>Eenmalige code</label>
+          <input type="text" id="login-otp" placeholder="12345678" maxlength="8" onkeydown="if(event.key==='Enter')verifyOtp()">
+        </div>
+        <button class="btn-login" onclick="verifyOtp()" id="btn-verify-otp">Inloggen</button>
+        <div id="login-msg-otp" class="login-msg" style="display:none;"></div>
+        <div style="margin-top:12px;text-align:center;">
+          <span style="font-size:12px;color:var(--tw-text-body);cursor:pointer;font-family:var(--font-body);" onclick="document.getElementById('login-step-otp').classList.add('hide');document.getElementById('login-step-email').classList.remove('hide');">← Ander e-mailadres</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <div class="logo-placeholder" id="sidebar-logo-el"><span id="sidebar-logo-txt">TW</span></div>
       <span class="sidebar-brand" id="sidebar-brand-txt">TAFELWERK</span>
@@ -176,13 +257,21 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
     </div>
   </div>
 
-  <div class="main">
+  <!-- MAIN -->
+  <div class="main" id="main-app">
     <div class="topbar">
       <span class="topbar-title" id="topbar-title">Dashboard</span>
-      <div class="search-trigger" onclick="openSearch()">
-        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
-        <span>Zoeken...</span>
-        <span class="kbd">⌘K</span>
+      <div class="topbar-right">
+        <div class="search-trigger" onclick="openSearch()">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
+          <span>Zoeken...</span>
+          <span class="kbd">⌘K</span>
+        </div>
+        <div class="user-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span id="user-email-display"></span>
+        </div>
+        <button class="btn-logout" onclick="logout()">Uitloggen</button>
       </div>
     </div>
 
@@ -290,7 +379,7 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
         <label>Logo van de klant</label>
         <div class="logo-upload-area" onclick="document.getElementById('c-logo-input').click()">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto;display:block;color:var(--tw-text-body);opacity:0.5;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <p>Klik om een logo te uploaden (PNG, JPG, SVG)</p>
+          <p>Klik om een logo te uploaden</p>
           <img id="c-logo-preview" class="logo-preview-img">
         </div>
         <input type="file" id="c-logo-input" accept="image/*" style="display:none;width:auto;" onchange="previewClientLogo(this)">
@@ -369,15 +458,96 @@ let eCid=null, eTid=null, clientLogoData=null;
 const SECTIONS=['dash','clients','tasks','team','settings'];
 const TITLES={dash:'Dashboard',clients:'Klanten',tasks:'Taken',team:'Team',settings:'Instellingen'};
 
-function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
-
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 function ini(n){if(!n)return'?';const p=n.trim().split(' ');return(p[0][0]+(p[1]?p[1][0]:'')).toUpperCase();}
 function fmtD(d){if(!d)return'—';return new Date(d+'T00:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'short'});}
 function sBadge(s){const m={Open:'badge-open',Bezig:'badge-bezig',Klaar:'badge-klaar'};return`<span class="badge ${m[s]||''}">${s}</span>`;}
 function pBadge(p){const cl=p.toLowerCase();return`<span class="prio-lbl prio-${cl}"><span class="prio-dot"></span>${p}</span>`;}
+
+function showApp(user){
+  document.getElementById('login-wrap').style.display='none';
+  document.getElementById('sidebar').classList.add('visible');
+  document.getElementById('main-app').classList.add('visible');
+  document.getElementById('user-email-display').textContent=user.email;
+  applyBranding();
+  loadAll().then(()=>renderDash());
+}
+
+function showLogin(){
+  document.getElementById('login-wrap').style.display='flex';
+  document.getElementById('sidebar').classList.remove('visible');
+  document.getElementById('main-app').classList.remove('visible');
+}
+
+async function loginGoogle(){
+  await sb.auth.signInWithOAuth({
+    provider:'google',
+    options:{redirectTo:'https://crm.tflwrk.nl'}
+  });
+}
+
+async function sendOtp(){
+  const email=document.getElementById('login-email').value.trim();
+  if(!email){showLoginMsg('email','Vul een e-mailadres in','error');return;}
+  const btn=document.getElementById('btn-send-otp');
+  btn.disabled=true;btn.textContent='Versturen...';
+  const{error}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:true}});
+  btn.disabled=false;btn.textContent='Code versturen';
+  if(error){showLoginMsg('email',error.message,'error');return;}
+  document.getElementById('login-step-email').classList.add('hide');
+  document.getElementById('login-step-otp').classList.remove('hide');
+  showLoginMsg('otp','Code verstuurd naar '+email+'. Controleer je inbox.','success');
+}
+
+async function verifyOtp(){
+  const email=document.getElementById('login-email').value.trim();
+  const token=document.getElementById('login-otp').value.trim();
+  if(!token){showLoginMsg('otp','Vul de code in','error');return;}
+  const btn=document.getElementById('btn-verify-otp');
+  btn.disabled=true;btn.textContent='Controleren...';
+  const{data,error}=await sb.auth.verifyOtp({email,token,type:'email'});
+  btn.disabled=false;btn.textContent='Inloggen';
+  if(error){showLoginMsg('otp','Ongeldige of verlopen code','error');return;}
+  showApp(data.user);
+}
+
+function showLoginMsg(step,msg,type){
+  const el=document.getElementById('login-msg-'+step);
+  el.textContent=msg;el.className='login-msg '+type;el.style.display='block';
+}
+
+async function logout(){
+  await sb.auth.signOut();
+  showLogin();
+  showToast('Uitgelogd');
+}
+
+function applyBranding(){
+  const brand=localStorage.getItem('tw_brand')||'TAFELWERK';
+  const logo=localStorage.getItem('tw_logo')||null;
+  document.getElementById('sidebar-brand-txt').textContent=brand;
+  document.getElementById('login-logo-name').textContent=brand;
+  document.title=brand+' CRM';
+  const logoEl=document.getElementById('sidebar-logo-el');
+  const loginMark=document.getElementById('login-logo-mark');
+  const settPrev=document.getElementById('settings-logo-preview');
+  const ab=brand.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  if(logo){
+    logoEl.innerHTML=`<img src="${logo}" style="width:32px;height:32px;object-fit:contain;">`;
+    loginMark.innerHTML=`<img src="${logo}" style="width:36px;height:36px;object-fit:contain;">`;
+    settPrev.innerHTML=`<img src="${logo}" style="width:48px;height:48px;object-fit:contain;">`;
+  }else{
+    logoEl.innerHTML=`<span style="color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;">${ab}</span>`;
+    loginMark.innerHTML=`<span style="color:#fff;font-family:var(--font-head);font-weight:700;font-size:13px;">${ab}</span>`;
+    settPrev.innerHTML=`<span>${ab}</span>`;
+  }
+  const si=document.getElementById('s-brandname');if(si)si.value=brand;
+}
+
+function saveBrand(){localStorage.setItem('tw_brand',document.getElementById('s-brandname').value.trim()||'TAFELWERK');applyBranding();showToast('Naam opgeslagen');}
+function handleLogoUpload(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=function(e){localStorage.setItem('tw_logo',e.target.result);applyBranding();showToast('Logo opgeslagen');};r.readAsDataURL(f);}
+function removeLogo(){localStorage.removeItem('tw_logo');applyBranding();showToast('Logo verwijderd');}
+function previewClientLogo(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=function(e){clientLogoData=e.target.result;const prev=document.getElementById('c-logo-preview');prev.src=e.target.result;prev.style.display='block';};r.readAsDataURL(f);}
 
 async function loadAll(){
   const[{data:c},{data:t},{data:e}]=await Promise.all([
@@ -385,54 +555,13 @@ async function loadAll(){
     sb.from('tasks').select('*').order('created_at',{ascending:false}),
     sb.from('employees').select('*').order('created_at',{ascending:false})
   ]);
-  clients=c||[]; tasks=t||[]; employees=e||[];
-}
-
-function applyBranding(){
-  const brand=localStorage.getItem('tw_brand')||'TAFELWERK';
-  const logo=localStorage.getItem('tw_logo')||null;
-  document.getElementById('sidebar-brand-txt').textContent=brand;
-  document.title=brand+' CRM';
-  const logoEl=document.getElementById('sidebar-logo-el');
-  const settPrev=document.getElementById('settings-logo-preview');
-  if(logo){
-    logoEl.innerHTML=`<img src="${logo}" style="width:32px;height:32px;object-fit:contain;">`;
-    settPrev.innerHTML=`<img src="${logo}" style="width:48px;height:48px;object-fit:contain;">`;
-  }else{
-    const ab=brand.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-    logoEl.innerHTML=`<span style="color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;">${ab}</span>`;
-    settPrev.innerHTML=`<span>${ab}</span>`;
-  }
-  const si=document.getElementById('s-brandname');if(si)si.value=brand;
-}
-
-function saveBrand(){
-  localStorage.setItem('tw_brand',document.getElementById('s-brandname').value.trim()||'TAFELWERK');
-  applyBranding();showToast('Naam opgeslagen');
-}
-
-function handleLogoUpload(input){
-  const f=input.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=function(e){localStorage.setItem('tw_logo',e.target.result);applyBranding();showToast('Logo opgeslagen');};
-  r.readAsDataURL(f);
-}
-
-function removeLogo(){localStorage.removeItem('tw_logo');applyBranding();showToast('Logo verwijderd');}
-
-function previewClientLogo(input){
-  const f=input.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=function(e){clientLogoData=e.target.result;const prev=document.getElementById('c-logo-preview');prev.src=e.target.result;prev.style.display='block';};
-  r.readAsDataURL(f);
+  clients=c||[];tasks=t||[];employees=e||[];
 }
 
 async function go(sec){
   SECTIONS.forEach(s=>{
-    const el=document.getElementById('sec-'+s);
-    if(el)el.classList.toggle('active',s===sec);
-    const nav=document.getElementById('nav-'+s);
-    if(nav)nav.classList.toggle('active',s===sec);
+    const el=document.getElementById('sec-'+s);if(el)el.classList.toggle('active',s===sec);
+    const nav=document.getElementById('nav-'+s);if(nav)nav.classList.toggle('active',s===sec);
   });
   document.getElementById('topbar-title').textContent=TITLES[sec]||'';
   await loadAll();
@@ -455,18 +584,7 @@ function renderDash(){
   const rows=tasks.filter(t=>t.status!=='Klaar').sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);}).slice(0,8);
   const tb=document.getElementById('dash-tasks-body');
   if(!rows.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:28px;font-family:var(--font-body);">Geen openstaande taken</td></tr>';return;}
-  tb.innerHTML=rows.map(t=>{
-    const cl=clients.find(c=>c.id===t.client_id);const em=employees.find(e=>e.id===t.employee_id);
-    const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();
-    return`<tr onclick="go('tasks')">
-      <td style="font-family:var(--font-head);font-weight:600;font-size:13px;">${t.title}</td>
-      <td>${cl?cl.name:'—'}</td>
-      <td>${em?em.first+' '+em.last:'—'}</td>
-      <td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td>
-      <td>${pBadge(t.prio)}</td>
-      <td>${sBadge(t.status)}</td>
-    </tr>`;
-  }).join('');
+  tb.innerHTML=rows.map(t=>{const cl=clients.find(c=>c.id===t.client_id);const em=employees.find(e=>e.id===t.employee_id);const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();return`<tr onclick="go('tasks')"><td style="font-family:var(--font-head);font-weight:600;font-size:13px;">${t.title}</td><td>${cl?cl.name:'—'}</td><td>${em?em.first+' '+em.last:'—'}</td><td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td><td>${pBadge(t.prio)}</td><td>${sBadge(t.status)}</td></tr>`;}).join('');
 }
 
 function renderClients(){
@@ -474,26 +592,7 @@ function renderClients(){
   const list=clients.filter(c=>!q||c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)||(c.city||'').toLowerCase().includes(q));
   const grid=document.getElementById('clients-grid');
   if(!list.length){grid.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;grid-column:1/-1;border:1px solid var(--tw-border);">Nog geen klanten toegevoegd</div>';return;}
-  grid.innerHTML=list.map(c=>{
-    const open=tasks.filter(t=>t.client_id===c.id&&t.status!=='Klaar').length;
-    const total=tasks.filter(t=>t.client_id===c.id).length;
-    const logoHtml=c.logo?`<img src="${c.logo}" style="width:44px;height:44px;object-fit:contain;">`:`<span class="client-logo-ini">${ini(c.name)}</span>`;
-    return`<div class="client-card" onclick="showClient('${c.id}')">
-      <div class="client-card-header">
-        <div class="client-logo">${logoHtml}</div>
-        <div><div class="client-name">${c.name}</div><div class="client-city">${c.city||'—'}</div></div>
-      </div>
-      <div class="client-card-body">
-        ${c.contact?`<div>${c.contact}</div>`:''}
-        ${c.email?`<div><a href="mailto:${c.email}" onclick="event.stopPropagation()">${c.email}</a></div>`:''}
-        ${c.phone?`<div>${c.phone}</div>`:''}
-      </div>
-      <div class="client-card-footer">
-        <span class="badge ${open>0?'badge-open':'badge-klaar'}">${open>0?open+' open':total+' taken'}</span>
-        ${c.drive?`<a href="${c.drive}" target="_blank" onclick="event.stopPropagation()" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Drive</a>`:''}
-      </div>
-    </div>`;
-  }).join('');
+  grid.innerHTML=list.map(c=>{const open=tasks.filter(t=>t.client_id===c.id&&t.status!=='Klaar').length;const total=tasks.filter(t=>t.client_id===c.id).length;const logoHtml=c.logo?`<img src="${c.logo}" style="width:44px;height:44px;object-fit:contain;">`:`<span class="client-logo-ini">${ini(c.name)}</span>`;return`<div class="client-card" onclick="showClient('${c.id}')"><div class="client-card-header"><div class="client-logo">${logoHtml}</div><div><div class="client-name">${c.name}</div><div class="client-city">${c.city||'—'}</div></div></div><div class="client-card-body">${c.contact?`<div>${c.contact}</div>`:''}${c.email?`<div><a href="mailto:${c.email}" onclick="event.stopPropagation()">${c.email}</a></div>`:''}${c.phone?`<div>${c.phone}</div>`:''}</div><div class="client-card-footer"><span class="badge ${open>0?'badge-open':'badge-klaar'}">${open>0?open+' open':total+' taken'}</span>${c.drive?`<a href="${c.drive}" target="_blank" onclick="event.stopPropagation()" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Drive</a>`:''}</div></div>`;}).join('');
 }
 
 function showClient(id){
@@ -502,86 +601,22 @@ function showClient(id){
   const det=document.getElementById('client-detail-wrap');det.classList.remove('hidden');
   const ctasks=tasks.filter(t=>t.client_id===id);
   const logoHtml=c.logo?`<img src="${c.logo}" style="width:56px;height:56px;object-fit:contain;">`:`<span class="detail-logo-ini">${ini(c.name)}</span>`;
-  det.innerHTML=`
-    <div class="back-link" onclick="document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');">← Terug naar klanten</div>
-    <div class="detail-hero">
-      <div class="detail-hero-top">
-        <div style="display:flex;align-items:center;gap:16px;">
-          <div class="detail-logo">${logoHtml}</div>
-          <div><div class="detail-name">${c.name}</div><div class="detail-sub">${[c.address,c.city].filter(Boolean).join(', ')||'Geen adres'}</div></div>
-        </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-          ${c.drive?`<a href="${c.drive}" target="_blank" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Google Drive map</a>`:''}
-          <button class="btn btn-sm" onclick="editClient('${c.id}')">Bewerken</button>
-          <button class="btn btn-sm btn-danger" onclick="delClient('${c.id}')">Verwijderen</button>
-        </div>
-      </div>
-      <div class="fields-3">
-        <div class="field-block"><div class="field-lbl">Contactpersoon</div><div class="field-val">${c.contact||'—'}</div></div>
-        <div class="field-block"><div class="field-lbl">E-mail</div><div class="field-val"><a href="mailto:${c.email}">${c.email||'—'}</a></div></div>
-        <div class="field-block"><div class="field-lbl">Telefoon</div><div class="field-val">${c.phone||'—'}</div></div>
-      </div>
-      ${c.notes?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--tw-border);font-size:13px;color:var(--tw-text-body);font-family:var(--font-body);white-space:pre-wrap;">${c.notes}</div>`:''}
-    </div>
-    <div class="panel">
-      <div class="panel-head"><h3>Taken voor ${c.name}</h3><button class="btn btn-sm btn-accent" onclick="openTaskFor('${c.id}')">+ Taak toevoegen</button></div>
-      <div class="tbl-wrap" style="border:none;">
-        <table class="data-table"><thead><tr><th>Taak</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th><th></th></tr></thead>
-        <tbody>${ctasks.length?ctasks.map(t=>{const em=employees.find(e=>e.id===t.employee_id);return`<tr>
-          <td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,60)}${t.note.length>60?'…':''}</div>`:''}</td>
-          <td>${em?em.first+' '+em.last:'—'}</td>
-          <td>${fmtD(t.deadline)}</td>
-          <td>${pBadge(t.prio)}</td>
-          <td>${sBadge(t.status)}</td>
-          <td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}','${c.id}')">✕</button></td>
-        </tr>`;}).join(''):`<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:28px;font-family:var(--font-body);">Geen taken voor deze klant</td></tr>`}</tbody>
-        </table>
-      </div>
-    </div>`;
+  det.innerHTML=`<div class="back-link" onclick="document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');">← Terug naar klanten</div><div class="detail-hero"><div class="detail-hero-top"><div style="display:flex;align-items:center;gap:16px;"><div class="detail-logo">${logoHtml}</div><div><div class="detail-name">${c.name}</div><div class="detail-sub">${[c.address,c.city].filter(Boolean).join(', ')||'Geen adres'}</div></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">${c.drive?`<a href="${c.drive}" target="_blank" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Google Drive map</a>`:''}<button class="btn btn-sm" onclick="editClient('${c.id}')">Bewerken</button><button class="btn btn-sm btn-danger" onclick="delClient('${c.id}')">Verwijderen</button></div></div><div class="fields-3"><div class="field-block"><div class="field-lbl">Contactpersoon</div><div class="field-val">${c.contact||'—'}</div></div><div class="field-block"><div class="field-lbl">E-mail</div><div class="field-val"><a href="mailto:${c.email}">${c.email||'—'}</a></div></div><div class="field-block"><div class="field-lbl">Telefoon</div><div class="field-val">${c.phone||'—'}</div></div></div>${c.notes?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--tw-border);font-size:13px;color:var(--tw-text-body);font-family:var(--font-body);white-space:pre-wrap;">${c.notes}</div>`:''}</div><div class="panel"><div class="panel-head"><h3>Taken voor ${c.name}</h3><button class="btn btn-sm btn-accent" onclick="openTaskFor('${c.id}')">+ Taak toevoegen</button></div><div class="tbl-wrap" style="border:none;"><table class="data-table"><thead><tr><th>Taak</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th><th></th></tr></thead><tbody>${ctasks.length?ctasks.map(t=>{const em=employees.find(e=>e.id===t.employee_id);return`<tr><td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,60)}${t.note.length>60?'…':''}</div>`:''}</td><td>${em?em.first+' '+em.last:'—'}</td><td>${fmtD(t.deadline)}</td><td>${pBadge(t.prio)}</td><td>${sBadge(t.status)}</td><td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}','${c.id}')">✕</button></td></tr>`;}).join(''):`<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:28px;font-family:var(--font-body);">Geen taken voor deze klant</td></tr>`}</tbody></table></div></div>`;
 }
 
 function renderTasks(){
-  const sf=document.getElementById('f-status')?.value||'';
-  const pf=document.getElementById('f-prio')?.value||'';
-  let list=tasks;
-  if(sf)list=list.filter(t=>t.status===sf);
-  if(pf)list=list.filter(t=>t.prio===pf);
+  const sf=document.getElementById('f-status')?.value||'';const pf=document.getElementById('f-prio')?.value||'';
+  let list=tasks;if(sf)list=list.filter(t=>t.status===sf);if(pf)list=list.filter(t=>t.prio===pf);
   list.sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);});
   const tb=document.getElementById('tasks-body');
   if(!list.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--tw-text-body);padding:32px;font-family:var(--font-body);">Geen taken gevonden</td></tr>';return;}
-  tb.innerHTML=list.map(t=>{
-    const cl=clients.find(c=>c.id===t.client_id);const em=employees.find(e=>e.id===t.employee_id);
-    const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();
-    return`<tr>
-      <td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,55)}${t.note.length>55?'…':''}</div>`:''}</td>
-      <td>${cl?`<span style="cursor:pointer;color:var(--tw-accent);font-family:var(--font-head);font-weight:600;" onclick="showClient('${cl.id}');go('clients')">${cl.name}</span>`:'—'}</td>
-      <td>${em?`<div style="display:flex;align-items:center;gap:7px;"><div class="emp-av" style="width:24px;height:24px;font-size:10px;">${ini(em.first+' '+em.last)}</div>${em.first} ${em.last}</div>`:'—'}</td>
-      <td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td>
-      <td>${pBadge(t.prio)}</td>
-      <td>${sBadge(t.status)}</td>
-      <td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}',null)">✕</button></td>
-    </tr>`;
-  }).join('');
+  tb.innerHTML=list.map(t=>{const cl=clients.find(c=>c.id===t.client_id);const em=employees.find(e=>e.id===t.employee_id);const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();return`<tr><td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,55)}${t.note.length>55?'…':''}</div>`:''}</td><td>${cl?`<span style="cursor:pointer;color:var(--tw-accent);font-family:var(--font-head);font-weight:600;" onclick="showClient('${cl.id}');go('clients')">${cl.name}</span>`:'—'}</td><td>${em?`<div style="display:flex;align-items:center;gap:7px;"><div class="emp-av" style="width:24px;height:24px;font-size:10px;">${ini(em.first+' '+em.last)}</div>${em.first} ${em.last}</div>`:'—'}</td><td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td><td>${pBadge(t.prio)}</td><td>${sBadge(t.status)}</td><td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}',null)">✕</button></td></tr>`;}).join('');
 }
 
 function renderTeam(){
   const g=document.getElementById('emp-grid');
   if(!employees.length){g.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;">Nog geen teamleden toegevoegd</div>';return;}
-  g.innerHTML=employees.map(e=>{
-    const name=e.first+' '+e.last;
-    const openT=tasks.filter(t=>t.employee_id===e.id&&t.status!=='Klaar').length;
-    return`<div class="emp-card">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-        <div class="emp-card-av">${ini(name)}</div>
-        <div><div style="font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);">${name}</div><div style="font-size:12px;color:var(--tw-text-body);">${e.role||'—'}</div></div>
-      </div>
-      ${e.email?`<div style="font-size:12px;color:var(--tw-text-body);font-family:var(--font-body);margin-bottom:10px;">${e.email}</div>`:''}
-      <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--tw-border);">
-        <span class="badge ${openT>0?'badge-open':'badge-klaar'}">${openT} open taken</span>
-        <button class="btn btn-sm btn-danger" style="padding:4px 8px;" onclick="delEmp('${e.id}')">✕</button>
-      </div>
-    </div>`;
-  }).join('');
+  g.innerHTML=employees.map(e=>{const name=e.first+' '+e.last;const openT=tasks.filter(t=>t.employee_id===e.id&&t.status!=='Klaar').length;return`<div class="emp-card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><div class="emp-card-av">${ini(name)}</div><div><div style="font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);">${name}</div><div style="font-size:12px;color:var(--tw-text-body);">${e.role||'—'}</div></div></div>${e.email?`<div style="font-size:12px;color:var(--tw-text-body);font-family:var(--font-body);margin-bottom:10px;">${e.email}</div>`:''}<div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--tw-border);"><span class="badge ${openT>0?'badge-open':'badge-klaar'}">${openT} open taken</span><button class="btn btn-sm btn-danger" style="padding:4px 8px;" onclick="delEmp('${e.id}')">✕</button></div></div>`;}).join('');
 }
 
 function openModal(type){
@@ -591,19 +626,8 @@ function openModal(type){
   document.getElementById('mod-'+type).classList.add('open');
 }
 
-function openTaskFor(cid){
-  eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';
-  fillSel(cid,null);
-  ['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');
-  document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';
-  document.getElementById('mod-task').classList.add('open');
-}
-
-function fillSel(sc,se){
-  document.getElementById('t-client').innerHTML='<option value="">— Kies klant —</option>'+clients.map(c=>`<option value="${c.id}"${c.id===sc?' selected':''}>${c.name}</option>`).join('');
-  document.getElementById('t-emp').innerHTML='<option value="">— Kies medewerker —</option>'+employees.map(e=>`<option value="${e.id}"${e.id===se?' selected':''}>${e.first} ${e.last}</option>`).join('');
-}
-
+function openTaskFor(cid){eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';fillSel(cid,null);['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';document.getElementById('mod-task').classList.add('open');}
+function fillSel(sc,se){document.getElementById('t-client').innerHTML='<option value="">— Kies klant —</option>'+clients.map(c=>`<option value="${c.id}"${c.id===sc?' selected':''}>${c.name}</option>`).join('');document.getElementById('t-emp').innerHTML='<option value="">— Kies medewerker —</option>'+employees.map(e=>`<option value="${e.id}"${e.id===se?' selected':''}>${e.first} ${e.last}</option>`).join('');}
 function closeModals(){document.querySelectorAll('.modal-wrap').forEach(m=>m.classList.remove('open'));eCid=null;eTid=null;}
 document.querySelectorAll('.modal-wrap').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)closeModals();}));
 
@@ -611,117 +635,41 @@ async function saveClient(){
   const name=document.getElementById('c-name').value.trim();if(!name){alert('Vul een bedrijfsnaam in');return;}
   const obj={name,contact:document.getElementById('c-contact').value,email:document.getElementById('c-email').value,phone:document.getElementById('c-phone').value,city:document.getElementById('c-city').value,address:document.getElementById('c-address').value,drive:document.getElementById('c-drive').value,notes:document.getElementById('c-notes').value};
   if(clientLogoData)obj.logo=clientLogoData;
-  if(eCid){
-    await sb.from('clients').update(obj).eq('id',eCid);
-    showToast('Klant bijgewerkt');
-  }else{
-    await sb.from('clients').insert(obj);
-    showToast('Klant toegevoegd');
-  }
+  if(eCid){await sb.from('clients').update(obj).eq('id',eCid);showToast('Klant bijgewerkt');}
+  else{await sb.from('clients').insert(obj);showToast('Klant toegevoegd');}
   await loadAll();closeModals();renderClients();if(eCid)showClient(eCid);
 }
 
-function editClient(id){
-  const c=clients.find(x=>x.id===id);if(!c)return;
-  eCid=id;clientLogoData=null;
-  document.getElementById('mod-client-title').textContent='Klant bewerken';
-  ['name','contact','email','phone','city','address','drive','notes'].forEach(f=>document.getElementById('c-'+f).value=c[f]||'');
-  const prev=document.getElementById('c-logo-preview');
-  if(c.logo){prev.src=c.logo;prev.style.display='block';}else{prev.style.display='none';}
-  document.getElementById('mod-client').classList.add('open');
-}
-
-async function delClient(id){
-  if(!confirm('Klant verwijderen?'))return;
-  await sb.from('clients').delete().eq('id',id);
-  showToast('Klant verwijderd');
-  await loadAll();
-  document.getElementById('clients-list-wrap').classList.remove('hidden');
-  document.getElementById('client-detail-wrap').classList.add('hidden');
-  renderClients();
-}
+function editClient(id){const c=clients.find(x=>x.id===id);if(!c)return;eCid=id;clientLogoData=null;document.getElementById('mod-client-title').textContent='Klant bewerken';['name','contact','email','phone','city','address','drive','notes'].forEach(f=>document.getElementById('c-'+f).value=c[f]||'');const prev=document.getElementById('c-logo-preview');if(c.logo){prev.src=c.logo;prev.style.display='block';}else{prev.style.display='none';}document.getElementById('mod-client').classList.add('open');}
+async function delClient(id){if(!confirm('Klant verwijderen?'))return;await sb.from('clients').delete().eq('id',id);showToast('Klant verwijderd');await loadAll();document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');renderClients();}
 
 async function saveTask(){
   const title=document.getElementById('t-title').value.trim();if(!title){alert('Vul een taakomschrijving in');return;}
   const obj={title,client_id:document.getElementById('t-client').value||null,employee_id:document.getElementById('t-emp').value||null,deadline:document.getElementById('t-deadline').value||null,prio:document.getElementById('t-prio').value,status:document.getElementById('t-status').value,note:document.getElementById('t-note').value};
-  if(eTid){
-    await sb.from('tasks').update(obj).eq('id',eTid);
-    showToast('Taak bijgewerkt');
-  }else{
-    await sb.from('tasks').insert(obj);
-    showToast('Taak toegevoegd');
-  }
+  if(eTid){await sb.from('tasks').update(obj).eq('id',eTid);showToast('Taak bijgewerkt');}
+  else{await sb.from('tasks').insert(obj);showToast('Taak toegevoegd');}
   await loadAll();closeModals();renderTasks();renderDash();
 }
 
-function editTask(id){
-  const t=tasks.find(x=>x.id===id);if(!t)return;
-  eTid=id;document.getElementById('mod-task-title').textContent='Taak bewerken';
-  fillSel(t.client_id,t.employee_id);
-  document.getElementById('t-title').value=t.title||'';
-  document.getElementById('t-deadline').value=t.deadline||'';
-  document.getElementById('t-prio').value=t.prio||'Middel';
-  document.getElementById('t-status').value=t.status||'Open';
-  document.getElementById('t-note').value=t.note||'';
-  document.getElementById('mod-task').classList.add('open');
-}
+function editTask(id){const t=tasks.find(x=>x.id===id);if(!t)return;eTid=id;document.getElementById('mod-task-title').textContent='Taak bewerken';fillSel(t.client_id,t.employee_id);document.getElementById('t-title').value=t.title||'';document.getElementById('t-deadline').value=t.deadline||'';document.getElementById('t-prio').value=t.prio||'Middel';document.getElementById('t-status').value=t.status||'Open';document.getElementById('t-note').value=t.note||'';document.getElementById('mod-task').classList.add('open');}
+async function delTask(id,returnCid){if(!confirm('Taak verwijderen?'))return;await sb.from('tasks').delete().eq('id',id);showToast('Taak verwijderd');await loadAll();if(returnCid)showClient(returnCid);else renderTasks();renderDash();}
+async function saveEmp(){const first=document.getElementById('e-first').value.trim(),last=document.getElementById('e-last').value.trim();if(!first||!last){alert('Vul voor- en achternaam in');return;}await sb.from('employees').insert({first,last,role:document.getElementById('e-role').value,email:document.getElementById('e-email').value});showToast('Teamlid toegevoegd');await loadAll();closeModals();renderTeam();}
+async function delEmp(id){if(!confirm('Teamlid verwijderen?'))return;await sb.from('employees').delete().eq('id',id);showToast('Teamlid verwijderd');await loadAll();renderTeam();}
 
-async function delTask(id,returnCid){
-  if(!confirm('Taak verwijderen?'))return;
-  await sb.from('tasks').delete().eq('id',id);
-  showToast('Taak verwijderd');
-  await loadAll();
-  if(returnCid)showClient(returnCid);else renderTasks();
-  renderDash();
-}
-
-async function saveEmp(){
-  const first=document.getElementById('e-first').value.trim(),last=document.getElementById('e-last').value.trim();
-  if(!first||!last){alert('Vul voor- en achternaam in');return;}
-  await sb.from('employees').insert({first,last,role:document.getElementById('e-role').value,email:document.getElementById('e-email').value});
-  showToast('Teamlid toegevoegd');
-  await loadAll();closeModals();renderTeam();
-}
-
-async function delEmp(id){
-  if(!confirm('Teamlid verwijderen?'))return;
-  await sb.from('employees').delete().eq('id',id);
-  showToast('Teamlid verwijderd');
-  await loadAll();renderTeam();
-}
-
-function openSearch(){
-  document.getElementById('search-overlay').classList.add('open');
-  setTimeout(()=>document.getElementById('search-input').focus(),50);
-  doSearch();
-}
+function openSearch(){document.getElementById('search-overlay').classList.add('open');setTimeout(()=>document.getElementById('search-input').focus(),50);doSearch();}
 function maybeCloseSearch(e){if(e.target===document.getElementById('search-overlay'))closeSearch();}
 function closeSearch(){document.getElementById('search-overlay').classList.remove('open');document.getElementById('search-input').value='';document.getElementById('search-results').innerHTML='<div class="search-empty">Begin met typen om te zoeken...</div>';}
+function doSearch(){const q=document.getElementById('search-input').value.toLowerCase().trim();const res=document.getElementById('search-results');if(!q){res.innerHTML='<div class="search-empty">Begin met typen om te zoeken...</div>';return;}let hits=[];clients.filter(c=>c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)).forEach(c=>hits.push({type:'Klant',label:c.name,sub:c.contact||'',action:`showClient('${c.id}');go('clients');closeSearch()`}));tasks.filter(t=>t.title.toLowerCase().includes(q)).forEach(t=>{const cl=clients.find(c=>c.id===t.client_id);hits.push({type:'Taak',label:t.title,sub:cl?cl.name:'',action:`go('tasks');closeSearch()`});});employees.filter(e=>(e.first+' '+e.last).toLowerCase().includes(q)||(e.role||'').toLowerCase().includes(q)).forEach(e=>hits.push({type:'Team',label:e.first+' '+e.last,sub:e.role||'',action:`go('team');closeSearch()`}));if(!hits.length){res.innerHTML='<div class="search-empty">Geen resultaten gevonden</div>';return;}res.innerHTML=hits.slice(0,10).map(h=>`<div class="search-result-item" onclick="${h.action}"><div style="flex:1;"><div style="font-family:var(--font-head);font-weight:600;font-size:13px;">${h.label}</div>${h.sub?`<div style="font-size:11px;color:var(--tw-text-body);font-family:var(--font-body);">${h.sub}</div>`:''}</div><span class="search-result-type">${h.type}</span></div>`).join('');}
 
-function doSearch(){
-  const q=document.getElementById('search-input').value.toLowerCase().trim();
-  const res=document.getElementById('search-results');
-  if(!q){res.innerHTML='<div class="search-empty">Begin met typen om te zoeken...</div>';return;}
-  let hits=[];
-  clients.filter(c=>c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)).forEach(c=>hits.push({type:'Klant',label:c.name,sub:c.contact||'',action:`showClient('${c.id}');go('clients');closeSearch()`}));
-  tasks.filter(t=>t.title.toLowerCase().includes(q)).forEach(t=>{const cl=clients.find(c=>c.id===t.client_id);hits.push({type:'Taak',label:t.title,sub:cl?cl.name:'',action:`go('tasks');closeSearch()`});});
-  employees.filter(e=>(e.first+' '+e.last).toLowerCase().includes(q)||(e.role||'').toLowerCase().includes(q)).forEach(e=>hits.push({type:'Team',label:e.first+' '+e.last,sub:e.role||'',action:`go('team');closeSearch()`}));
-  if(!hits.length){res.innerHTML='<div class="search-empty">Geen resultaten gevonden</div>';return;}
-  res.innerHTML=hits.slice(0,10).map(h=>`<div class="search-result-item" onclick="${h.action}">
-    <div style="flex:1;"><div style="font-family:var(--font-head);font-weight:600;font-size:13px;">${h.label}</div>${h.sub?`<div style="font-size:11px;color:var(--tw-text-body);font-family:var(--font-body);">${h.sub}</div>`:''}</div>
-    <span class="search-result-type">${h.type}</span>
-  </div>`).join('');
-}
-
-document.addEventListener('keydown',function(e){
-  if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}
-  if(e.key==='Escape'){closeSearch();closeModals();}
-});
+document.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape'){closeSearch();closeModals();}});
 
 async function init(){
   applyBranding();
-  await loadAll();
-  renderDash();
+  const{data:{session}}=await sb.auth.getSession();
+  if(session){showApp(session.user);}else{showLogin();}
+  sb.auth.onAuthStateChange((event,session)=>{
+    if(session){showApp(session.user);}else{showLogin();}
+  });
 }
 init();
 </script>
