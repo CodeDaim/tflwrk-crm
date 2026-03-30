@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TAFELWERK CRM</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -23,7 +24,7 @@ html,body{height:100%;min-height:700px;}
 .app{display:flex;height:100vh;background:var(--tw-bg);color:var(--tw-text);font-family:var(--font-body);font-weight:500;}
 .sidebar{width:220px;background:var(--tw-surface);border-right:1px solid var(--tw-border);display:flex;flex-direction:column;flex-shrink:0;}
 .sidebar-logo{padding:22px 20px 18px;border-bottom:1px solid var(--tw-border);display:flex;align-items:center;gap:10px;}
-.logo-placeholder{width:32px;height:32px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-placeholder{width:32px;height:32px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
 .logo-placeholder img{width:32px;height:32px;object-fit:contain;}
 .logo-placeholder span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;letter-spacing:0.05em;}
 .sidebar-brand{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--tw-text);letter-spacing:0.04em;}
@@ -149,6 +150,11 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
 .current-logo-preview span{color:#fff;font-family:var(--font-head);font-weight:700;font-size:14px;}
 .hidden{display:none!important;}
 .late-badge{font-size:10px;font-family:var(--font-head);font-weight:600;background:#fcebeb;color:#a32d2d;padding:1px 5px;margin-left:4px;}
+.loading{display:flex;align-items:center;justify-content:center;padding:40px;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;gap:8px;}
+.spinner{width:16px;height:16px;border:2px solid var(--tw-border);border-top-color:var(--tw-accent);border-radius:50%;animation:spin 0.6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--tw-accent);color:#fff;padding:10px 18px;font-family:var(--font-head);font-size:13px;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all 0.3s;}
+.toast.show{transform:translateY(0);opacity:1;}
 </style>
 </head>
 <body>
@@ -180,7 +186,6 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
       </div>
     </div>
 
-    <!-- DASHBOARD -->
     <div class="section active" id="sec-dash">
       <div class="content">
         <div class="stat-row" id="dash-stats"></div>
@@ -194,36 +199,22 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
       </div>
     </div>
 
-    <!-- KLANTEN -->
     <div class="section" id="sec-clients">
       <div class="filter-bar">
         <input id="q-clients" placeholder="Filter klanten..." oninput="renderClients()" style="width:200px;">
         <button class="btn btn-accent" onclick="openModal('client')">+ Klant toevoegen</button>
       </div>
       <div class="content">
-        <div id="clients-list-wrap">
-          <div class="card-grid" id="clients-grid"></div>
-        </div>
+        <div id="clients-list-wrap"><div class="card-grid" id="clients-grid"></div></div>
         <div id="client-detail-wrap" class="hidden"></div>
       </div>
     </div>
 
-    <!-- TAKEN -->
     <div class="section" id="sec-tasks">
       <div class="filter-bar">
         <div style="display:flex;gap:8px;">
-          <select id="f-status" onchange="renderTasks()" style="width:130px;">
-            <option value="">Alle statussen</option>
-            <option value="Open">Open</option>
-            <option value="Bezig">Bezig</option>
-            <option value="Klaar">Klaar</option>
-          </select>
-          <select id="f-prio" onchange="renderTasks()" style="width:130px;">
-            <option value="">Alle prioriteiten</option>
-            <option value="Hoog">Hoog</option>
-            <option value="Middel">Middel</option>
-            <option value="Laag">Laag</option>
-          </select>
+          <select id="f-status" onchange="renderTasks()" style="width:130px;"><option value="">Alle statussen</option><option value="Open">Open</option><option value="Bezig">Bezig</option><option value="Klaar">Klaar</option></select>
+          <select id="f-prio" onchange="renderTasks()" style="width:130px;"><option value="">Alle prioriteiten</option><option value="Hoog">Hoog</option><option value="Middel">Middel</option><option value="Laag">Laag</option></select>
         </div>
         <button class="btn btn-accent" onclick="openModal('task')">+ Taak toevoegen</button>
       </div>
@@ -235,18 +226,11 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
       </div>
     </div>
 
-    <!-- TEAM -->
     <div class="section" id="sec-team">
-      <div class="filter-bar">
-        <span></span>
-        <button class="btn btn-accent" onclick="openModal('employee')">+ Teamlid toevoegen</button>
-      </div>
-      <div class="content">
-        <div class="emp-grid" id="emp-grid"></div>
-      </div>
+      <div class="filter-bar"><span></span><button class="btn btn-accent" onclick="openModal('employee')">+ Teamlid toevoegen</button></div>
+      <div class="content"><div class="emp-grid" id="emp-grid"></div></div>
     </div>
 
-    <!-- INSTELLINGEN -->
     <div class="section" id="sec-settings">
       <div class="content">
         <div style="max-width:560px;">
@@ -265,7 +249,7 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
                 <div class="current-logo-preview" id="settings-logo-preview"><span id="settings-logo-ini">TW</span></div>
                 <div style="flex:1;">
                   <div style="font-size:13px;color:var(--tw-text);font-family:var(--font-body);margin-bottom:4px;">Huidig logo</div>
-                  <div style="font-size:12px;color:var(--tw-text-body);margin-bottom:10px;">PNG of SVG, bij voorkeur vierkant (min. 64×64px)</div>
+                  <div style="font-size:12px;color:var(--tw-text-body);margin-bottom:10px;">PNG of SVG, bij voorkeur vierkant</div>
                   <label style="cursor:pointer;">
                     <input type="file" id="logo-file-input" accept="image/*" style="display:none;width:auto;" onchange="handleLogoUpload(this)">
                     <span class="btn btn-sm" style="display:inline-flex;">Logo uploaden</span>
@@ -277,14 +261,8 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
           </div>
           <div class="settings-section">
             <h4>Informatie</h4>
-            <div class="settings-row">
-              <div class="settings-lbl">Versie</div>
-              <div style="font-size:13px;color:var(--tw-text-body);font-family:var(--font-body);">1.0 — TAFELWERK CRM</div>
-            </div>
-            <div class="settings-row">
-              <div class="settings-lbl">Sneltoets zoeken</div>
-              <div style="font-size:12px;color:var(--tw-text-body);font-family:var(--font-body);">⌘K of Ctrl+K</div>
-            </div>
+            <div class="settings-row"><div class="settings-lbl">Versie</div><div style="font-size:13px;color:var(--tw-text-body);font-family:var(--font-body);">1.0 — TAFELWERK CRM</div></div>
+            <div class="settings-row"><div class="settings-lbl">Sneltoets zoeken</div><div style="font-size:12px;color:var(--tw-text-body);font-family:var(--font-body);">⌘K of Ctrl+K</div></div>
           </div>
         </div>
       </div>
@@ -292,7 +270,7 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
   </div>
 </div>
 
-<!-- MODAL: KLANT -->
+<!-- MODALS -->
 <div class="modal-wrap" id="mod-client">
   <div class="modal">
     <div class="modal-head"><h3 id="mod-client-title">Klant toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
@@ -326,7 +304,6 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
   </div>
 </div>
 
-<!-- MODAL: TAAK -->
 <div class="modal-wrap" id="mod-task">
   <div class="modal">
     <div class="modal-head"><h3 id="mod-task-title">Taak toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
@@ -338,13 +315,9 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
       </div>
       <div class="form-row">
         <div class="form-group"><label>Deadline</label><input type="date" id="t-deadline"></div>
-        <div class="form-group"><label>Prioriteit</label>
-          <select id="t-prio"><option value="Laag">Laag</option><option value="Middel" selected>Middel</option><option value="Hoog">Hoog</option></select>
-        </div>
+        <div class="form-group"><label>Prioriteit</label><select id="t-prio"><option value="Laag">Laag</option><option value="Middel" selected>Middel</option><option value="Hoog">Hoog</option></select></div>
       </div>
-      <div class="form-group"><label>Status</label>
-        <select id="t-status"><option value="Open">Open</option><option value="Bezig">Bezig</option><option value="Klaar">Klaar</option></select>
-      </div>
+      <div class="form-group"><label>Status</label><select id="t-status"><option value="Open">Open</option><option value="Bezig">Bezig</option><option value="Klaar">Klaar</option></select></div>
       <div class="form-group"><label>Notitie</label><textarea id="t-note" placeholder="Aanvullende beschrijving..."></textarea></div>
     </div>
     <div class="modal-foot">
@@ -354,7 +327,6 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
   </div>
 </div>
 
-<!-- MODAL: MEDEWERKER -->
 <div class="modal-wrap" id="mod-employee">
   <div class="modal">
     <div class="modal-head"><h3>Teamlid toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
@@ -375,7 +347,6 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
   </div>
 </div>
 
-<!-- ZOEKEN -->
 <div class="search-overlay" id="search-overlay" onclick="maybeCloseSearch(event)">
   <div class="search-box">
     <div class="search-box-inner">
@@ -386,31 +357,47 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
-let eCid=null,eTid=null,clientLogoData=null;
+const SUPABASE_URL = 'https://ogycuwxweqisrhyvikjq.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9neWN1d3h3ZXFpc3JoeXZpa2pxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4ODgxNjYsImV4cCI6MjA5MDQ2NDE2Nn0.AigfnfGbjTN-HA-3_jiy9UoYDsqtJjF0r3MWVlc54Qs';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let clients=[], tasks=[], employees=[];
+let eCid=null, eTid=null, clientLogoData=null;
 const SECTIONS=['dash','clients','tasks','team','settings'];
 const TITLES={dash:'Dashboard',clients:'Klanten',tasks:'Taken',team:'Team',settings:'Instellingen'};
 
-function db(){
-  try{return{c:JSON.parse(localStorage.getItem('tw_c')||'[]'),t:JSON.parse(localStorage.getItem('tw_t')||'[]'),e:JSON.parse(localStorage.getItem('tw_e')||'[]'),s:JSON.parse(localStorage.getItem('tw_s')||'{"brand":"TAFELWERK","logo":null}')};}
-  catch{return{c:[],t:[],e:[],s:{brand:'TAFELWERK',logo:null}};}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
 }
-function save(d){localStorage.setItem('tw_c',JSON.stringify(d.c));localStorage.setItem('tw_t',JSON.stringify(d.t));localStorage.setItem('tw_e',JSON.stringify(d.e));localStorage.setItem('tw_s',JSON.stringify(d.s));}
-function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+
 function ini(n){if(!n)return'?';const p=n.trim().split(' ');return(p[0][0]+(p[1]?p[1][0]:'')).toUpperCase();}
 function fmtD(d){if(!d)return'—';return new Date(d+'T00:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'short'});}
 function sBadge(s){const m={Open:'badge-open',Bezig:'badge-bezig',Klaar:'badge-klaar'};return`<span class="badge ${m[s]||''}">${s}</span>`;}
 function pBadge(p){const cl=p.toLowerCase();return`<span class="prio-lbl prio-${cl}"><span class="prio-dot"></span>${p}</span>`;}
 
+async function loadAll(){
+  const[{data:c},{data:t},{data:e}]=await Promise.all([
+    sb.from('clients').select('*').order('created_at',{ascending:false}),
+    sb.from('tasks').select('*').order('created_at',{ascending:false}),
+    sb.from('employees').select('*').order('created_at',{ascending:false})
+  ]);
+  clients=c||[]; tasks=t||[]; employees=e||[];
+}
+
 function applyBranding(){
-  const d=db();const brand=d.s?.brand||'TAFELWERK';
+  const brand=localStorage.getItem('tw_brand')||'TAFELWERK';
+  const logo=localStorage.getItem('tw_logo')||null;
   document.getElementById('sidebar-brand-txt').textContent=brand;
   document.title=brand+' CRM';
   const logoEl=document.getElementById('sidebar-logo-el');
   const settPrev=document.getElementById('settings-logo-preview');
-  if(d.s?.logo){
-    logoEl.innerHTML=`<img src="${d.s.logo}" style="width:32px;height:32px;object-fit:contain;">`;
-    settPrev.innerHTML=`<img src="${d.s.logo}" style="width:48px;height:48px;object-fit:contain;">`;
+  if(logo){
+    logoEl.innerHTML=`<img src="${logo}" style="width:32px;height:32px;object-fit:contain;">`;
+    settPrev.innerHTML=`<img src="${logo}" style="width:48px;height:48px;object-fit:contain;">`;
   }else{
     const ab=brand.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
     logoEl.innerHTML=`<span style="color:#fff;font-family:var(--font-head);font-weight:700;font-size:11px;">${ab}</span>`;
@@ -420,37 +407,35 @@ function applyBranding(){
 }
 
 function saveBrand(){
-  const d=db();d.s=d.s||{};
-  d.s.brand=document.getElementById('s-brandname').value.trim()||'TAFELWERK';
-  save(d);applyBranding();
+  localStorage.setItem('tw_brand',document.getElementById('s-brandname').value.trim()||'TAFELWERK');
+  applyBranding();showToast('Naam opgeslagen');
 }
 
 function handleLogoUpload(input){
   const f=input.files[0];if(!f)return;
   const r=new FileReader();
-  r.onload=function(e){const d=db();d.s=d.s||{};d.s.logo=e.target.result;save(d);applyBranding();};
+  r.onload=function(e){localStorage.setItem('tw_logo',e.target.result);applyBranding();showToast('Logo opgeslagen');};
   r.readAsDataURL(f);
 }
 
-function removeLogo(){const d=db();d.s=d.s||{};d.s.logo=null;save(d);applyBranding();}
+function removeLogo(){localStorage.removeItem('tw_logo');applyBranding();showToast('Logo verwijderd');}
 
 function previewClientLogo(input){
   const f=input.files[0];if(!f)return;
   const r=new FileReader();
-  r.onload=function(e){
-    clientLogoData=e.target.result;
-    const prev=document.getElementById('c-logo-preview');prev.src=e.target.result;prev.style.display='block';
-  };r.readAsDataURL(f);
+  r.onload=function(e){clientLogoData=e.target.result;const prev=document.getElementById('c-logo-preview');prev.src=e.target.result;prev.style.display='block';};
+  r.readAsDataURL(f);
 }
 
-function go(sec){
+async function go(sec){
   SECTIONS.forEach(s=>{
     const el=document.getElementById('sec-'+s);
-    if(el){el.classList.toggle('active',s===sec);}
+    if(el)el.classList.toggle('active',s===sec);
     const nav=document.getElementById('nav-'+s);
     if(nav)nav.classList.toggle('active',s===sec);
   });
   document.getElementById('topbar-title').textContent=TITLES[sec]||'';
+  await loadAll();
   if(sec==='dash')renderDash();
   if(sec==='clients'){document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');renderClients();}
   if(sec==='tasks')renderTasks();
@@ -459,20 +444,19 @@ function go(sec){
 }
 
 function renderDash(){
-  const d=db();
-  const open=d.t.filter(t=>t.status!=='Klaar').length;
-  const bezig=d.t.filter(t=>t.status==='Bezig').length;
-  const klaar=d.t.filter(t=>t.status==='Klaar').length;
+  const open=tasks.filter(t=>t.status!=='Klaar').length;
+  const bezig=tasks.filter(t=>t.status==='Bezig').length;
+  const klaar=tasks.filter(t=>t.status==='Klaar').length;
   document.getElementById('dash-stats').innerHTML=`
-    <div class="stat-card"><div class="stat-lbl">Klanten</div><div class="stat-val">${d.c.length}</div><div class="stat-sub">totaal</div></div>
+    <div class="stat-card"><div class="stat-lbl">Klanten</div><div class="stat-val">${clients.length}</div><div class="stat-sub">totaal</div></div>
     <div class="stat-card"><div class="stat-lbl">Open taken</div><div class="stat-val">${open}</div><div class="stat-sub">te doen</div></div>
     <div class="stat-card"><div class="stat-lbl">In uitvoering</div><div class="stat-val">${bezig}</div><div class="stat-sub">bezig</div></div>
     <div class="stat-card"><div class="stat-lbl">Afgerond</div><div class="stat-val">${klaar}</div><div class="stat-sub">klaar</div></div>`;
-  const rows=d.t.filter(t=>t.status!=='Klaar').sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);}).slice(0,8);
+  const rows=tasks.filter(t=>t.status!=='Klaar').sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);}).slice(0,8);
   const tb=document.getElementById('dash-tasks-body');
   if(!rows.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:28px;font-family:var(--font-body);">Geen openstaande taken</td></tr>';return;}
   tb.innerHTML=rows.map(t=>{
-    const cl=d.c.find(c=>c.id===t.cid);const em=d.e.find(e=>e.id===t.eid);
+    const cl=clients.find(c=>c.id===t.client_id);const em=employees.find(e=>e.id===t.employee_id);
     const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();
     return`<tr onclick="go('tasks')">
       <td style="font-family:var(--font-head);font-weight:600;font-size:13px;">${t.title}</td>
@@ -486,13 +470,13 @@ function renderDash(){
 }
 
 function renderClients(){
-  const d=db();const q=(document.getElementById('q-clients')?.value||'').toLowerCase();
-  const list=d.c.filter(c=>!q||c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)||(c.city||'').toLowerCase().includes(q));
+  const q=(document.getElementById('q-clients')?.value||'').toLowerCase();
+  const list=clients.filter(c=>!q||c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)||(c.city||'').toLowerCase().includes(q));
   const grid=document.getElementById('clients-grid');
   if(!list.length){grid.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;grid-column:1/-1;border:1px solid var(--tw-border);">Nog geen klanten toegevoegd</div>';return;}
   grid.innerHTML=list.map(c=>{
-    const open=d.t.filter(t=>t.cid===c.id&&t.status!=='Klaar').length;
-    const total=d.t.filter(t=>t.cid===c.id).length;
+    const open=tasks.filter(t=>t.client_id===c.id&&t.status!=='Klaar').length;
+    const total=tasks.filter(t=>t.client_id===c.id).length;
     const logoHtml=c.logo?`<img src="${c.logo}" style="width:44px;height:44px;object-fit:contain;">`:`<span class="client-logo-ini">${ini(c.name)}</span>`;
     return`<div class="client-card" onclick="showClient('${c.id}')">
       <div class="client-card-header">
@@ -513,10 +497,10 @@ function renderClients(){
 }
 
 function showClient(id){
-  const d=db();const c=d.c.find(x=>x.id===id);if(!c)return;
+  const c=clients.find(x=>x.id===id);if(!c)return;
   document.getElementById('clients-list-wrap').classList.add('hidden');
   const det=document.getElementById('client-detail-wrap');det.classList.remove('hidden');
-  const tasks=d.t.filter(t=>t.cid===id);
+  const ctasks=tasks.filter(t=>t.client_id===id);
   const logoHtml=c.logo?`<img src="${c.logo}" style="width:56px;height:56px;object-fit:contain;">`:`<span class="detail-logo-ini">${ini(c.name)}</span>`;
   det.innerHTML=`
     <div class="back-link" onclick="document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');">← Terug naar klanten</div>
@@ -524,10 +508,7 @@ function showClient(id){
       <div class="detail-hero-top">
         <div style="display:flex;align-items:center;gap:16px;">
           <div class="detail-logo">${logoHtml}</div>
-          <div>
-            <div class="detail-name">${c.name}</div>
-            <div class="detail-sub">${[c.address,c.city].filter(Boolean).join(', ')||'Geen adres'}</div>
-          </div>
+          <div><div class="detail-name">${c.name}</div><div class="detail-sub">${[c.address,c.city].filter(Boolean).join(', ')||'Geen adres'}</div></div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
           ${c.drive?`<a href="${c.drive}" target="_blank" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Google Drive map</a>`:''}
@@ -546,7 +527,7 @@ function showClient(id){
       <div class="panel-head"><h3>Taken voor ${c.name}</h3><button class="btn btn-sm btn-accent" onclick="openTaskFor('${c.id}')">+ Taak toevoegen</button></div>
       <div class="tbl-wrap" style="border:none;">
         <table class="data-table"><thead><tr><th>Taak</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th><th></th></tr></thead>
-        <tbody>${tasks.length?tasks.map(t=>{const em=d.e.find(e=>e.id===t.eid);return`<tr>
+        <tbody>${ctasks.length?ctasks.map(t=>{const em=employees.find(e=>e.id===t.employee_id);return`<tr>
           <td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,60)}${t.note.length>60?'…':''}</div>`:''}</td>
           <td>${em?em.first+' '+em.last:'—'}</td>
           <td>${fmtD(t.deadline)}</td>
@@ -560,17 +541,16 @@ function showClient(id){
 }
 
 function renderTasks(){
-  const d=db();
   const sf=document.getElementById('f-status')?.value||'';
   const pf=document.getElementById('f-prio')?.value||'';
-  let list=d.t;
+  let list=tasks;
   if(sf)list=list.filter(t=>t.status===sf);
   if(pf)list=list.filter(t=>t.prio===pf);
   list.sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);});
   const tb=document.getElementById('tasks-body');
   if(!list.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--tw-text-body);padding:32px;font-family:var(--font-body);">Geen taken gevonden</td></tr>';return;}
   tb.innerHTML=list.map(t=>{
-    const cl=d.c.find(c=>c.id===t.cid);const em=d.e.find(e=>e.id===t.eid);
+    const cl=clients.find(c=>c.id===t.client_id);const em=employees.find(e=>e.id===t.employee_id);
     const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();
     return`<tr>
       <td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,55)}${t.note.length>55?'…':''}</div>`:''}</td>
@@ -585,11 +565,11 @@ function renderTasks(){
 }
 
 function renderTeam(){
-  const d=db();const g=document.getElementById('emp-grid');
-  if(!d.e.length){g.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;">Nog geen teamleden toegevoegd</div>';return;}
-  g.innerHTML=d.e.map(e=>{
+  const g=document.getElementById('emp-grid');
+  if(!employees.length){g.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;">Nog geen teamleden toegevoegd</div>';return;}
+  g.innerHTML=employees.map(e=>{
     const name=e.first+' '+e.last;
-    const openT=d.t.filter(t=>t.eid===e.id&&t.status!=='Klaar').length;
+    const openT=tasks.filter(t=>t.employee_id===e.id&&t.status!=='Klaar').length;
     return`<div class="emp-card">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
         <div class="emp-card-av">${ini(name)}</div>
@@ -606,37 +586,43 @@ function renderTeam(){
 
 function openModal(type){
   if(type==='client'){eCid=null;clientLogoData=null;document.getElementById('mod-client-title').textContent='Klant toevoegen';['c-name','c-contact','c-email','c-phone','c-city','c-address','c-drive','c-notes'].forEach(i=>document.getElementById(i).value='');document.getElementById('c-logo-preview').style.display='none';}
-  if(type==='task'){eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';const d=db();fillSel(d,null,null);['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';}
+  if(type==='task'){eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';fillSel(null,null);['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';}
   if(type==='employee'){['e-first','e-last','e-role','e-email'].forEach(i=>document.getElementById(i).value='');}
   document.getElementById('mod-'+type).classList.add('open');
 }
 
 function openTaskFor(cid){
   eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';
-  const d=db();fillSel(d,cid,null);
+  fillSel(cid,null);
   ['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');
   document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';
   document.getElementById('mod-task').classList.add('open');
 }
 
-function fillSel(d,sc,se){
-  document.getElementById('t-client').innerHTML='<option value="">— Kies klant —</option>'+d.c.map(c=>`<option value="${c.id}"${c.id===sc?' selected':''}>${c.name}</option>`).join('');
-  document.getElementById('t-emp').innerHTML='<option value="">— Kies medewerker —</option>'+d.e.map(e=>`<option value="${e.id}"${e.id===se?' selected':''}>${e.first} ${e.last}</option>`).join('');
+function fillSel(sc,se){
+  document.getElementById('t-client').innerHTML='<option value="">— Kies klant —</option>'+clients.map(c=>`<option value="${c.id}"${c.id===sc?' selected':''}>${c.name}</option>`).join('');
+  document.getElementById('t-emp').innerHTML='<option value="">— Kies medewerker —</option>'+employees.map(e=>`<option value="${e.id}"${e.id===se?' selected':''}>${e.first} ${e.last}</option>`).join('');
 }
 
 function closeModals(){document.querySelectorAll('.modal-wrap').forEach(m=>m.classList.remove('open'));eCid=null;eTid=null;}
 document.querySelectorAll('.modal-wrap').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)closeModals();}));
 
-function saveClient(){
+async function saveClient(){
   const name=document.getElementById('c-name').value.trim();if(!name){alert('Vul een bedrijfsnaam in');return;}
-  const d=db();
-  const obj={id:eCid||uid(),name,contact:document.getElementById('c-contact').value,email:document.getElementById('c-email').value,phone:document.getElementById('c-phone').value,city:document.getElementById('c-city').value,address:document.getElementById('c-address').value,drive:document.getElementById('c-drive').value,notes:document.getElementById('c-notes').value,logo:clientLogoData};
-  if(eCid){const old=d.c.find(c=>c.id===eCid);if(!obj.logo&&old?.logo)obj.logo=old.logo;d.c=d.c.map(c=>c.id===eCid?obj:c);}else{d.c.push(obj);}
-  save(d);closeModals();renderClients();if(eCid)showClient(eCid);
+  const obj={name,contact:document.getElementById('c-contact').value,email:document.getElementById('c-email').value,phone:document.getElementById('c-phone').value,city:document.getElementById('c-city').value,address:document.getElementById('c-address').value,drive:document.getElementById('c-drive').value,notes:document.getElementById('c-notes').value};
+  if(clientLogoData)obj.logo=clientLogoData;
+  if(eCid){
+    await sb.from('clients').update(obj).eq('id',eCid);
+    showToast('Klant bijgewerkt');
+  }else{
+    await sb.from('clients').insert(obj);
+    showToast('Klant toegevoegd');
+  }
+  await loadAll();closeModals();renderClients();if(eCid)showClient(eCid);
 }
 
 function editClient(id){
-  const d=db();const c=d.c.find(x=>x.id===id);if(!c)return;
+  const c=clients.find(x=>x.id===id);if(!c)return;
   eCid=id;clientLogoData=null;
   document.getElementById('mod-client-title').textContent='Klant bewerken';
   ['name','contact','email','phone','city','address','drive','notes'].forEach(f=>document.getElementById('c-'+f).value=c[f]||'');
@@ -645,20 +631,33 @@ function editClient(id){
   document.getElementById('mod-client').classList.add('open');
 }
 
-function delClient(id){if(!confirm('Klant verwijderen?'))return;const d=db();d.c=d.c.filter(c=>c.id!==id);save(d);document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');renderClients();}
+async function delClient(id){
+  if(!confirm('Klant verwijderen?'))return;
+  await sb.from('clients').delete().eq('id',id);
+  showToast('Klant verwijderd');
+  await loadAll();
+  document.getElementById('clients-list-wrap').classList.remove('hidden');
+  document.getElementById('client-detail-wrap').classList.add('hidden');
+  renderClients();
+}
 
-function saveTask(){
+async function saveTask(){
   const title=document.getElementById('t-title').value.trim();if(!title){alert('Vul een taakomschrijving in');return;}
-  const d=db();
-  const obj={id:eTid||uid(),title,cid:document.getElementById('t-client').value,eid:document.getElementById('t-emp').value,deadline:document.getElementById('t-deadline').value,prio:document.getElementById('t-prio').value,status:document.getElementById('t-status').value,note:document.getElementById('t-note').value};
-  if(eTid)d.t=d.t.map(t=>t.id===eTid?obj:t);else d.t.push(obj);
-  save(d);closeModals();renderTasks();renderDash();
+  const obj={title,client_id:document.getElementById('t-client').value||null,employee_id:document.getElementById('t-emp').value||null,deadline:document.getElementById('t-deadline').value||null,prio:document.getElementById('t-prio').value,status:document.getElementById('t-status').value,note:document.getElementById('t-note').value};
+  if(eTid){
+    await sb.from('tasks').update(obj).eq('id',eTid);
+    showToast('Taak bijgewerkt');
+  }else{
+    await sb.from('tasks').insert(obj);
+    showToast('Taak toegevoegd');
+  }
+  await loadAll();closeModals();renderTasks();renderDash();
 }
 
 function editTask(id){
-  const d=db();const t=d.t.find(x=>x.id===id);if(!t)return;
+  const t=tasks.find(x=>x.id===id);if(!t)return;
   eTid=id;document.getElementById('mod-task-title').textContent='Taak bewerken';
-  fillSel(d,t.cid,t.eid);
+  fillSel(t.client_id,t.employee_id);
   document.getElementById('t-title').value=t.title||'';
   document.getElementById('t-deadline').value=t.deadline||'';
   document.getElementById('t-prio').value=t.prio||'Middel';
@@ -667,16 +666,29 @@ function editTask(id){
   document.getElementById('mod-task').classList.add('open');
 }
 
-function delTask(id,returnCid){if(!confirm('Taak verwijderen?'))return;const d=db();d.t=d.t.filter(t=>t.id!==id);save(d);if(returnCid)showClient(returnCid);else renderTasks();renderDash();}
-
-function saveEmp(){
-  const first=document.getElementById('e-first').value.trim(),last=document.getElementById('e-last').value.trim();
-  if(!first||!last){alert('Vul voor- en achternaam in');return;}
-  const d=db();d.e.push({id:uid(),first,last,role:document.getElementById('e-role').value,email:document.getElementById('e-email').value});
-  save(d);closeModals();renderTeam();
+async function delTask(id,returnCid){
+  if(!confirm('Taak verwijderen?'))return;
+  await sb.from('tasks').delete().eq('id',id);
+  showToast('Taak verwijderd');
+  await loadAll();
+  if(returnCid)showClient(returnCid);else renderTasks();
+  renderDash();
 }
 
-function delEmp(id){if(!confirm('Teamlid verwijderen?'))return;const d=db();d.e=d.e.filter(e=>e.id!==id);save(d);renderTeam();}
+async function saveEmp(){
+  const first=document.getElementById('e-first').value.trim(),last=document.getElementById('e-last').value.trim();
+  if(!first||!last){alert('Vul voor- en achternaam in');return;}
+  await sb.from('employees').insert({first,last,role:document.getElementById('e-role').value,email:document.getElementById('e-email').value});
+  showToast('Teamlid toegevoegd');
+  await loadAll();closeModals();renderTeam();
+}
+
+async function delEmp(id){
+  if(!confirm('Teamlid verwijderen?'))return;
+  await sb.from('employees').delete().eq('id',id);
+  showToast('Teamlid verwijderd');
+  await loadAll();renderTeam();
+}
 
 function openSearch(){
   document.getElementById('search-overlay').classList.add('open');
@@ -690,10 +702,10 @@ function doSearch(){
   const q=document.getElementById('search-input').value.toLowerCase().trim();
   const res=document.getElementById('search-results');
   if(!q){res.innerHTML='<div class="search-empty">Begin met typen om te zoeken...</div>';return;}
-  const d=db();let hits=[];
-  d.c.filter(c=>c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)).forEach(c=>hits.push({type:'Klant',label:c.name,sub:c.contact||'',action:`showClient('${c.id}');go('clients');closeSearch()`}));
-  d.t.filter(t=>t.title.toLowerCase().includes(q)).forEach(t=>{const cl=d.c.find(c=>c.id===t.cid);hits.push({type:'Taak',label:t.title,sub:cl?cl.name:'',action:`go('tasks');closeSearch()`});});
-  d.e.filter(e=>(e.first+' '+e.last).toLowerCase().includes(q)||(e.role||'').toLowerCase().includes(q)).forEach(e=>hits.push({type:'Team',label:e.first+' '+e.last,sub:e.role||'',action:`go('team');closeSearch()`}));
+  let hits=[];
+  clients.filter(c=>c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)).forEach(c=>hits.push({type:'Klant',label:c.name,sub:c.contact||'',action:`showClient('${c.id}');go('clients');closeSearch()`}));
+  tasks.filter(t=>t.title.toLowerCase().includes(q)).forEach(t=>{const cl=clients.find(c=>c.id===t.client_id);hits.push({type:'Taak',label:t.title,sub:cl?cl.name:'',action:`go('tasks');closeSearch()`});});
+  employees.filter(e=>(e.first+' '+e.last).toLowerCase().includes(q)||(e.role||'').toLowerCase().includes(q)).forEach(e=>hits.push({type:'Team',label:e.first+' '+e.last,sub:e.role||'',action:`go('team');closeSearch()`}));
   if(!hits.length){res.innerHTML='<div class="search-empty">Geen resultaten gevonden</div>';return;}
   res.innerHTML=hits.slice(0,10).map(h=>`<div class="search-result-item" onclick="${h.action}">
     <div style="flex:1;"><div style="font-family:var(--font-head);font-weight:600;font-size:13px;">${h.label}</div>${h.sub?`<div style="font-size:11px;color:var(--tw-text-body);font-family:var(--font-body);">${h.sub}</div>`:''}</div>
@@ -706,8 +718,12 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){closeSearch();closeModals();}
 });
 
-applyBranding();
-renderDash();
+async function init(){
+  applyBranding();
+  await loadAll();
+  renderDash();
+}
+init();
 </script>
 </body>
 </html>
