@@ -17,158 +17,195 @@
   --tw-text-body:#4a3035;
   --tw-border:#e0d8d9;
   --tw-border-strong:#c9bfc0;
+  --tw-sidebar:#1a0a0c;
+  --tw-sidebar-hover:rgba(255,255,255,0.08);
+  --tw-sidebar-active:rgba(255,255,255,0.15);
   --font-head:'Montserrat',sans-serif;
   --font-body:'Quicksand',sans-serif;
 }
 html,body{height:100%;}
 .app{display:flex;height:100vh;background:var(--tw-bg);color:var(--tw-text);font-family:var(--font-body);font-weight:500;}
+
+/* LOGIN */
 .login-wrap{display:flex;align-items:center;justify-content:center;width:100%;background:var(--tw-surface);}
-.login-box{background:var(--tw-bg);border:1px solid var(--tw-border);width:400px;max-width:95vw;padding:40px;}
-.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:32px;}
-.login-logo-mark{width:36px;height:36px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
-.login-logo-mark img{width:36px;height:36px;object-fit:contain;}
-.login-logo-mark span{color:#fff;font-family:var(--font-head);font-weight:900;font-size:12px;letter-spacing:0.05em;}
-.login-logo-name{font-family:var(--font-head);font-weight:900;font-size:17px;color:var(--tw-text);letter-spacing:0.1em;text-transform:uppercase;}
-.login-title{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--tw-text);margin-bottom:6px;}
-.login-sub{font-size:13px;color:var(--tw-text-body);margin-bottom:28px;line-height:1.5;}
+.login-box{background:var(--tw-bg);border:1px solid var(--tw-border);width:420px;max-width:95vw;padding:44px;}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:36px;}
+.login-logo-mark{width:38px;height:38px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;border-radius:50%;}
+.login-logo-mark img{width:38px;height:38px;object-fit:contain;}
+.login-logo-mark span{color:#fff;font-family:var(--font-head);font-weight:900;font-size:12px;}
+.login-logo-name{font-family:var(--font-head);font-weight:900;font-size:18px;color:var(--tw-text);letter-spacing:-0.01em;text-transform:uppercase;}
+.login-title{font-family:var(--font-head);font-size:22px;font-weight:700;color:var(--tw-text);margin-bottom:6px;}
+.login-sub{font-size:13px;color:var(--tw-text-body);margin-bottom:28px;line-height:1.6;}
 .login-divider{display:flex;align-items:center;gap:12px;margin:20px 0;}
 .login-divider span{font-size:11px;color:var(--tw-text-body);font-family:var(--font-head);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;}
 .login-divider-line{flex:1;height:1px;background:var(--tw-border);}
-.form-group{margin-bottom:14px;}
-.form-group label{display:block;font-family:var(--font-head);font-size:11px;font-weight:600;color:var(--tw-text-body);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px;}
-.login-input{width:100%;padding:10px 12px;border:1px solid var(--tw-border);background:var(--tw-surface);color:var(--tw-text);font-size:13px;font-family:var(--font-body);font-weight:500;outline:none;transition:border-color 0.12s;border-radius:0;}
+.form-lbl{display:block;font-family:var(--font-head);font-size:11px;font-weight:600;color:var(--tw-text-body);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px;}
+.login-input{width:100%;padding:11px 13px;border:1px solid var(--tw-border);background:var(--tw-surface);color:var(--tw-text);font-size:13px;font-family:var(--font-body);font-weight:500;outline:none;transition:border-color 0.15s;border-radius:0;}
 .login-input:focus{border-color:var(--tw-accent);}
-.btn-login{width:100%;padding:11px;border:none;background:var(--tw-accent);color:#fff;font-family:var(--font-head);font-weight:700;font-size:13px;letter-spacing:0.04em;cursor:pointer;transition:background 0.12s;}
+.btn-login{width:100%;padding:12px;border:none;background:var(--tw-accent);color:#fff;font-family:var(--font-head);font-weight:700;font-size:13px;letter-spacing:0.04em;cursor:pointer;transition:background 0.15s;border-radius:99px;}
 .btn-login:hover{background:var(--tw-accent-hover);}
 .btn-login:disabled{opacity:0.6;cursor:not-allowed;}
-.btn-google{width:100%;padding:11px;border:1px solid var(--tw-border);background:var(--tw-bg);color:var(--tw-text);font-family:var(--font-head);font-weight:600;font-size:13px;cursor:pointer;transition:all 0.12s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.btn-google{width:100%;padding:11px;border:1px solid var(--tw-border);background:var(--tw-bg);color:var(--tw-text);font-family:var(--font-head);font-weight:600;font-size:13px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:99px;}
 .btn-google:hover{background:var(--tw-surface);border-color:var(--tw-border-strong);}
-.login-msg{font-size:12px;margin-top:10px;padding:10px 12px;font-family:var(--font-body);display:none;}
+.login-msg{font-size:12px;margin-top:10px;padding:10px 13px;font-family:var(--font-body);display:none;border-radius:99px;}
 .login-msg.success{background:#eaf3de;color:#27500a;display:block;}
 .login-msg.error{background:#fcebeb;color:#a32d2d;display:block;}
-.sidebar{width:220px;background:var(--tw-surface);border-right:1px solid var(--tw-border);display:none;flex-direction:column;flex-shrink:0;}
+
+/* SIDEBAR */
+.sidebar{width:230px;background:var(--tw-sidebar);border-right:none;display:none;flex-direction:column;flex-shrink:0;}
 .sidebar.visible{display:flex;}
-.sidebar-logo{padding:22px 20px 18px;border-bottom:1px solid var(--tw-border);display:flex;align-items:center;gap:10px;}
-.logo-placeholder{width:32px;height:32px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
-.logo-placeholder img{width:32px;height:32px;object-fit:contain;}
+.sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:10px;}
+.logo-placeholder{width:32px;height:32px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;border-radius:50%;}
+.logo-placeholder img{width:32px;height:32px;object-fit:contain;border-radius:50%;}
 .logo-placeholder span{color:#fff;font-family:var(--font-head);font-weight:900;font-size:11px;}
-.sidebar-brand{font-family:var(--font-head);font-weight:900;font-size:15px;color:var(--tw-text);letter-spacing:0.1em;text-transform:uppercase;}
-.nav-body{flex:1;padding:14px 10px;}
-.nav-lbl{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.5;padding:0 10px;margin-bottom:4px;letter-spacing:0.08em;text-transform:uppercase;}
-.nav-item{display:flex;align-items:center;gap:9px;padding:9px 10px;cursor:pointer;font-family:var(--font-body);font-weight:500;font-size:13px;color:var(--tw-text-body);transition:background 0.12s,color 0.12s;border:1px solid transparent;margin-bottom:2px;}
-.nav-item:hover{background:var(--tw-border);color:var(--tw-text);}
-.nav-item.active{background:var(--tw-accent);color:#fff;border-color:var(--tw-accent);}
-.nav-ic{width:15px;text-align:center;font-size:13px;flex-shrink:0;}
-.sidebar-foot{padding:12px 10px;border-top:1px solid var(--tw-border);}
-.main{flex:1;display:none;flex-direction:column;overflow:hidden;background:var(--tw-bg);}
+.sidebar-brand{font-family:var(--font-head);font-weight:900;font-size:15px;color:#ffffff;letter-spacing:-0.01em;text-transform:uppercase;}
+.nav-body{flex:1;padding:16px 12px;overflow-y:auto;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 11px;cursor:pointer;font-family:var(--font-body);font-weight:500;font-size:13px;color:rgba(255,255,255,0.65);transition:background 0.15s,color 0.15s;border-radius:99px;margin-bottom:2px;}
+.nav-item:hover{background:var(--tw-sidebar-hover);color:#fff;}
+.nav-item.active{background:var(--tw-sidebar-active);color:#fff;font-weight:600;}
+.nav-ic{width:16px;height:16px;flex-shrink:0;opacity:0.7;}
+.nav-item.active .nav-ic,.nav-item:hover .nav-ic{opacity:1;}
+.sidebar-foot{padding:12px;border-top:1px solid rgba(255,255,255,0.08);}
+
+/* MAIN */
+.main{flex:1;display:none;flex-direction:column;overflow:hidden;}
 .main.visible{display:flex;}
-.topbar{background:var(--tw-bg);border-bottom:1px solid var(--tw-border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;flex-shrink:0;}
-.topbar-title{font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--tw-text);letter-spacing:0.02em;}
+.topbar{background:var(--tw-bg);border-bottom:1px solid var(--tw-border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:54px;flex-shrink:0;}
+.topbar-title{font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--tw-text);letter-spacing:0.01em;}
 .topbar-right{display:flex;align-items:center;gap:10px;}
-.user-badge{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--tw-text-body);font-family:var(--font-body);}
+.user-badge{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--tw-text-body);}
 .user-badge span{max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.btn-logout{padding:5px 10px;border:1px solid var(--tw-border);background:transparent;cursor:pointer;font-size:12px;font-family:var(--font-head);font-weight:600;color:var(--tw-text-body);transition:all 0.12s;}
+.btn-logout{padding:6px 12px;border:1px solid var(--tw-border);background:transparent;cursor:pointer;font-size:12px;font-family:var(--font-head);font-weight:600;color:var(--tw-text-body);transition:all 0.12s;border-radius:99px;}
 .btn-logout:hover{background:var(--tw-surface);color:var(--tw-accent);}
-.search-trigger{display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--tw-border);background:var(--tw-surface);cursor:pointer;font-family:var(--font-body);font-size:13px;color:var(--tw-text-body);}
+.search-trigger{display:flex;align-items:center;gap:8px;padding:7px 13px;border:1px solid var(--tw-border);background:var(--tw-surface);cursor:pointer;font-size:13px;color:var(--tw-text-body);border-radius:99px;transition:border-color 0.12s;}
 .search-trigger:hover{border-color:var(--tw-border-strong);}
-.kbd{font-family:var(--font-head);font-size:10px;background:var(--tw-border);padding:2px 6px;color:var(--tw-text-body);font-weight:600;}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:1px solid var(--tw-border);background:var(--tw-bg);cursor:pointer;font-size:13px;font-family:var(--font-body);font-weight:500;color:var(--tw-text);transition:all 0.12s;}
+.kbd{font-family:var(--font-head);font-size:10px;background:var(--tw-border);padding:2px 6px;color:var(--tw-text-body);font-weight:600;border-radius:4px;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:1px solid var(--tw-border);background:var(--tw-bg);cursor:pointer;font-size:13px;font-family:var(--font-body);font-weight:500;color:var(--tw-text);transition:all 0.12s;border-radius:99px;}
 .btn:hover{background:var(--tw-surface);border-color:var(--tw-border-strong);}
 .btn:active{transform:scale(0.98);}
 .btn-accent{background:var(--tw-accent);border-color:var(--tw-accent);color:#fff;font-family:var(--font-head);font-weight:600;letter-spacing:0.02em;}
 .btn-accent:hover{background:var(--tw-accent-hover);border-color:var(--tw-accent-hover);}
-.btn-sm{padding:5px 10px;font-size:12px;}
+.btn-sm{padding:5px 11px;font-size:12px;}
 .btn-ghost{border-color:transparent;background:transparent;}
 .btn-ghost:hover{background:var(--tw-surface);border-color:var(--tw-border);}
-.btn-danger{background:transparent;border-color:#c9bfc0;color:#a32d2d;}
+.btn-danger{background:transparent;border-color:#c9bfc0;color:#a32d2d;border-radius:99px;}
 .btn-danger:hover{background:#fcebeb;}
-.content{flex:1;overflow-y:auto;padding:24px;}
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-bottom:24px;border:1px solid var(--tw-border);background:var(--tw-border);}
-.stat-card{background:var(--tw-bg);padding:18px 20px;}
-.stat-lbl{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.6;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;}
-.stat-val{font-family:var(--font-head);font-size:26px;font-weight:700;color:var(--tw-text);line-height:1;}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:28px;}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+.stat-card{background:var(--tw-bg);padding:20px;border:1px solid var(--tw-border);border-radius:0;}
+.stat-lbl{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.6;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+.stat-val{font-family:var(--font-head);font-size:28px;font-weight:700;color:var(--tw-text);line-height:1;}
 .stat-sub{font-size:12px;color:var(--tw-text-body);margin-top:4px;}
 .section{display:none;flex-direction:column;flex:1;overflow:hidden;}
 .section.active{display:flex;}
 .filter-bar{padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:1px solid var(--tw-border);background:var(--tw-bg);}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:0;border:1px solid var(--tw-border);}
-.client-card{background:var(--tw-bg);padding:20px;border-right:1px solid var(--tw-border);border-bottom:1px solid var(--tw-border);cursor:pointer;transition:background 0.12s;}
-.client-card:hover{background:var(--tw-surface);}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.client-card{background:var(--tw-bg);padding:20px;border:1px solid var(--tw-border);cursor:pointer;transition:box-shadow 0.2s,border-color 0.2s;}
+.client-card:hover{box-shadow:0 4px 16px rgba(81,30,38,0.1);border-color:var(--tw-border-strong);}
 .client-card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
 .client-logo{width:44px;height:44px;background:var(--tw-surface);border:1px solid var(--tw-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
 .client-logo img{width:100%;height:100%;object-fit:contain;}
 .client-logo-ini{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--tw-accent);}
 .client-name{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);line-height:1.2;}
 .client-city{font-size:12px;color:var(--tw-text-body);margin-top:2px;}
-.client-card-body{font-size:12px;color:var(--tw-text-body);line-height:1.7;}
+.client-card-body{font-size:12px;color:var(--tw-text-body);line-height:1.8;}
 .client-card-body a{color:var(--tw-accent);text-decoration:none;}
 .client-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--tw-border);}
-.badge{display:inline-flex;align-items:center;padding:3px 8px;font-family:var(--font-head);font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;}
+.project-card{background:var(--tw-bg);padding:20px;border:1px solid var(--tw-border);cursor:pointer;transition:box-shadow 0.2s,border-color 0.2s;}
+.project-card:hover{box-shadow:0 4px 16px rgba(81,30,38,0.1);border-color:var(--tw-border-strong);}
+.project-card-name{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);margin-bottom:4px;}
+.project-card-client{font-size:12px;color:var(--tw-text-body);margin-bottom:10px;}
+.project-card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--tw-border);}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:3px 9px;font-family:var(--font-head);font-size:10px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;border-radius:99px;}
 .badge-open{background:#faeeda;color:#633806;}
 .badge-bezig{background:#e6f1fb;color:#0c447c;}
 .badge-klaar{background:#eaf3de;color:#27500a;}
-.prio-dot{width:6px;height:6px;display:inline-block;margin-right:5px;flex-shrink:0;}
+.badge-actief{background:#e6f1fb;color:#0c447c;}
+.badge-onhold{background:#faeeda;color:#633806;}
+.badge-afgerond{background:#eaf3de;color:#27500a;}
+.badge-event{background:#EEEDFE;color:#534AB7;}
+.prio-dot{width:6px;height:6px;display:inline-block;margin-right:5px;flex-shrink:0;border-radius:50%;}
 .prio-hoog .prio-dot{background:#E24B4A;}
 .prio-middel .prio-dot{background:#BA7517;}
 .prio-laag .prio-dot{background:#639922;}
 .prio-lbl{display:inline-flex;align-items:center;font-size:12px;}
-.emp-av{width:26px;height:26px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:10px;font-weight:700;color:#fff;flex-shrink:0;}
+
+/* TEAM AVATAR */
+.team-av{border-radius:50%;object-fit:cover;flex-shrink:0;}
+.team-av-ini{border-radius:50%;background:var(--tw-accent);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;color:#fff;flex-shrink:0;}
+
+/* TABLES */
 .tbl-wrap{border:1px solid var(--tw-border);overflow:hidden;}
 .data-table{width:100%;border-collapse:collapse;font-size:13px;}
 .data-table th{padding:10px 16px;text-align:left;font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.7;border-bottom:1px solid var(--tw-border);text-transform:uppercase;letter-spacing:0.06em;background:var(--tw-surface);}
 .data-table td{padding:12px 16px;border-bottom:1px solid var(--tw-border);color:var(--tw-text);font-family:var(--font-body);font-size:13px;vertical-align:middle;}
 .data-table tr:last-child td{border-bottom:none;}
 .data-table tbody tr:hover td{background:var(--tw-surface);cursor:pointer;}
-.panel{background:var(--tw-bg);border:1px solid var(--tw-border);margin-bottom:16px;}
+.panel{background:var(--tw-bg);border:1px solid var(--tw-border);margin-bottom:20px;}
 .panel-head{padding:14px 18px;border-bottom:1px solid var(--tw-border);display:flex;align-items:center;justify-content:space-between;background:var(--tw-surface);}
 .panel-head h3{font-family:var(--font-head);font-size:11px;font-weight:700;color:var(--tw-text);text-transform:uppercase;letter-spacing:0.07em;}
-.detail-hero{background:var(--tw-bg);border:1px solid var(--tw-border);padding:20px;margin-bottom:16px;}
+.detail-hero{background:var(--tw-bg);border:1px solid var(--tw-border);padding:22px;margin-bottom:20px;}
 .detail-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
 .detail-logo{width:56px;height:56px;background:var(--tw-surface);border:1px solid var(--tw-border);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
 .detail-logo img{width:100%;height:100%;object-fit:contain;}
 .detail-logo-ini{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--tw-accent);}
 .detail-name{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--tw-text);}
 .detail-sub{font-size:13px;color:var(--tw-text-body);margin-top:3px;}
-.fields-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:16px;background:var(--tw-border);}
-.field-block{background:var(--tw-surface);padding:10px 14px;}
+.fields-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
+.field-block{background:var(--tw-surface);padding:12px 14px;border:1px solid var(--tw-border);}
 .field-lbl{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.6;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
 .field-val{font-size:13px;color:var(--tw-text);font-family:var(--font-body);}
 .field-val a{color:var(--tw-accent);text-decoration:none;}
-.drive-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--tw-accent);text-decoration:none;padding:5px 10px;border:1px solid var(--tw-accent);font-family:var(--font-head);font-weight:600;letter-spacing:0.03em;transition:all 0.12s;}
+.drive-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--tw-accent);text-decoration:none;padding:6px 12px;border:1px solid var(--tw-accent);font-family:var(--font-head);font-weight:600;letter-spacing:0.03em;transition:all 0.12s;border-radius:99px;}
 .drive-btn:hover{background:var(--tw-accent);color:#fff;}
-.emp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0;border:1px solid var(--tw-border);}
-.emp-card{background:var(--tw-bg);padding:18px;border-right:1px solid var(--tw-border);border-bottom:1px solid var(--tw-border);}
-.emp-card-av{width:40px;height:40px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:14px;font-weight:700;color:#fff;}
-.back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--tw-text-body);cursor:pointer;margin-bottom:16px;font-family:var(--font-body);transition:color 0.12s;}
+.emp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+.emp-card{background:var(--tw-bg);padding:20px;border:1px solid var(--tw-border);transition:box-shadow 0.2s;}
+.emp-card:hover{box-shadow:0 4px 16px rgba(81,30,38,0.08);}
+.back-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--tw-text-body);cursor:pointer;margin-bottom:18px;font-family:var(--font-body);transition:color 0.12s;}
 .back-link:hover{color:var(--tw-text);}
-.modal-wrap{display:none;position:fixed;inset:0;background:rgba(19,0,2,0.45);z-index:200;align-items:center;justify-content:center;}
+
+/* MODALS */
+.modal-wrap{display:none;position:fixed;inset:0;background:rgba(19,0,2,0.5);z-index:200;align-items:center;justify-content:center;}
 .modal-wrap.open{display:flex;}
 .modal{background:var(--tw-bg);width:520px;max-width:95vw;max-height:90vh;overflow-y:auto;border:1px solid var(--tw-border-strong);}
 .modal-head{padding:18px 20px;border-bottom:1px solid var(--tw-border);background:var(--tw-surface);display:flex;align-items:center;justify-content:space-between;}
-.modal-head h3{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);letter-spacing:0.02em;}
-.modal-body{padding:20px;}
+.modal-head h3{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);}
+.modal-body{padding:22px;}
 .modal-foot{padding:14px 20px;border-top:1px solid var(--tw-border);display:flex;gap:8px;justify-content:flex-end;background:var(--tw-surface);}
 .form-group{margin-bottom:14px;}
 .form-group label{display:block;font-family:var(--font-head);font-size:11px;font-weight:600;color:var(--tw-text-body);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--tw-border);background:var(--tw-surface);color:var(--tw-text);font-size:13px;font-family:var(--font-body);font-weight:500;outline:none;transition:border-color 0.12s;border-radius:0;}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--tw-border);background:var(--tw-surface);color:var(--tw-text);font-size:13px;font-family:var(--font-body);font-weight:500;outline:none;transition:border-color 0.12s;border-radius:0;}
 input:focus,select:focus,textarea:focus{border-color:var(--tw-accent);}
-textarea{resize:vertical;min-height:70px;line-height:1.5;}
+textarea{resize:vertical;min-height:72px;line-height:1.5;}
 .logo-upload-area{border:1px dashed var(--tw-border-strong);padding:16px;text-align:center;cursor:pointer;background:var(--tw-surface);}
 .logo-upload-area:hover{border-color:var(--tw-accent);}
-.logo-upload-area p{font-size:12px;color:var(--tw-text-body);margin-top:6px;font-family:var(--font-body);}
-.logo-preview-img{width:60px;height:60px;object-fit:contain;display:none;border:1px solid var(--tw-border);margin:8px auto 0;}
-.search-overlay{display:none;position:fixed;inset:0;background:rgba(19,0,2,0.45);z-index:300;align-items:flex-start;justify-content:center;padding-top:80px;}
+.logo-upload-area p{font-size:12px;color:var(--tw-text-body);margin-top:6px;}
+.logo-preview-img{width:60px;height:60px;object-fit:contain;display:none;border:1px solid var(--tw-border);margin:8px auto 0;border-radius:50%;}
+.avatar-preview-img{width:64px;height:64px;object-fit:cover;display:none;border-radius:50%;margin:8px auto 0;border:2px solid var(--tw-border);}
+
+/* SEARCH */
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(19,0,2,0.5);z-index:300;align-items:flex-start;justify-content:center;padding-top:80px;}
 .search-overlay.open{display:flex;}
-.search-box{background:var(--tw-bg);border:1px solid var(--tw-border-strong);width:540px;max-width:95vw;}
-.search-box-inner{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--tw-border);}
+.search-box{background:var(--tw-bg);border:1px solid var(--tw-border-strong);width:560px;max-width:95vw;border-radius:0;}
+.search-box-inner{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--tw-border);}
 .search-box-inner input{border:none;background:transparent;font-size:15px;font-family:var(--font-head);font-weight:600;padding:0;color:var(--tw-text);width:100%;}
 .search-box-inner input:focus{border:none;outline:none;}
-.search-results{padding:8px 0;max-height:320px;overflow-y:auto;}
-.search-result-item{padding:10px 16px;cursor:pointer;font-size:13px;color:var(--tw-text);display:flex;align-items:center;gap:10px;}
+.search-results{padding:8px 0;max-height:340px;overflow-y:auto;}
+.search-result-item{padding:10px 18px;cursor:pointer;font-size:13px;color:var(--tw-text);display:flex;align-items:center;gap:10px;}
 .search-result-item:hover{background:var(--tw-surface);}
 .search-result-type{font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);opacity:0.5;text-transform:uppercase;margin-left:auto;}
-.search-empty{padding:24px 16px;text-align:center;color:var(--tw-text-body);font-size:13px;}
+.search-empty{padding:28px 18px;text-align:center;color:var(--tw-text-body);font-size:13px;}
+
+/* SETTINGS */
 .settings-section{margin-bottom:28px;}
 .settings-section h4{font-family:var(--font-head);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--tw-text-body);opacity:0.6;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--tw-border);}
 .settings-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--tw-border);}
@@ -176,22 +213,43 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
 .settings-lbl{font-family:var(--font-body);font-size:13px;color:var(--tw-text);font-weight:500;}
 .settings-sub{font-size:12px;color:var(--tw-text-body);margin-top:2px;}
 .logo-upload-row{border:1px dashed var(--tw-border-strong);padding:14px;display:flex;align-items:center;gap:14px;background:var(--tw-surface);width:100%;}
-.current-logo-preview{width:48px;height:48px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
-.current-logo-preview img{width:100%;height:100%;object-fit:contain;}
+.current-logo-preview{width:48px;height:48px;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;border-radius:50%;}
+.current-logo-preview img{width:100%;height:100%;object-fit:contain;border-radius:50%;}
 .current-logo-preview span{color:#fff;font-family:var(--font-head);font-weight:900;font-size:14px;}
+
+/* CALENDAR */
+.cal-wrap{padding:24px;flex:1;overflow-y:auto;}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.cal-month{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--tw-text);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;}
+.cal-day-head{padding:8px 4px;text-align:center;font-family:var(--font-head);font-size:10px;font-weight:600;color:var(--tw-text-body);text-transform:uppercase;letter-spacing:0.06em;}
+.cal-day{background:var(--tw-bg);padding:8px;min-height:90px;border:1px solid var(--tw-border);transition:border-color 0.15s;}
+.cal-day:hover{border-color:var(--tw-border-strong);}
+.cal-day.other-month{background:var(--tw-surface);opacity:0.5;}
+.cal-day.today{border-color:var(--tw-accent);}
+.cal-day.today .cal-day-num{color:var(--tw-accent);font-weight:700;}
+.cal-day-num{font-family:var(--font-head);font-size:12px;font-weight:600;color:var(--tw-text);margin-bottom:4px;display:block;}
+.cal-event{font-size:10px;padding:2px 6px;margin-bottom:2px;cursor:pointer;font-family:var(--font-body);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-radius:3px;}
+.cal-event.event-type{background:#EEEDFE;color:#534AB7;}
+.cal-event.task-type{background:#faeeda;color:#633806;}
+.cal-event.project-type{background:#e6f1fb;color:#0c447c;}
+
+/* MISC */
 .hidden{display:none!important;}
-.late-badge{font-size:10px;font-family:var(--font-head);font-weight:600;background:#fcebeb;color:#a32d2d;padding:1px 5px;margin-left:4px;}
-.toast{position:fixed;bottom:24px;right:24px;background:var(--tw-accent);color:#fff;padding:10px 18px;font-family:var(--font-head);font-size:13px;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all 0.3s;}
+.late-badge{font-size:10px;font-family:var(--font-head);font-weight:600;background:#fcebeb;color:#a32d2d;padding:2px 6px;margin-left:4px;border-radius:3px;}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--tw-accent);color:#fff;padding:10px 20px;font-family:var(--font-head);font-size:13px;font-weight:600;z-index:999;transform:translateY(80px);opacity:0;transition:all 0.3s;border-radius:99px;}
 .toast.show{transform:translateY(0);opacity:1;}
 </style>
 </head>
 <body>
 <div class="app" id="app">
+
+  <!-- LOGIN -->
   <div class="login-wrap" id="login-wrap">
     <div class="login-box">
       <div class="login-logo">
         <div class="login-logo-mark" id="login-logo-mark"><span id="login-logo-ini">TW</span></div>
-        <span class="login-logo-name" id="login-logo-name">TAFELWERK</span>
+        <span class="login-logo-name" id="login-logo-name">TAFELWERK®</span>
       </div>
       <div class="login-title">Inloggen</div>
       <div class="login-sub">Log in met je Google account of ontvang een magic link per e-mail.</div>
@@ -201,31 +259,55 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
       </button>
       <div class="login-divider"><div class="login-divider-line"></div><span>of via e-mail</span><div class="login-divider-line"></div></div>
       <div class="form-group">
-        <label>E-mailadres</label>
-        <input type="email" id="login-email" class="login-input" placeholder="naam@tafelwerk.nl" onkeydown="if(event.key==='Enter')sendMagicLink()">
+        <label class="form-lbl">E-mailadres</label>
+        <input type="email" id="login-email" class="login-input" placeholder="naam@tflwrk.nl" onkeydown="if(event.key==='Enter')sendMagicLink()">
       </div>
       <button class="btn-login" id="btn-magic" onclick="sendMagicLink()">Link versturen</button>
       <div id="login-msg" class="login-msg"></div>
     </div>
   </div>
 
+  <!-- SIDEBAR -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <div class="logo-placeholder" id="sidebar-logo-el"><span id="sidebar-logo-txt">TW</span></div>
-      <span class="sidebar-brand" id="sidebar-brand-txt">TAFELWERK</span>
+      <div class="logo-placeholder" id="sidebar-logo-el"><span>TW</span></div>
+      <span class="sidebar-brand" id="sidebar-brand-txt">TAFELWERK®</span>
     </div>
     <div class="nav-body">
-      <div class="nav-lbl">Menu</div>
-      <div class="nav-item active" id="nav-dash" onclick="go('dash')"><span class="nav-ic">▦</span>Dashboard</div>
-      <div class="nav-item" id="nav-clients" onclick="go('clients')"><span class="nav-ic">◉</span>Klanten</div>
-      <div class="nav-item" id="nav-tasks" onclick="go('tasks')"><span class="nav-ic">☑</span>Taken</div>
-      <div class="nav-item" id="nav-team" onclick="go('team')"><span class="nav-ic">♟</span>Team</div>
+      <div class="nav-item active" id="nav-dash" onclick="go('dash')">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </div>
+      <div class="nav-item" id="nav-clients" onclick="go('clients')">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Klanten
+      </div>
+      <div class="nav-item" id="nav-projects" onclick="go('projects')">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 6h20M2 12h20M2 18h12"/><circle cx="19" cy="18" r="3"/><path d="M19 15v3l2 1"/></svg>
+        Projecten
+      </div>
+      <div class="nav-item" id="nav-tasks" onclick="go('tasks')">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Taken
+      </div>
+      <div class="nav-item" id="nav-calendar" onclick="go('calendar')">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Kalender
+      </div>
+      <div class="nav-item" id="nav-team" onclick="go('team')">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.85"/></svg>
+        Team
+      </div>
     </div>
     <div class="sidebar-foot">
-      <div class="nav-item" id="nav-settings" onclick="go('settings')"><span class="nav-ic">⚙</span>Instellingen</div>
+      <div class="nav-item" id="nav-settings" onclick="go('settings')">
+        <svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Instellingen
+      </div>
     </div>
   </div>
 
+  <!-- MAIN -->
   <div class="main" id="main-app">
     <div class="topbar">
       <span class="topbar-title" id="topbar-title">Dashboard</span>
@@ -234,21 +316,32 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
           <span>Zoeken...</span><span class="kbd">⌘K</span>
         </div>
-        <div class="user-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span id="user-email-display"></span></div>
+        <div class="user-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span id="user-email-display"></span>
+        </div>
         <button class="btn-logout" onclick="logout()">Uitloggen</button>
       </div>
     </div>
 
+    <!-- DASHBOARD -->
     <div class="section active" id="sec-dash">
       <div class="content">
         <div class="stat-row" id="dash-stats"></div>
-        <div class="panel">
-          <div class="panel-head"><h3>Openstaande taken</h3><button class="btn btn-sm btn-accent" onclick="go('tasks')">Alle taken</button></div>
-          <div class="tbl-wrap" style="border:none;"><table class="data-table"><thead><tr><th>Taak</th><th>Klant</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th></tr></thead><tbody id="dash-tasks-body"></tbody></table></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="panel">
+            <div class="panel-head"><h3>Openstaande taken</h3><button class="btn btn-sm btn-accent" onclick="go('tasks')">Alle taken</button></div>
+            <div class="tbl-wrap" style="border:none;"><table class="data-table"><thead><tr><th>Taak</th><th>Klant</th><th>Deadline</th><th>Status</th></tr></thead><tbody id="dash-tasks-body"></tbody></table></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3>Actieve projecten</h3><button class="btn btn-sm btn-accent" onclick="go('projects')">Alle projecten</button></div>
+            <div class="tbl-wrap" style="border:none;"><table class="data-table"><thead><tr><th>Project</th><th>Klant</th><th>Deadline</th><th>Status</th></tr></thead><tbody id="dash-projects-body"></tbody></table></div>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- CLIENTS -->
     <div class="section" id="sec-clients">
       <div class="filter-bar">
         <input id="q-clients" placeholder="Filter klanten..." oninput="renderClients()" style="width:200px;">
@@ -260,6 +353,22 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
       </div>
     </div>
 
+    <!-- PROJECTS -->
+    <div class="section" id="sec-projects">
+      <div class="filter-bar">
+        <div style="display:flex;gap:8px;">
+          <input id="q-projects" placeholder="Filter projecten..." oninput="renderProjects()" style="width:200px;">
+          <select id="f-proj-status" onchange="renderProjects()" style="width:140px;"><option value="">Alle statussen</option><option value="Actief">Actief</option><option value="On hold">On hold</option><option value="Afgerond">Afgerond</option></select>
+        </div>
+        <button class="btn btn-accent" onclick="openModal('project')">+ Project toevoegen</button>
+      </div>
+      <div class="content">
+        <div id="projects-list-wrap"><div class="card-grid" id="projects-grid"></div></div>
+        <div id="project-detail-wrap" class="hidden"></div>
+      </div>
+    </div>
+
+    <!-- TASKS -->
     <div class="section" id="sec-tasks">
       <div class="filter-bar">
         <div style="display:flex;gap:8px;">
@@ -268,14 +377,40 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
         </div>
         <button class="btn btn-accent" onclick="openModal('task')">+ Taak toevoegen</button>
       </div>
-      <div class="content"><div class="tbl-wrap"><table class="data-table"><thead><tr><th>Taak</th><th>Klant</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th><th></th></tr></thead><tbody id="tasks-body"></tbody></table></div></div>
+      <div class="content"><div class="tbl-wrap"><table class="data-table"><thead><tr><th>Taak</th><th>Klant</th><th>Project</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th><th></th></tr></thead><tbody id="tasks-body"></tbody></table></div></div>
     </div>
 
+    <!-- CALENDAR -->
+    <div class="section" id="sec-calendar">
+      <div class="filter-bar">
+        <span style="font-size:13px;color:var(--tw-text-body);">Fotoshoots, afspraken en deadlines</span>
+        <button class="btn btn-accent" onclick="openModal('event')">+ Afspraak toevoegen</button>
+      </div>
+      <div class="cal-wrap">
+        <div class="cal-header">
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-sm" onclick="calPrev()">←</button>
+            <button class="btn btn-sm" onclick="calToday()">Vandaag</button>
+            <button class="btn btn-sm" onclick="calNext()">→</button>
+          </div>
+          <div class="cal-month" id="cal-month-label"></div>
+          <div style="display:flex;gap:8px;font-size:11px;font-family:var(--font-head);font-weight:600;align-items:center;">
+            <span style="background:#EEEDFE;color:#534AB7;padding:3px 9px;border-radius:3px;">Afspraak</span>
+            <span style="background:#faeeda;color:#633806;padding:3px 9px;border-radius:3px;">Taak</span>
+            <span style="background:#e6f1fb;color:#0c447c;padding:3px 9px;border-radius:3px;">Project</span>
+          </div>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+    </div>
+
+    <!-- TEAM -->
     <div class="section" id="sec-team">
       <div class="filter-bar"><span></span><button class="btn btn-accent" onclick="openModal('employee')">+ Teamlid toevoegen</button></div>
       <div class="content"><div class="emp-grid" id="emp-grid"></div></div>
     </div>
 
+    <!-- SETTINGS -->
     <div class="section" id="sec-settings">
       <div class="content"><div style="max-width:560px;">
         <div class="settings-section">
@@ -289,7 +424,7 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
             <div class="logo-upload-row">
               <div class="current-logo-preview" id="settings-logo-preview"><span id="settings-logo-ini">TW</span></div>
               <div style="flex:1;">
-                <div style="font-size:13px;color:var(--tw-text);font-family:var(--font-body);margin-bottom:4px;">Huidig logo</div>
+                <div style="font-size:13px;color:var(--tw-text);margin-bottom:4px;">Huidig logo</div>
                 <div style="font-size:12px;color:var(--tw-text-body);margin-bottom:10px;">PNG of SVG, bij voorkeur vierkant</div>
                 <label style="cursor:pointer;"><input type="file" id="logo-file-input" accept="image/*" style="display:none;width:auto;" onchange="handleLogoUpload(this)"><span class="btn btn-sm" style="display:inline-flex;">Logo uploaden</span></label>
                 <button class="btn btn-sm btn-danger" style="margin-left:8px;" onclick="removeLogo()">Verwijderen</button>
@@ -299,14 +434,15 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
         </div>
         <div class="settings-section">
           <h4>Informatie</h4>
-          <div class="settings-row"><div class="settings-lbl">Versie</div><div style="font-size:13px;color:var(--tw-text-body);font-family:var(--font-body);">1.0 — TAFELWERK CRM</div></div>
-          <div class="settings-row"><div class="settings-lbl">Sneltoets zoeken</div><div style="font-size:12px;color:var(--tw-text-body);font-family:var(--font-body);">⌘K of Ctrl+K</div></div>
+          <div class="settings-row"><div class="settings-lbl">Versie</div><div style="font-size:13px;color:var(--tw-text-body);">1.1 — TAFELWERK CRM</div></div>
+          <div class="settings-row"><div class="settings-lbl">Sneltoets zoeken</div><div style="font-size:12px;color:var(--tw-text-body);">⌘K of Ctrl+K</div></div>
         </div>
       </div></div>
     </div>
   </div>
 </div>
 
+<!-- MODALS -->
 <div class="modal-wrap" id="mod-client">
   <div class="modal">
     <div class="modal-head"><h3 id="mod-client-title">Klant toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
@@ -319,15 +455,28 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
       <div class="form-group">
         <label>Logo van de klant</label>
         <div class="logo-upload-area" onclick="document.getElementById('c-logo-input').click()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto;display:block;color:var(--tw-text-body);opacity:0.5;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto;display:block;opacity:0.4;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           <p>Klik om een logo te uploaden</p>
           <img id="c-logo-preview" class="logo-preview-img">
         </div>
-        <input type="file" id="c-logo-input" accept="image/*" style="display:none;width:auto;" onchange="previewClientLogo(this)">
+        <input type="file" id="c-logo-input" accept="image/*" style="display:none;width:auto;" onchange="previewLogo(this,'c-logo-preview')">
       </div>
       <div class="form-group"><label>Notities</label><textarea id="c-notes" placeholder="Extra informatie..."></textarea></div>
     </div>
     <div class="modal-foot"><button class="btn" onclick="closeModals()">Annuleren</button><button class="btn btn-accent" onclick="saveClient()">Opslaan</button></div>
+  </div>
+</div>
+
+<div class="modal-wrap" id="mod-project">
+  <div class="modal">
+    <div class="modal-head"><h3 id="mod-project-title">Project toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Projectnaam *</label><input id="p-name" placeholder="Bijv. Rebranding 2025"></div>
+      <div class="form-group"><label>Klant</label><select id="p-client"></select></div>
+      <div class="form-group"><label>Omschrijving</label><textarea id="p-desc" placeholder="Beschrijf het project, de opdracht en doelstelling..."></textarea></div>
+      <div class="form-row"><div class="form-group"><label>Deadline</label><input type="date" id="p-deadline"></div><div class="form-group"><label>Status</label><select id="p-status"><option value="Actief">Actief</option><option value="On hold">On hold</option><option value="Afgerond">Afgerond</option></select></div></div>
+    </div>
+    <div class="modal-foot"><button class="btn" onclick="closeModals()">Annuleren</button><button class="btn btn-accent" onclick="saveProject()">Opslaan</button></div>
   </div>
 </div>
 
@@ -336,23 +485,45 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
     <div class="modal-head"><h3 id="mod-task-title">Taak toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
     <div class="modal-body">
       <div class="form-group"><label>Taakomschrijving *</label><input id="t-title" placeholder="Beschrijf de taak"></div>
-      <div class="form-row"><div class="form-group"><label>Klant</label><select id="t-client"></select></div><div class="form-group"><label>Toegewezen aan</label><select id="t-emp"></select></div></div>
-      <div class="form-row"><div class="form-group"><label>Deadline</label><input type="date" id="t-deadline"></div><div class="form-group"><label>Prioriteit</label><select id="t-prio"><option value="Laag">Laag</option><option value="Middel" selected>Middel</option><option value="Hoog">Hoog</option></select></div></div>
-      <div class="form-group"><label>Status</label><select id="t-status"><option value="Open">Open</option><option value="Bezig">Bezig</option><option value="Klaar">Klaar</option></select></div>
+      <div class="form-row"><div class="form-group"><label>Klant</label><select id="t-client" onchange="filterProjectsByClient()"></select></div><div class="form-group"><label>Project</label><select id="t-project"></select></div></div>
+      <div class="form-row"><div class="form-group"><label>Toegewezen aan</label><select id="t-emp"></select></div><div class="form-group"><label>Deadline</label><input type="date" id="t-deadline"></div></div>
+      <div class="form-row"><div class="form-group"><label>Prioriteit</label><select id="t-prio"><option value="Laag">Laag</option><option value="Middel" selected>Middel</option><option value="Hoog">Hoog</option></select></div><div class="form-group"><label>Status</label><select id="t-status"><option value="Open">Open</option><option value="Bezig">Bezig</option><option value="Klaar">Klaar</option></select></div></div>
       <div class="form-group"><label>Notitie</label><textarea id="t-note" placeholder="Aanvullende beschrijving..."></textarea></div>
     </div>
     <div class="modal-foot"><button class="btn" onclick="closeModals()">Annuleren</button><button class="btn btn-accent" onclick="saveTask()">Opslaan</button></div>
   </div>
 </div>
 
+<div class="modal-wrap" id="mod-event">
+  <div class="modal">
+    <div class="modal-head"><h3 id="mod-event-title">Afspraak toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Titel *</label><input id="ev-title" placeholder="Bijv. Fotoshoot Lancia Franke"></div>
+      <div class="form-row"><div class="form-group"><label>Datum *</label><input type="date" id="ev-date"></div><div class="form-group"><label>Tijdstip</label><input type="time" id="ev-time"></div></div>
+      <div class="form-row"><div class="form-group"><label>Klant</label><select id="ev-client"></select></div><div class="form-group"><label>Project</label><select id="ev-project"></select></div></div>
+      <div class="form-group"><label>Notities</label><textarea id="ev-notes" placeholder="Locatie, bijzonderheden..."></textarea></div>
+    </div>
+    <div class="modal-foot"><button class="btn" onclick="closeModals()">Annuleren</button><button class="btn btn-accent" onclick="saveEvent()">Opslaan</button></div>
+  </div>
+</div>
+
 <div class="modal-wrap" id="mod-employee">
   <div class="modal">
-    <div class="modal-head"><h3>Teamlid toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
+    <div class="modal-head"><h3 id="mod-emp-title">Teamlid toevoegen</h3><button class="btn btn-sm btn-ghost" onclick="closeModals()">✕</button></div>
     <div class="modal-body">
       <div class="form-row"><div class="form-group"><label>Voornaam *</label><input id="e-first" placeholder="Voornaam"></div><div class="form-group"><label>Achternaam *</label><input id="e-last" placeholder="Achternaam"></div></div>
       <div class="form-row"><div class="form-group"><label>Functie</label><input id="e-role" placeholder="Designer, Copywriter..."></div><div class="form-group"><label>E-mailadres</label><input id="e-email" placeholder="naam@tafelwerk.nl"></div></div>
+      <div class="form-group">
+        <label>Profielfoto</label>
+        <div class="logo-upload-area" onclick="document.getElementById('e-avatar-input').click()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto;display:block;opacity:0.4;"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <p>Klik om een profielfoto te uploaden</p>
+          <img id="e-avatar-preview" class="avatar-preview-img">
+        </div>
+        <input type="file" id="e-avatar-input" accept="image/*" style="display:none;width:auto;" onchange="previewLogo(this,'e-avatar-preview')">
+      </div>
     </div>
-    <div class="modal-foot"><button class="btn" onclick="closeModals()">Annuleren</button><button class="btn btn-accent" onclick="saveEmp()">Toevoegen</button></div>
+    <div class="modal-foot"><button class="btn" onclick="closeModals()">Annuleren</button><button class="btn btn-accent" id="btn-save-emp" onclick="saveEmp()">Toevoegen</button></div>
   </div>
 </div>
 
@@ -360,7 +531,7 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
   <div class="search-box">
     <div class="search-box-inner">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6.5" cy="6.5" r="5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
-      <input id="search-input" placeholder="Zoek klant, taak of teamlid..." oninput="doSearch()" autocomplete="off">
+      <input id="search-input" placeholder="Zoek klant, project, taak of teamlid..." oninput="doSearch()" autocomplete="off">
     </div>
     <div class="search-results" id="search-results"><div class="search-empty">Begin met typen om te zoeken...</div></div>
   </div>
@@ -369,130 +540,51 @@ textarea{resize:vertical;min-height:70px;line-height:1.5;}
 <div class="toast" id="toast"></div>
 
 <script>
-const SUPABASE_URL = 'https://ogycuwxweqisrhyvikjq.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9neWN1d3h3ZXFpc3JoeXZpa2pxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4ODgxNjYsImV4cCI6MjA5MDQ2NDE2Nn0.AigfnfGbjTN-HA-3_jiy9UoYDsqtJjF0r3MWVlc54Qs';
+const SUPABASE_URL = 'JOUW_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'JOUW_SUPABASE_ANON_KEY';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-let clients=[], tasks=[], employees=[];
-let eCid=null, eTid=null, clientLogoData=null;
-const SECTIONS=['dash','clients','tasks','team','settings'];
-const TITLES={dash:'Dashboard',clients:'Klanten',tasks:'Taken',team:'Team',settings:'Instellingen'};
+let clients=[], tasks=[], employees=[], projects=[], events=[];
+let eCid=null, eTid=null, ePid=null, eEvid=null, eEmpid=null;
+let clientLogoData=null, avatarData=null;
+let calYear=new Date().getFullYear(), calMonth=new Date().getMonth();
+const SECTIONS=['dash','clients','projects','tasks','calendar','team','settings'];
+const TITLES={dash:'Dashboard',clients:'Klanten',projects:'Projecten',tasks:'Taken',calendar:'Kalender',team:'Team',settings:'Instellingen'};
 
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 function ini(n){if(!n)return'?';const p=n.trim().split(' ');return(p[0][0]+(p[1]?p[1][0]:'')).toUpperCase();}
 function fmtD(d){if(!d)return'—';return new Date(d+'T00:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'short'});}
 function sBadge(s){const m={Open:'badge-open',Bezig:'badge-bezig',Klaar:'badge-klaar'};return`<span class="badge ${m[s]||''}">${s}</span>`;}
 function pBadge(p){const cl=p.toLowerCase();return`<span class="prio-lbl prio-${cl}"><span class="prio-dot"></span>${p}</span>`;}
-
-function showApp(user){
-  document.getElementById('login-wrap').style.display='none';
-  document.getElementById('sidebar').classList.add('visible');
-  document.getElementById('main-app').classList.add('visible');
-  document.getElementById('user-email-display').textContent=user.email;
-  applyBranding();
-  loadAll().then(()=>renderDash());
+function empAv(em,size=26){
+  if(!em)return'—';
+  const name=em.first+' '+em.last;
+  const inner=em.avatar?`<img src="${em.avatar}" style="width:${size}px;height:${size}px;object-fit:cover;border-radius:50%;">`:`<span style="font-size:${Math.round(size*0.38)}px;color:#fff;font-family:var(--font-head);font-weight:700;">${ini(name)}</span>`;
+  return`<div style="display:flex;align-items:center;gap:7px;"><div style="width:${size}px;height:${size}px;border-radius:50%;background:${em.avatar?'var(--tw-surface)':'var(--tw-accent)'};display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;${em.avatar?'border:2px solid var(--tw-border);':''}">${inner}</div><span>${name}</span></div>`;
 }
+function projBadge(s){const m={'Actief':'badge-actief','On hold':'badge-onhold','Afgerond':'badge-afgerond'};return`<span class="badge ${m[s]||''}">${s}</span>`;}
 
-function showLogin(){
-  document.getElementById('login-wrap').style.display='flex';
-  document.getElementById('sidebar').classList.remove('visible');
-  document.getElementById('main-app').classList.remove('visible');
-}
-
-async function loginGoogle(){
-  await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://crm.tflwrk.nl'}});
-}
-
-async function sendMagicLink(){
-  const email=document.getElementById('login-email').value.trim();
-  if(!email){showLoginMsg('Vul een e-mailadres in','error');return;}
-  const btn=document.getElementById('btn-magic');
-  btn.disabled=true;btn.textContent='Versturen...';
-  const{error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:'https://crm.tflwrk.nl',shouldCreateUser:true}});
-  btn.disabled=false;btn.textContent='Link versturen';
-  if(error){showLoginMsg(error.message,'error');return;}
-  showLoginMsg('Magic link verstuurd naar '+email+'. Klik op de link in de mail om in te loggen.','success');
-  btn.style.display='none';
-}
-
-function showLoginMsg(msg,type){
-  const el=document.getElementById('login-msg');
-  el.textContent=msg;el.className='login-msg '+type;
-}
-
-async function logout(){
-  await sb.auth.signOut();
-  showLogin();
-  showToast('Uitgelogd');
-}
-
-function applyBranding(){
-  const brand=localStorage.getItem('tw_brand')||'TAFELWERK';
-  const logo=localStorage.getItem('tw_logo')||null;
-  document.getElementById('sidebar-brand-txt').textContent=brand;
-  document.getElementById('login-logo-name').textContent=brand;
-  document.title=brand+' CRM';
-  const logoEl=document.getElementById('sidebar-logo-el');
-  const loginMark=document.getElementById('login-logo-mark');
-  const settPrev=document.getElementById('settings-logo-preview');
-  const ab=brand.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  if(logo){
-    logoEl.innerHTML=`<img src="${logo}" style="width:32px;height:32px;object-fit:contain;">`;
-    loginMark.innerHTML=`<img src="${logo}" style="width:36px;height:36px;object-fit:contain;">`;
-    settPrev.innerHTML=`<img src="${logo}" style="width:48px;height:48px;object-fit:contain;">`;
-  }else{
-    logoEl.innerHTML=`<span style="color:#fff;font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;">${ab}</span>`;
-    loginMark.innerHTML=`<span style="color:#fff;font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;">${ab}</span>`;
-    settPrev.innerHTML=`<span>${ab}</span>`;
-  }
-  const si=document.getElementById('s-brandname');if(si)si.value=brand;
-}
-
-function saveBrand(){localStorage.setItem('tw_brand',document.getElementById('s-brandname').value.trim()||'TAFELWERK');applyBranding();showToast('Naam opgeslagen');}
-function handleLogoUpload(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=function(e){localStorage.setItem('tw_logo',e.target.result);applyBranding();showToast('Logo opgeslagen');};r.readAsDataURL(f);}
-function removeLogo(){localStorage.removeItem('tw_logo');applyBranding();showToast('Logo verwijderd');}
-function previewClientLogo(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=function(e){clientLogoData=e.target.result;const prev=document.getElementById('c-logo-preview');prev.src=e.target.result;prev.style.display='block';};r.readAsDataURL(f);}
-
-async function loadAll(){
-  const[{data:c},{data:t},{data:e}]=await Promise.all([
-    sb.from('clients').select('*').order('created_at',{ascending:false}),
-    sb.from('tasks').select('*').order('created_at',{ascending:false}),
-    sb.from('employees').select('*').order('created_at',{ascending:false})
-  ]);
-  clients=c||[];tasks=t||[];employees=e||[];
-}
-
-async function go(sec){
-  SECTIONS.forEach(s=>{
-    const el=document.getElementById('sec-'+s);if(el)el.classList.toggle('active',s===sec);
-    const nav=document.getElementById('nav-'+s);if(nav)nav.classList.toggle('active',s===sec);
-  });
-  document.getElementById('topbar-title').textContent=TITLES[sec]||'';
-  await loadAll();
-  if(sec==='dash')renderDash();
-  if(sec==='clients'){document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');renderClients();}
-  if(sec==='tasks')renderTasks();
-  if(sec==='team')renderTeam();
-  if(sec==='settings')applyBranding();
-}
-
-function renderDash(){
-  const open=tasks.filter(t=>t.status!=='Klaar').length;
-  const bezig=tasks.filter(t=>t.status==='Bezig').length;
-  const klaar=tasks.filter(t=>t.status==='Klaar').length;
-  document.getElementById('dash-stats').innerHTML=`<div class="stat-card"><div class="stat-lbl">Klanten</div><div class="stat-val">${clients.length}</div><div class="stat-sub">totaal</div></div><div class="stat-card"><div class="stat-lbl">Open taken</div><div class="stat-val">${open}</div><div class="stat-sub">te doen</div></div><div class="stat-card"><div class="stat-lbl">In uitvoering</div><div class="stat-val">${bezig}</div><div class="stat-sub">bezig</div></div><div class="stat-card"><div class="stat-lbl">Afgerond</div><div class="stat-val">${klaar}</div><div class="stat-sub">klaar</div></div>`;
-  const rows=tasks.filter(t=>t.status!=='Klaar').sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);}).slice(0,8);
-  const tb=document.getElementById('dash-tasks-body');
-  if(!rows.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:28px;font-family:var(--font-body);">Geen openstaande taken</td></tr>';return;}
-  tb.innerHTML=rows.map(t=>{const cl=clients.find(c=>c.id===t.client_id);const em=employees.find(e=>e.id===t.employee_id);const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();return`<tr onclick="go('tasks')"><td style="font-family:var(--font-head);font-weight:600;font-size:13px;">${t.title}</td><td>${cl?cl.name:'—'}</td><td>${em?em.first+' '+em.last:'—'}</td><td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td><td>${pBadge(t.prio)}</td><td>${sBadge(t.status)}</td></tr>`;}).join('');
+).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--tw-text-body);padding:20px;">Geen openstaande taken</td></tr>';
+  const pb=document.getElementById('dash-projects-body');
+  const activeP=projects.filter(p=>p.status==='Actief').slice(0,6);
+  pb.innerHTML=activeP.length?activeP.map(p=>{const cl=clients.find(c=>c.id===p.client_id);const od=p.deadline&&new Date(p.deadline)<new Date();return`<tr onclick="go('projects')"><td style="font-family:var(--font-head);font-weight:600;font-size:13px;">${p.name}</td><td>${cl?cl.name:'—'}</td><td>${fmtD(p.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td><td>${projBadge(p.status)}</td></tr>`;}).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--tw-text-body);padding:20px;">Geen actieve projecten</td></tr>';
 }
 
 function renderClients(){
   const q=(document.getElementById('q-clients')?.value||'').toLowerCase();
   const list=clients.filter(c=>!q||c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)||(c.city||'').toLowerCase().includes(q));
   const grid=document.getElementById('clients-grid');
-  if(!list.length){grid.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-family:var(--font-body);font-size:13px;grid-column:1/-1;border:1px solid var(--tw-border);">Nog geen klanten toegevoegd</div>';return;}
-  grid.innerHTML=list.map(c=>{const open=tasks.filter(t=>t.client_id===c.id&&t.status!=='Klaar').length;const total=tasks.filter(t=>t.client_id===c.id).length;const logoHtml=c.logo?`<img src="${c.logo}" style="width:44px;height:44px;object-fit:contain;">`:`<span class="client-logo-ini">${ini(c.name)}</span>`;return`<div class="client-card" onclick="showClient('${c.id}')"><div class="client-card-header"><div class="client-logo">${logoHtml}</div><div><div class="client-name">${c.name}</div><div class="client-city">${c.city||'—'}</div></div></div><div class="client-card-body">${c.contact?`<div>${c.contact}</div>`:''}${c.email?`<div><a href="mailto:${c.email}" onclick="event.stopPropagation()">${c.email}</a></div>`:''}${c.phone?`<div>${c.phone}</div>`:''}</div><div class="client-card-footer"><span class="badge ${open>0?'badge-open':'badge-klaar'}">${open>0?open+' open':total+' taken'}</span>${c.drive?`<a href="${c.drive}" target="_blank" onclick="event.stopPropagation()" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Drive</a>`:''}</div></div>`;}).join('');
+  if(!list.length){grid.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-size:13px;">Nog geen klanten toegevoegd</div>';return;}
+  grid.innerHTML=list.map(c=>{
+    const open=tasks.filter(t=>t.client_id===c.id&&t.status!=='Klaar').length;
+    const total=tasks.filter(t=>t.client_id===c.id).length;
+    const logoHtml=c.logo?`<img src="${c.logo}" style="width:44px;height:44px;object-fit:contain;">`:`<span class="client-logo-ini">${ini(c.name)}</span>`;
+    return`<div class="client-card" onclick="showClient('${c.id}')">
+      <div class="client-card-header"><div class="client-logo">${logoHtml}</div><div><div class="client-name">${c.name}</div><div class="client-city">${c.city||'—'}</div></div></div>
+      <div class="client-card-body">${c.contact?`<div>${c.contact}</div>`:''}${c.email?`<div><a href="mailto:${c.email}" onclick="event.stopPropagation()">${c.email}</a></div>`:''}${c.phone?`<div>${c.phone}</div>`:''}</div>
+      <div class="client-card-footer"><span class="badge ${open>0?'badge-open':'badge-klaar'}">${open>0?open+' open':total+' taken'}</span>${c.drive?`<a href="${c.drive}" target="_blank" onclick="event.stopPropagation()" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Drive</a>`:''}</div>
+    </div>`;
+  }).join('');
 }
 
 function showClient(id){
@@ -500,8 +592,79 @@ function showClient(id){
   document.getElementById('clients-list-wrap').classList.add('hidden');
   const det=document.getElementById('client-detail-wrap');det.classList.remove('hidden');
   const ctasks=tasks.filter(t=>t.client_id===id);
+  const cprojects=projects.filter(p=>p.client_id===id);
   const logoHtml=c.logo?`<img src="${c.logo}" style="width:56px;height:56px;object-fit:contain;">`:`<span class="detail-logo-ini">${ini(c.name)}</span>`;
-  det.innerHTML=`<div class="back-link" onclick="document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');">← Terug naar klanten</div><div class="detail-hero"><div class="detail-hero-top"><div style="display:flex;align-items:center;gap:16px;"><div class="detail-logo">${logoHtml}</div><div><div class="detail-name">${c.name}</div><div class="detail-sub">${[c.address,c.city].filter(Boolean).join(', ')||'Geen adres'}</div></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">${c.drive?`<a href="${c.drive}" target="_blank" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Google Drive map</a>`:''}<button class="btn btn-sm" onclick="editClient('${c.id}')">Bewerken</button><button class="btn btn-sm btn-danger" onclick="delClient('${c.id}')">Verwijderen</button></div></div><div class="fields-3"><div class="field-block"><div class="field-lbl">Contactpersoon</div><div class="field-val">${c.contact||'—'}</div></div><div class="field-block"><div class="field-lbl">E-mail</div><div class="field-val"><a href="mailto:${c.email}">${c.email||'—'}</a></div></div><div class="field-block"><div class="field-lbl">Telefoon</div><div class="field-val">${c.phone||'—'}</div></div></div>${c.notes?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--tw-border);font-size:13px;color:var(--tw-text-body);font-family:var(--font-body);white-space:pre-wrap;">${c.notes}</div>`:''}</div><div class="panel"><div class="panel-head"><h3>Taken voor ${c.name}</h3><button class="btn btn-sm btn-accent" onclick="openTaskFor('${c.id}')">+ Taak toevoegen</button></div><div class="tbl-wrap" style="border:none;"><table class="data-table"><thead><tr><th>Taak</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th><th></th></tr></thead><tbody>${ctasks.length?ctasks.map(t=>{const em=employees.find(e=>e.id===t.employee_id);return`<tr><td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,60)}${t.note.length>60?'…':''}</div>`:''}</td><td>${em?em.first+' '+em.last:'—'}</td><td>${fmtD(t.deadline)}</td><td>${pBadge(t.prio)}</td><td>${sBadge(t.status)}</td><td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}','${c.id}')">✕</button></td></tr>`;}).join(''):`<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:28px;">Geen taken voor deze klant</td></tr>`}</tbody></table></div></div>`;
+  det.innerHTML=`
+    <div class="back-link" onclick="document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');">← Terug naar klanten</div>
+    <div class="detail-hero">
+      <div class="detail-hero-top">
+        <div style="display:flex;align-items:center;gap:16px;"><div class="detail-logo">${logoHtml}</div><div><div class="detail-name">${c.name}</div><div class="detail-sub">${[c.address,c.city].filter(Boolean).join(', ')||'Geen adres'}</div></div></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">${c.drive?`<a href="${c.drive}" target="_blank" class="drive-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15l5-9 4 7"/><path d="M9 15h12l-5-9"/><path d="M8 15l4 6h4l-4-6"/></svg> Google Drive map</a>`:''}<button class="btn btn-sm" onclick="editClient('${c.id}')">Bewerken</button><button class="btn btn-sm btn-danger" onclick="delClient('${c.id}')">Verwijderen</button></div>
+      </div>
+      <div class="fields-3">
+        <div class="field-block"><div class="field-lbl">Contactpersoon</div><div class="field-val">${c.contact||'—'}</div></div>
+        <div class="field-block"><div class="field-lbl">E-mail</div><div class="field-val"><a href="mailto:${c.email}">${c.email||'—'}</a></div></div>
+        <div class="field-block"><div class="field-lbl">Telefoon</div><div class="field-val">${c.phone||'—'}</div></div>
+      </div>
+      ${c.notes?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--tw-border);font-size:13px;color:var(--tw-text-body);white-space:pre-wrap;">${c.notes}</div>`:''}
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Projecten</h3><button class="btn btn-sm btn-accent" onclick="openProjectFor('${c.id}')">+ Project toevoegen</button></div>
+      <div class="tbl-wrap" style="border:none;"><table class="data-table"><thead><tr><th>Project</th><th>Deadline</th><th>Status</th><th></th></tr></thead>
+      <tbody>${cprojects.length?cprojects.map(p=>`<tr onclick="showProject('${p.id}');go('projects')"><td style="font-family:var(--font-head);font-weight:600;">${p.name}</td><td>${fmtD(p.deadline)}</td><td>${projBadge(p.status)}</td><td><button class="btn btn-sm btn-ghost" onclick="event.stopPropagation();editProject('${p.id}')">✎</button></td></tr>`).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--tw-text-body);padding:16px;">Geen projecten</td></tr>'}</tbody></table></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Taken</h3><button class="btn btn-sm btn-accent" onclick="openTaskFor('${c.id}',null)">+ Taak toevoegen</button></div>
+      <div class="tbl-wrap" style="border:none;"><table class="data-table"><thead><tr><th>Taak</th><th>Project</th><th>Medewerker</th><th>Deadline</th><th>Status</th><th></th></tr></thead>
+      <tbody>${ctasks.length?ctasks.map(t=>{const em=employees.find(e=>e.id===t.employee_id);const pr=projects.find(p=>p.id===t.project_id);return`<tr><td style="font-family:var(--font-head);font-weight:600;">${t.title}</td><td>${pr?pr.name:'—'}</td><td>${em?empAv(em,24):'—'}</td><td>${fmtD(t.deadline)}</td><td>${sBadge(t.status)}</td><td><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}','${c.id}')">✕</button></td></tr>`;}).join(''):'<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:16px;">Geen taken</td></tr>'}</tbody></table></div>
+    </div>`;
+}
+
+function renderProjects(){
+  const q=(document.getElementById('q-projects')?.value||'').toLowerCase();
+  const sf=document.getElementById('f-proj-status')?.value||'';
+  let list=projects;
+  if(q)list=list.filter(p=>p.name.toLowerCase().includes(q)||(clients.find(c=>c.id===p.client_id)?.name||'').toLowerCase().includes(q));
+  if(sf)list=list.filter(p=>p.status===sf);
+  const grid=document.getElementById('projects-grid');
+  if(!list.length){grid.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-size:13px;">Nog geen projecten toegevoegd</div>';return;}
+  grid.innerHTML=list.map(p=>{
+    const cl=clients.find(c=>c.id===p.client_id);
+    const ptasks=tasks.filter(t=>t.project_id===p.id);
+    const open=ptasks.filter(t=>t.status!=='Klaar').length;
+    const od=p.deadline&&p.status!=='Afgerond'&&new Date(p.deadline)<new Date();
+    return`<div class="project-card" onclick="showProject('${p.id}')">
+      <div class="project-card-name">${p.name}</div>
+      <div class="project-card-client">${cl?cl.name:'Geen klant'}</div>
+      ${p.description?`<div style="font-size:12px;color:var(--tw-text-body);margin-bottom:12px;line-height:1.6;">${p.description.slice(0,90)}${p.description.length>90?'…':''}</div>`:''}
+      <div class="project-card-footer">
+        <div style="display:flex;gap:6px;align-items:center;">${projBadge(p.status)}<span class="badge badge-open">${open} open</span></div>
+        <span style="font-size:11px;font-family:var(--font-head);font-weight:600;color:${od?'#a32d2d':'var(--tw-text-body)'};">${fmtD(p.deadline)}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function showProject(id){
+  const p=projects.find(x=>x.id===id);if(!p)return;
+  document.getElementById('projects-list-wrap').classList.add('hidden');
+  const det=document.getElementById('project-detail-wrap');det.classList.remove('hidden');
+  const cl=clients.find(c=>c.id===p.client_id);
+  const ptasks=tasks.filter(t=>t.project_id===id);
+  det.innerHTML=`
+    <div class="back-link" onclick="document.getElementById('projects-list-wrap').classList.remove('hidden');document.getElementById('project-detail-wrap').classList.add('hidden');">← Terug naar projecten</div>
+    <div class="detail-hero">
+      <div class="detail-hero-top">
+        <div><div class="detail-name">${p.name}</div><div class="detail-sub">${cl?cl.name:'Geen klant'} · Deadline: ${fmtD(p.deadline)}</div></div>
+        <div style="display:flex;gap:8px;align-items:center;">${projBadge(p.status)}<button class="btn btn-sm" onclick="editProject('${p.id}')">Bewerken</button><button class="btn btn-sm btn-danger" onclick="delProject('${p.id}')">Verwijderen</button></div>
+      </div>
+      ${p.description?`<div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--tw-border);font-size:13px;color:var(--tw-text-body);line-height:1.7;white-space:pre-wrap;">${p.description}</div>`:''}
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h3>Taken binnen dit project</h3><button class="btn btn-sm btn-accent" onclick="openTaskFor('${p.client_id}','${p.id}')">+ Taak toevoegen</button></div>
+      <div class="tbl-wrap" style="border:none;"><table class="data-table"><thead><tr><th>Taak</th><th>Toegewezen aan</th><th>Deadline</th><th>Prioriteit</th><th>Status</th><th></th></tr></thead>
+      <tbody>${ptasks.length?ptasks.map(t=>{const em=employees.find(e=>e.id===t.employee_id);return`<tr><td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,60)}${t.note.length>60?'…':''}</div>`:''}</td><td>${em?empAv(em,28):'—'}</td><td>${fmtD(t.deadline)}</td><td>${pBadge(t.prio)}</td><td>${sBadge(t.status)}</td><td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}',null)">✕</button></td></tr>`;}).join(''):'<tr><td colspan="6" style="text-align:center;color:var(--tw-text-body);padding:16px;">Geen taken voor dit project</td></tr>'}</tbody></table></div>
+    </div>`;
 }
 
 function renderTasks(){
@@ -509,26 +672,100 @@ function renderTasks(){
   let list=tasks;if(sf)list=list.filter(t=>t.status===sf);if(pf)list=list.filter(t=>t.prio===pf);
   list.sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);});
   const tb=document.getElementById('tasks-body');
-  if(!list.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--tw-text-body);padding:32px;">Geen taken gevonden</td></tr>';return;}
-  tb.innerHTML=list.map(t=>{const cl=clients.find(c=>c.id===t.client_id);const em=employees.find(e=>e.id===t.employee_id);const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();return`<tr><td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,55)}${t.note.length>55?'…':''}</div>`:''}</td><td>${cl?`<span style="cursor:pointer;color:var(--tw-accent);font-family:var(--font-head);font-weight:600;" onclick="showClient('${cl.id}');go('clients')">${cl.name}</span>`:'—'}</td><td>${em?`<div style="display:flex;align-items:center;gap:7px;"><div class="emp-av" style="width:24px;height:24px;font-size:10px;">${ini(em.first+' '+em.last)}</div>${em.first} ${em.last}</div>`:'—'}</td><td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td><td>${pBadge(t.prio)}</td><td>${sBadge(t.status)}</td><td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}',null)">✕</button></td></tr>`;}).join('');
+  if(!list.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--tw-text-body);padding:32px;">Geen taken gevonden</td></tr>';return;}
+  tb.innerHTML=list.map(t=>{
+    const cl=clients.find(c=>c.id===t.client_id);const em=employees.find(e=>e.id===t.employee_id);const pr=projects.find(p=>p.id===t.project_id);
+    const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();
+    return`<tr>
+      <td style="font-family:var(--font-head);font-weight:600;">${t.title}${t.note?`<div style="font-family:var(--font-body);font-weight:500;font-size:11px;color:var(--tw-text-body);margin-top:2px;">${t.note.slice(0,55)}${t.note.length>55?'…':''}</div>`:''}</td>
+      <td>${cl?`<span style="cursor:pointer;color:var(--tw-accent);font-family:var(--font-head);font-weight:600;" onclick="showClient('${cl.id}');go('clients')">${cl.name}</span>`:'—'}</td>
+      <td>${pr?`<span style="cursor:pointer;color:var(--tw-accent);" onclick="showProject('${pr.id}');go('projects')">${pr.name}</span>`:'—'}</td>
+      <td>${em?empAv(em,28):'—'}</td>
+      <td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td>
+      <td>${pBadge(t.prio)}</td>
+      <td>${sBadge(t.status)}</td>
+      <td style="white-space:nowrap;"><button class="btn btn-sm btn-ghost" onclick="editTask('${t.id}')">✎</button> <button class="btn btn-sm btn-danger" style="padding:4px 7px;" onclick="delTask('${t.id}',null)">✕</button></td>
+    </tr>`;
+  }).join('');
 }
+
+function renderCalendar(){
+  const months=['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
+  document.getElementById('cal-month-label').textContent=months[calMonth]+' '+calYear;
+  const grid=document.getElementById('cal-grid');
+  const days=['Ma','Di','Wo','Do','Vr','Za','Zo'];
+  let html=days.map(d=>`<div class="cal-day-head">${d}</div>`).join('');
+  const first=new Date(calYear,calMonth,1);
+  let startDay=first.getDay()-1;if(startDay<0)startDay=6;
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const daysInPrev=new Date(calYear,calMonth,0).getDate();
+  const today=new Date();
+  for(let i=0;i<startDay;i++){html+=`<div class="cal-day other-month"><span class="cal-day-num">${daysInPrev-startDay+1+i}</span></div>`;}
+  for(let d=1;d<=daysInMonth;d++){
+    const dateStr=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday=today.getFullYear()===calYear&&today.getMonth()===calMonth&&today.getDate()===d;
+    const dayEvents=events.filter(e=>e.date===dateStr);
+    const dayTasks=tasks.filter(t=>t.deadline===dateStr&&t.status!=='Klaar');
+    const dayProjects=projects.filter(p=>p.deadline===dateStr&&p.status!=='Afgerond');
+    let items='';
+    dayEvents.forEach(e=>{items+=`<div class="cal-event event-type">${e.time?e.time+' ':''}${e.title}</div>`;});
+    dayTasks.forEach(t=>{items+=`<div class="cal-event task-type">✓ ${t.title}</div>`;});
+    dayProjects.forEach(p=>{items+=`<div class="cal-event project-type">◈ ${p.name}</div>`;});
+    html+=`<div class="cal-day${isToday?' today':''}"><span class="cal-day-num">${d}</span>${items}</div>`;
+  }
+  const remaining=(7-(startDay+daysInMonth)%7)%7;
+  for(let i=1;i<=remaining;i++){html+=`<div class="cal-day other-month"><span class="cal-day-num">${i}</span></div>`;}
+  grid.innerHTML=html;
+}
+function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
+function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();}
+function calToday(){calYear=new Date().getFullYear();calMonth=new Date().getMonth();renderCalendar();}
 
 function renderTeam(){
   const g=document.getElementById('emp-grid');
   if(!employees.length){g.innerHTML='<div style="padding:40px;text-align:center;color:var(--tw-text-body);font-size:13px;">Nog geen teamleden toegevoegd</div>';return;}
-  g.innerHTML=employees.map(e=>{const name=e.first+' '+e.last;const openT=tasks.filter(t=>t.employee_id===e.id&&t.status!=='Klaar').length;return`<div class="emp-card"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><div class="emp-card-av">${ini(name)}</div><div><div style="font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);">${name}</div><div style="font-size:12px;color:var(--tw-text-body);">${e.role||'—'}</div></div></div>${e.email?`<div style="font-size:12px;color:var(--tw-text-body);margin-bottom:10px;">${e.email}</div>`:''}<div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--tw-border);"><span class="badge ${openT>0?'badge-open':'badge-klaar'}">${openT} open taken</span><button class="btn btn-sm btn-danger" style="padding:4px 8px;" onclick="delEmp('${e.id}')">✕</button></div></div>`;}).join('');
+  g.innerHTML=employees.map(e=>{
+    const name=e.first+' '+e.last;
+    const openT=tasks.filter(t=>t.employee_id===e.id&&t.status!=='Klaar').length;
+    const avatarHtml=e.avatar?`<img src="${e.avatar}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--tw-border);">`:`<div style="width:52px;height:52px;border-radius:50%;background:var(--tw-accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:18px;font-weight:700;color:#fff;">${ini(name)}</div>`;
+    return`<div class="emp-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        ${avatarHtml}
+        <div><div style="font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--tw-text);">${name}</div><div style="font-size:12px;color:var(--tw-text-body);">${e.role||'—'}</div></div>
+      </div>
+      ${e.email?`<div style="font-size:12px;color:var(--tw-text-body);margin-bottom:12px;">${e.email}</div>`:''}
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--tw-border);">
+        <span class="badge ${openT>0?'badge-open':'badge-klaar'}">${openT} open taken</span>
+        <div style="display:flex;gap:6px;">
+          <button class="btn btn-sm btn-ghost" onclick="editEmp('${e.id}')">✎</button>
+          <button class="btn btn-sm btn-danger" style="padding:4px 8px;" onclick="delEmp('${e.id}')">✕</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function openModal(type){
   if(type==='client'){eCid=null;clientLogoData=null;document.getElementById('mod-client-title').textContent='Klant toevoegen';['c-name','c-contact','c-email','c-phone','c-city','c-address','c-drive','c-notes'].forEach(i=>document.getElementById(i).value='');document.getElementById('c-logo-preview').style.display='none';}
-  if(type==='task'){eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';fillSel(null,null);['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';}
-  if(type==='employee'){['e-first','e-last','e-role','e-email'].forEach(i=>document.getElementById(i).value='');}
+  if(type==='project'){ePid=null;document.getElementById('mod-project-title').textContent='Project toevoegen';['p-name','p-desc','p-deadline'].forEach(i=>document.getElementById(i).value='');document.getElementById('p-status').value='Actief';document.getElementById('p-client').innerHTML='<option value="">— Kies klant —</option>'+clients.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');}
+  if(type==='task'){eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';fillTaskSel(null,null,null);['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';}
+  if(type==='event'){eEvid=null;document.getElementById('mod-event-title').textContent='Afspraak toevoegen';['ev-title','ev-date','ev-time','ev-notes'].forEach(i=>document.getElementById(i).value='');document.getElementById('ev-client').innerHTML='<option value="">— Kies klant —</option>'+clients.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');document.getElementById('ev-project').innerHTML='<option value="">— Kies project —</option>'+projects.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');}
+  if(type==='employee'){eEmpid=null;avatarData=null;document.getElementById('mod-emp-title').textContent='Teamlid toevoegen';document.getElementById('btn-save-emp').textContent='Toevoegen';['e-first','e-last','e-role','e-email'].forEach(i=>document.getElementById(i).value='');document.getElementById('e-avatar-preview').style.display='none';}
   document.getElementById('mod-'+type).classList.add('open');
 }
 
-function openTaskFor(cid){eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';fillSel(cid,null);['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';document.getElementById('mod-task').classList.add('open');}
-function fillSel(sc,se){document.getElementById('t-client').innerHTML='<option value="">— Kies klant —</option>'+clients.map(c=>`<option value="${c.id}"${c.id===sc?' selected':''}>${c.name}</option>`).join('');document.getElementById('t-emp').innerHTML='<option value="">— Kies medewerker —</option>'+employees.map(e=>`<option value="${e.id}"${e.id===se?' selected':''}>${e.first} ${e.last}</option>`).join('');}
-function closeModals(){document.querySelectorAll('.modal-wrap').forEach(m=>m.classList.remove('open'));eCid=null;eTid=null;}
+function openProjectFor(cid){ePid=null;document.getElementById('mod-project-title').textContent='Project toevoegen';['p-name','p-desc','p-deadline'].forEach(i=>document.getElementById(i).value='');document.getElementById('p-status').value='Actief';document.getElementById('p-client').innerHTML='<option value="">— Kies klant —</option>'+clients.map(c=>`<option value="${c.id}"${c.id===cid?' selected':''}>${c.name}</option>`).join('');document.getElementById('mod-project').classList.add('open');}
+function openTaskFor(cid,pid){eTid=null;document.getElementById('mod-task-title').textContent='Taak toevoegen';fillTaskSel(cid,pid,null);['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';document.getElementById('mod-task').classList.add('open');}
+
+function fillTaskSel(sc,sp,se){
+  document.getElementById('t-client').innerHTML='<option value="">— Kies klant —</option>'+clients.map(c=>`<option value="${c.id}"${c.id===sc?' selected':''}>${c.name}</option>`).join('');
+  const fp=sc?projects.filter(p=>p.client_id===sc):projects;
+  document.getElementById('t-project').innerHTML='<option value="">— Kies project —</option>'+fp.map(p=>`<option value="${p.id}"${p.id===sp?' selected':''}>${p.name}</option>`).join('');
+  document.getElementById('t-emp').innerHTML='<option value="">— Kies medewerker —</option>'+employees.map(e=>`<option value="${e.id}"${e.id===se?' selected':''}>${e.first} ${e.last}</option>`).join('');
+}
+function filterProjectsByClient(){const cid=document.getElementById('t-client').value;const fp=cid?projects.filter(p=>p.client_id===cid):projects;document.getElementById('t-project').innerHTML='<option value="">— Kies project —</option>'+fp.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');}
+
+function closeModals(){document.querySelectorAll('.modal-wrap').forEach(m=>m.classList.remove('open'));eCid=null;eTid=null;ePid=null;eEvid=null;eEmpid=null;}
 document.querySelectorAll('.modal-wrap').forEach(m=>m.addEventListener('click',function(e){if(e.target===this)closeModals();}));
 
 async function saveClient(){
@@ -539,27 +776,78 @@ async function saveClient(){
   else{await sb.from('clients').insert(obj);showToast('Klant toegevoegd');}
   await loadAll();closeModals();renderClients();if(eCid)showClient(eCid);
 }
-
 function editClient(id){const c=clients.find(x=>x.id===id);if(!c)return;eCid=id;clientLogoData=null;document.getElementById('mod-client-title').textContent='Klant bewerken';['name','contact','email','phone','city','address','drive','notes'].forEach(f=>document.getElementById('c-'+f).value=c[f]||'');const prev=document.getElementById('c-logo-preview');if(c.logo){prev.src=c.logo;prev.style.display='block';}else{prev.style.display='none';}document.getElementById('mod-client').classList.add('open');}
 async function delClient(id){if(!confirm('Klant verwijderen?'))return;await sb.from('clients').delete().eq('id',id);showToast('Klant verwijderd');await loadAll();document.getElementById('clients-list-wrap').classList.remove('hidden');document.getElementById('client-detail-wrap').classList.add('hidden');renderClients();}
 
+async function saveProject(){
+  const name=document.getElementById('p-name').value.trim();if(!name){alert('Vul een projectnaam in');return;}
+  const obj={name,client_id:document.getElementById('p-client').value||null,description:document.getElementById('p-desc').value,deadline:document.getElementById('p-deadline').value||null,status:document.getElementById('p-status').value};
+  if(ePid){await sb.from('projects').update(obj).eq('id',ePid);showToast('Project bijgewerkt');}
+  else{await sb.from('projects').insert(obj);showToast('Project toegevoegd');}
+  await loadAll();closeModals();renderProjects();if(ePid)showProject(ePid);
+}
+function editProject(id){const p=projects.find(x=>x.id===id);if(!p)return;ePid=id;document.getElementById('mod-project-title').textContent='Project bewerken';document.getElementById('p-name').value=p.name||'';document.getElementById('p-desc').value=p.description||'';document.getElementById('p-deadline').value=p.deadline||'';document.getElementById('p-status').value=p.status||'Actief';document.getElementById('p-client').innerHTML='<option value="">— Kies klant —</option>'+clients.map(c=>`<option value="${c.id}"${c.id===p.client_id?' selected':''}>${c.name}</option>`).join('');document.getElementById('mod-project').classList.add('open');}
+async function delProject(id){if(!confirm('Project verwijderen?'))return;await sb.from('projects').delete().eq('id',id);showToast('Project verwijderd');await loadAll();document.getElementById('projects-list-wrap').classList.remove('hidden');document.getElementById('project-detail-wrap').classList.add('hidden');renderProjects();}
+
 async function saveTask(){
   const title=document.getElementById('t-title').value.trim();if(!title){alert('Vul een taakomschrijving in');return;}
-  const obj={title,client_id:document.getElementById('t-client').value||null,employee_id:document.getElementById('t-emp').value||null,deadline:document.getElementById('t-deadline').value||null,prio:document.getElementById('t-prio').value,status:document.getElementById('t-status').value,note:document.getElementById('t-note').value};
+  const obj={title,client_id:document.getElementById('t-client').value||null,project_id:document.getElementById('t-project').value||null,employee_id:document.getElementById('t-emp').value||null,deadline:document.getElementById('t-deadline').value||null,prio:document.getElementById('t-prio').value,status:document.getElementById('t-status').value,note:document.getElementById('t-note').value};
   if(eTid){await sb.from('tasks').update(obj).eq('id',eTid);showToast('Taak bijgewerkt');}
   else{await sb.from('tasks').insert(obj);showToast('Taak toegevoegd');}
   await loadAll();closeModals();renderTasks();renderDash();
 }
-
-function editTask(id){const t=tasks.find(x=>x.id===id);if(!t)return;eTid=id;document.getElementById('mod-task-title').textContent='Taak bewerken';fillSel(t.client_id,t.employee_id);document.getElementById('t-title').value=t.title||'';document.getElementById('t-deadline').value=t.deadline||'';document.getElementById('t-prio').value=t.prio||'Middel';document.getElementById('t-status').value=t.status||'Open';document.getElementById('t-note').value=t.note||'';document.getElementById('mod-task').classList.add('open');}
+function editTask(id){const t=tasks.find(x=>x.id===id);if(!t)return;eTid=id;document.getElementById('mod-task-title').textContent='Taak bewerken';fillTaskSel(t.client_id,t.project_id,t.employee_id);document.getElementById('t-title').value=t.title||'';document.getElementById('t-deadline').value=t.deadline||'';document.getElementById('t-prio').value=t.prio||'Middel';document.getElementById('t-status').value=t.status||'Open';document.getElementById('t-note').value=t.note||'';document.getElementById('mod-task').classList.add('open');}
 async function delTask(id,returnCid){if(!confirm('Taak verwijderen?'))return;await sb.from('tasks').delete().eq('id',id);showToast('Taak verwijderd');await loadAll();if(returnCid)showClient(returnCid);else renderTasks();renderDash();}
-async function saveEmp(){const first=document.getElementById('e-first').value.trim(),last=document.getElementById('e-last').value.trim();if(!first||!last){alert('Vul voor- en achternaam in');return;}await sb.from('employees').insert({first,last,role:document.getElementById('e-role').value,email:document.getElementById('e-email').value});showToast('Teamlid toegevoegd');await loadAll();closeModals();renderTeam();}
+
+async function saveEvent(){
+  const title=document.getElementById('ev-title').value.trim();const date=document.getElementById('ev-date').value;if(!title||!date){alert('Vul een titel en datum in');return;}
+  const obj={title,date,time:document.getElementById('ev-time').value||null,client_id:document.getElementById('ev-client').value||null,project_id:document.getElementById('ev-project').value||null,notes:document.getElementById('ev-notes').value};
+  if(eEvid){await sb.from('events').update(obj).eq('id',eEvid);showToast('Afspraak bijgewerkt');}
+  else{await sb.from('events').insert(obj);showToast('Afspraak toegevoegd');}
+  await loadAll();closeModals();renderCalendar();
+}
+
+async function saveEmp(){
+  const first=document.getElementById('e-first').value.trim(),last=document.getElementById('e-last').value.trim();
+  if(!first||!last){alert('Vul voor- en achternaam in');return;}
+  const obj={first,last,role:document.getElementById('e-role').value,email:document.getElementById('e-email').value};
+  if(avatarData)obj.avatar=avatarData;
+  if(eEmpid){
+    if(!avatarData){const old=employees.find(e=>e.id===eEmpid);if(old?.avatar)obj.avatar=old.avatar;}
+    await sb.from('employees').update(obj).eq('id',eEmpid);showToast('Teamlid bijgewerkt');
+  }else{await sb.from('employees').insert(obj);showToast('Teamlid toegevoegd');}
+  await loadAll();closeModals();renderTeam();
+}
+function editEmp(id){
+  const e=employees.find(x=>x.id===id);if(!e)return;
+  eEmpid=id;avatarData=null;
+  document.getElementById('mod-emp-title').textContent='Teamlid bewerken';
+  document.getElementById('btn-save-emp').textContent='Opslaan';
+  document.getElementById('e-first').value=e.first||'';
+  document.getElementById('e-last').value=e.last||'';
+  document.getElementById('e-role').value=e.role||'';
+  document.getElementById('e-email').value=e.email||'';
+  const prev=document.getElementById('e-avatar-preview');
+  if(e.avatar){prev.src=e.avatar;prev.style.display='block';}else{prev.style.display='none';}
+  document.getElementById('mod-employee').classList.add('open');
+}
 async function delEmp(id){if(!confirm('Teamlid verwijderen?'))return;await sb.from('employees').delete().eq('id',id);showToast('Teamlid verwijderd');await loadAll();renderTeam();}
 
 function openSearch(){document.getElementById('search-overlay').classList.add('open');setTimeout(()=>document.getElementById('search-input').focus(),50);doSearch();}
 function maybeCloseSearch(e){if(e.target===document.getElementById('search-overlay'))closeSearch();}
 function closeSearch(){document.getElementById('search-overlay').classList.remove('open');document.getElementById('search-input').value='';document.getElementById('search-results').innerHTML='<div class="search-empty">Begin met typen om te zoeken...</div>';}
-function doSearch(){const q=document.getElementById('search-input').value.toLowerCase().trim();const res=document.getElementById('search-results');if(!q){res.innerHTML='<div class="search-empty">Begin met typen om te zoeken...</div>';return;}let hits=[];clients.filter(c=>c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)).forEach(c=>hits.push({type:'Klant',label:c.name,sub:c.contact||'',action:`showClient('${c.id}');go('clients');closeSearch()`}));tasks.filter(t=>t.title.toLowerCase().includes(q)).forEach(t=>{const cl=clients.find(c=>c.id===t.client_id);hits.push({type:'Taak',label:t.title,sub:cl?cl.name:'',action:`go('tasks');closeSearch()`});});employees.filter(e=>(e.first+' '+e.last).toLowerCase().includes(q)||(e.role||'').toLowerCase().includes(q)).forEach(e=>hits.push({type:'Team',label:e.first+' '+e.last,sub:e.role||'',action:`go('team');closeSearch()`}));if(!hits.length){res.innerHTML='<div class="search-empty">Geen resultaten gevonden</div>';return;}res.innerHTML=hits.slice(0,10).map(h=>`<div class="search-result-item" onclick="${h.action}"><div style="flex:1;"><div style="font-family:var(--font-head);font-weight:600;font-size:13px;">${h.label}</div>${h.sub?`<div style="font-size:11px;color:var(--tw-text-body);">${h.sub}</div>`:''}</div><span class="search-result-type">${h.type}</span></div>`).join('');}
+function doSearch(){
+  const q=document.getElementById('search-input').value.toLowerCase().trim();
+  const res=document.getElementById('search-results');
+  if(!q){res.innerHTML='<div class="search-empty">Begin met typen om te zoeken...</div>';return;}
+  let hits=[];
+  clients.filter(c=>c.name.toLowerCase().includes(q)||(c.contact||'').toLowerCase().includes(q)).forEach(c=>hits.push({type:'Klant',label:c.name,sub:c.contact||'',action:`showClient('${c.id}');go('clients');closeSearch()`}));
+  projects.filter(p=>p.name.toLowerCase().includes(q)).forEach(p=>{const cl=clients.find(c=>c.id===p.client_id);hits.push({type:'Project',label:p.name,sub:cl?cl.name:'',action:`showProject('${p.id}');go('projects');closeSearch()`});});
+  tasks.filter(t=>t.title.toLowerCase().includes(q)).forEach(t=>{const cl=clients.find(c=>c.id===t.client_id);hits.push({type:'Taak',label:t.title,sub:cl?cl.name:'',action:`go('tasks');closeSearch()`});});
+  employees.filter(e=>(e.first+' '+e.last).toLowerCase().includes(q)).forEach(e=>hits.push({type:'Team',label:e.first+' '+e.last,sub:e.role||'',action:`go('team');closeSearch()`}));
+  if(!hits.length){res.innerHTML='<div class="search-empty">Geen resultaten gevonden</div>';return;}
+  res.innerHTML=hits.slice(0,10).map(h=>`<div class="search-result-item" onclick="${h.action}"><div style="flex:1;"><div style="font-family:var(--font-head);font-weight:600;font-size:13px;">${h.label}</div>${h.sub?`<div style="font-size:11px;color:var(--tw-text-body);">${h.sub}</div>`:''}</div><span class="search-result-type">${h.type}</span></div>`).join('');
+}
 
 document.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}if(e.key==='Escape'){closeSearch();closeModals();}});
 
@@ -567,9 +855,7 @@ async function init(){
   applyBranding();
   const{data:{session}}=await sb.auth.getSession();
   if(session){showApp(session.user);}else{showLogin();}
-  sb.auth.onAuthStateChange((event,session)=>{
-    if(session){showApp(session.user);}else{showLogin();}
-  });
+  sb.auth.onAuthStateChange((event,session)=>{if(session){showApp(session.user);}else{showLogin();}});
 }
 init();
 </script>
