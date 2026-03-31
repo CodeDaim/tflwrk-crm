@@ -17,7 +17,7 @@
   --txb:#4a3035;
   --br:#e0d8d9;
   --brs:#c9bfc0;
-  --sb:#1a0a0c;
+  --sb:#511E26;
   --fh:'Montserrat',sans-serif;
   --fb:'Quicksand',sans-serif;
 }
@@ -472,11 +472,11 @@ function prevAv(input){const f=input.files[0];if(!f)return;const r=new FileReade
 
 async function loadAll(){
   const[{data:c},{data:t},{data:e},{data:p},{data:ev}]=await Promise.all([
-    sb.from('clients').select('*').order('created_at',{ascending:false}),
-    sb.from('tasks').select('*').order('created_at',{ascending:false}),
-    sb.from('employees').select('*').order('created_at',{ascending:false}),
-    sb.from('projects').select('*').order('created_at',{ascending:false}),
-    sb.from('events').select('*').order('date',{ascending:true})
+    sb.from('clients').select('id,name,contact,email,phone,city,address,drive,notes,logo,created_at').order('name',{ascending:true}),
+    sb.from('tasks').select('id,title,client_id,project_id,employee_id,deadline,prio,status,note,created_at').order('created_at',{ascending:false}),
+    sb.from('employees').select('id,first,last,role,email,avatar,created_at').order('first',{ascending:true}),
+    sb.from('projects').select('id,name,client_id,description,status,deadline,created_at').order('created_at',{ascending:false}),
+    sb.from('events').select('id,title,date,time,client_id,project_id,notes,created_at').order('date',{ascending:true})
   ]);
   C=c||[];T=t||[];E=e||[];P=p||[];EV=ev||[];
 }
@@ -487,6 +487,7 @@ async function go(sec){
     const nav=document.getElementById('n-'+s);if(nav)nav.classList.toggle('on',s===sec);
   });
   document.getElementById('tbtitle').textContent=TITLES[sec]||'';
+  if(sec==='settings'){applyBrand();return;}
   await loadAll();
   if(sec==='dash')rDash();
   if(sec==='clients'){show('clist');hide('cdet');rClients();}
@@ -494,7 +495,6 @@ async function go(sec){
   if(sec==='tasks')rTasks();
   if(sec==='calendar')rCal();
   if(sec==='team')rTeam();
-  if(sec==='settings')applyBrand();
 }
 function show(id){document.getElementById(id).classList.remove('hidden');}
 function hide(id){document.getElementById(id).classList.add('hidden');}
