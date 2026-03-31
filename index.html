@@ -564,7 +564,15 @@ function empAv(em,size=26){
 }
 function projBadge(s){const m={'Actief':'badge-actief','On hold':'badge-onhold','Afgerond':'badge-afgerond'};return`<span class="badge ${m[s]||''}">${s}</span>`;}
 
-).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--tw-text-body);padding:20px;">Geen openstaande taken</td></tr>';
+function renderDash(){
+  const open=tasks.filter(t=>t.status!=='Klaar').length;
+  const activeProj=projects.filter(p=>p.status==='Actief').length;
+  const klaar=tasks.filter(t=>t.status==='Klaar').length;
+  const bezig=tasks.filter(t=>t.status==='Bezig').length;
+  document.getElementById('dash-stats').innerHTML=`<div class="stat-card"><div class="stat-lbl">Klanten</div><div class="stat-val">${clients.length}</div><div class="stat-sub">totaal</div></div><div class="stat-card"><div class="stat-lbl">Actieve projecten</div><div class="stat-val">${activeProj}</div><div class="stat-sub">lopend</div></div><div class="stat-card"><div class="stat-lbl">Open taken</div><div class="stat-val">${open}</div><div class="stat-sub">te doen</div></div><div class="stat-card"><div class="stat-lbl">Afgerond</div><div class="stat-val">${klaar}</div><div class="stat-sub">taken klaar</div></div>`;
+  const tb=document.getElementById('dash-tasks-body');
+  const rows=tasks.filter(t=>t.status!=='Klaar').sort((a,b)=>{const p={Hoog:0,Middel:1,Laag:2};return(p[a.prio]||1)-(p[b.prio]||1);}).slice(0,6);
+  tb.innerHTML=rows.length?rows.map(t=>{const cl=clients.find(c=>c.id===t.client_id);const od=t.deadline&&t.status!=='Klaar'&&new Date(t.deadline)<new Date();return`<tr onclick="go('tasks')"><td style="font-family:var(--font-head);font-weight:600;font-size:13px;">${t.title}</td><td>${cl?cl.name:'—'}</td><td>${fmtD(t.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td><td>${sBadge(t.status)}</td></tr>`;}).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--tw-text-body);padding:20px;">Geen openstaande taken</td></tr>';
   const pb=document.getElementById('dash-projects-body');
   const activeP=projects.filter(p=>p.status==='Actief').slice(0,6);
   pb.innerHTML=activeP.length?activeP.map(p=>{const cl=clients.find(c=>c.id===p.client_id);const od=p.deadline&&new Date(p.deadline)<new Date();return`<tr onclick="go('projects')"><td style="font-family:var(--font-head);font-weight:600;font-size:13px;">${p.name}</td><td>${cl?cl.name:'—'}</td><td>${fmtD(p.deadline)}${od?'<span class="late-badge">TE LAAT</span>':''}</td><td>${projBadge(p.status)}</td></tr>`;}).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--tw-text-body);padding:20px;">Geen actieve projecten</td></tr>';
