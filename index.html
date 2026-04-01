@@ -478,17 +478,15 @@ function applyBrand(){
   document.getElementById('lname').textContent=brand+'®';
   document.title=brand+' CRM';
   const ab=brand.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  const sl=document.getElementById('slogo'),lm=document.getElementById('lmark'),sp=document.getElementById('setlogo');
+  const sl=document.getElementById('slogo'),sp=document.getElementById('setlogo');
   if(logo){
-    sl.innerHTML=`<img src="${logo}" style="width:32px;height:32px;object-fit:contain;border-radius:50%;">`;
-    lm.innerHTML=`<img src="${logo}" style="width:38px;height:38px;object-fit:contain;border-radius:50%;">`;
-    sp.innerHTML=`<img src="${logo}" style="width:48px;height:48px;object-fit:contain;border-radius:50%;">`;
+    if(sl)sl.innerHTML=`<img src="${logo}" style="width:32px;height:32px;object-fit:contain;border-radius:50%;">`;
+    if(sp)sp.innerHTML=`<img src="${logo}" style="width:48px;height:48px;object-fit:contain;border-radius:50%;">`;
   }else{
-    sl.innerHTML=`<span style="color:#fff;font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;">${ab}</span>`;
-    lm.innerHTML=`<span style="color:#fff;font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;">${ab}</span>`;
-    sp.innerHTML=`<span>${ab}</span>`;
+    if(sl)sl.innerHTML=`<span style="color:#fff;font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;">${ab}</span>`;
+    if(sp)sp.innerHTML=`<span>${ab}</span>`;
   }
-  const si=document.getElementById('setini');if(si)si.textContent=ab;
+  
   const sn=document.getElementById('sbname');if(sn)sn.value=brand;
 }
 function saveBrand(){localStorage.setItem('tw_brand',document.getElementById('sbname').value.trim()||'TAFELWERK');applyBrand();toast('Naam opgeslagen');}
