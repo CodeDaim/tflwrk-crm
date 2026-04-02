@@ -210,6 +210,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.6;}
 .cup{width:48px;height:48px;background:var(--acc);border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
 .cup img{width:48px;height:48px;object-fit:contain;border-radius:50%;}
 .cup span{color:#fff;font-family:var(--fh);font-weight:900;font-size:14px;}
+.drb:hover .drive-ic{filter:brightness(0) invert(1);}
 </style>
 </head>
 <body>
@@ -483,6 +484,7 @@ function renderLoginGrid(){
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 
 let C=[],T=[],E=[],P=[],EV=[],TE=[];
+let activeTimers={};
 let eCid=null,eTid=null,ePid=null,eEvid=null,eEid=null;
 let logoD=null,avD=null;
 let cY=new Date().getFullYear(),cM=new Date().getMonth();
@@ -650,7 +652,7 @@ function rClients(){
     const op=T.filter(t=>t.client_id===c.id&&t.status!=='Klaar').length;
     const tot=T.filter(t=>t.client_id===c.id).length;
     const lh=c.logo?`<img src="${c.logo}" style="width:46px;height:46px;object-fit:contain;">`:`<span class="cli">${ini(c.name)}</span>`;
-    return`<div class="cc" onclick="sClient('${c.id}')"><div class="cch"><div class="cl">${lh}</div><div><div class="cn">${c.name}</div><div class="cy">${c.city||'—'}</div></div></div><div class="cb">${c.contact?`<div>${c.contact}</div>`:''}${c.email?`<div><a href="mailto:${c.email}" onclick="event.stopPropagation()">${c.email}</a></div>`:''}${c.phone?`<div>${c.phone}</div>`:''}</div><div class="cf"><span class="badge ${op>0?'bo':'bk'}">${op>0?op+' open':tot+' taken'}</span>${c.drive?`<a href="${c.drive}" target="_blank" onclick="event.stopPropagation()" class="drb"><img src="https://raw.githubusercontent.com/CodeDaim/tflwrk-crm/main/google-drive.png" style="width:12px;height:12px;object-fit:contain;"> Drive</a>`:''}</div></div>`;
+    return`<div class="cc" onclick="sClient('${c.id}')"><div class="cch"><div class="cl">${lh}</div><div><div class="cn">${c.name}</div><div class="cy">${c.city||'—'}</div></div></div><div class="cb">${c.contact?`<div>${c.contact}</div>`:''}${c.email?`<div><a href="mailto:${c.email}" onclick="event.stopPropagation()">${c.email}</a></div>`:''}${c.phone?`<div>${c.phone}</div>`:''}</div><div class="cf"><span class="badge ${op>0?'bo':'bk'}">${op>0?op+' open':tot+' taken'}</span>${c.drive?`<a href="${c.drive}" target="_blank" onclick="event.stopPropagation()" class="drb"><img src="https://raw.githubusercontent.com/CodeDaim/tflwrk-crm/main/google-drive%20(1).svg" style="width:14px;height:14px;object-fit:contain;filter:brightness(0) saturate(100%);" class="drive-ic"> Drive</a>`:''}</div></div>`;
   }).join('');
 }
 
@@ -662,7 +664,7 @@ function sClient(id){
   const cp=P.filter(p=>p.client_id===id);
   const lh=c.logo?`<img src="${c.logo}" style="width:56px;height:56px;object-fit:contain;">`:`<span class="dli">${ini(c.name)}</span>`;
   det.innerHTML=`<div class="bl" onclick="show('clist');hide('cdet')">← Terug naar klanten</div>
-  <div class="dh"><div class="dht"><div style="display:flex;align-items:center;gap:16px;"><div class="dl2">${lh}</div><div><div class="dn">${c.name}</div><div class="ds">${[c.address,c.city].filter(Boolean).join(', ')||'Geen adres'}</div></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">${c.drive?`<a href="${c.drive}" target="_blank" class="drb"><img src="https://raw.githubusercontent.com/CodeDaim/tflwrk-crm/main/google-drive.png" style="width:12px;height:12px;object-fit:contain;"> Google Drive map</a>`:''}<button class="btn bts" onclick="editClient('${c.id}')">Bewerken</button><button class="btn bts btd" onclick="delClient('${c.id}')">Verwijderen</button></div></div>
+  <div class="dh"><div class="dht"><div style="display:flex;align-items:center;gap:16px;"><div class="dl2">${lh}</div><div><div class="dn">${c.name}</div><div class="ds">${[c.address,c.city].filter(Boolean).join(', ')||'Geen adres'}</div></div></div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">${c.drive?`<a href="${c.drive}" target="_blank" class="drb"><img src="https://raw.githubusercontent.com/CodeDaim/tflwrk-crm/main/google-drive%20(1).svg" style="width:14px;height:14px;object-fit:contain;filter:brightness(0) saturate(100%);" class="drive-ic"> Google Drive map</a>`:''}<button class="btn bts" onclick="editClient('${c.id}')">Bewerken</button><button class="btn bts btd" onclick="delClient('${c.id}')">Verwijderen</button></div></div>
   <div class="fg3"><div class="fb3"><div class="fl">Contactpersoon</div><div class="fv">${c.contact||'—'}</div></div><div class="fb3"><div class="fl">E-mail</div><div class="fv"><a href="mailto:${c.email}">${c.email||'—'}</a></div></div><div class="fb3"><div class="fl">Telefoon</div><div class="fv">${c.phone||'—'}</div></div></div>
   ${c.notes?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--br);font-size:13px;color:var(--txb);white-space:pre-wrap;">${c.notes}</div>`:''}</div>
   <div class="pn2"><div class="ph2"><h3>Projecten</h3><button class="btn bts bta" onclick="oProjFor('${c.id}')">+ Project</button></div><div class="tw"><table class="dt"><thead><tr><th>Project</th><th>Deadline</th><th>Status</th><th></th></tr></thead><tbody>${cp.length?cp.map(p=>`<tr><td style="font-family:var(--fh);font-weight:600;">${p.name}</td><td>${fd(p.deadline)}</td><td>${pjb(p.status)}</td><td><button class="btn btg bts" onclick="editProject('${p.id}')">✎</button></td></tr>`).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--txb);padding:16px;">Geen projecten</td></tr>'}</tbody></table></div></div>
