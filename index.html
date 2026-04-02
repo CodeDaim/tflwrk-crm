@@ -241,6 +241,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.6;}
     <div class="ni" id="n-tasks" onclick="go('tasks')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Taken</div>
     <div class="ni" id="n-calendar" onclick="go('calendar')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Kalender</div>
     <div class="ni" id="n-team" onclick="go('team')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3 3-5 7-5s7 2 7 5"/><circle cx="18" cy="8" r="2"/><path d="M22 20c0-2-1.5-3.5-4-4"/></svg>Team</div>
+    <div class="ni" id="n-timer" onclick="go('timer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>Uren</div>
   </div>
   <div class="sf"><div class="ni" id="n-settings" onclick="go('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Instellingen</div></div>
 </div>
@@ -310,6 +311,32 @@ textarea{resize:vertical;min-height:80px;line-height:1.6;}
   <div class="sec" id="s-team">
     <div class="fb2"><span></span><button class="btn bta" onclick="oMod('employee')">+ Teamlid toevoegen</button></div>
     <div class="ct"><div class="eg" id="egrid"></div></div>
+  </div>
+
+  <!-- TIMER -->
+  <div class="sec" id="s-timer">
+    <div class="fb2">
+      <span style="font-size:13px;color:var(--txb);">Actieve timers en urenregistratie</span>
+      <div style="display:flex;gap:8px;">
+        <button class="btn bta" onclick="oMod('timer')">▶ Start timer</button>
+        <button class="btn" onclick="oMod('manual')">+ Handmatig toevoegen</button>
+      </div>
+    </div>
+    <div class="ct">
+      <!-- Active timers -->
+      <div id="active-timers" style="margin-bottom:24px;"></div>
+      <!-- All entries -->
+      <div class="pn2">
+        <div class="ph2">
+          <h3>Alle urenregistraties</h3>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <select id="timer-filter-client" onchange="rTimer()" style="width:180px;font-size:12px;"><option value="">Alle klanten</option></select>
+            <select id="timer-filter-invoiced" onchange="rTimer()" style="width:140px;font-size:12px;"><option value="">Alle statussen</option><option value="false">Niet gefactureerd</option><option value="true">Gefactureerd</option></select>
+          </div>
+        </div>
+        <div class="tw"><table class="dt"><thead><tr><th>Datum</th><th>Klant</th><th>Medewerker</th><th>Omschrijving</th><th>Duur</th><th>Status</th><th></th></tr></thead><tbody id="timer-body"></tbody></table></div>
+      </div>
+    </div>
   </div>
 
   <!-- SETTINGS -->
@@ -390,6 +417,36 @@ textarea{resize:vertical;min-height:80px;line-height:1.6;}
   <div class="mf"><button class="btn" onclick="cMod()">Annuleren</button><button class="btn bta" id="empSaveBtn" onclick="saveEmp()">Toevoegen</button></div>
 </div></div>
 
+<!-- MODAL TIMER START -->
+<div class="mw" id="m-timer"><div class="mo">
+  <div class="mh"><h3>Timer starten</h3><button class="btn btg bts" onclick="cMod()">✕</button></div>
+  <div class="mb">
+    <div class="fg"><label>Wat ben je aan het doen? *</label><input id="ti-desc" placeholder="Bijv. Website onderhoud, Fotoshoot bewerken..."></div>
+    <div class="fr">
+      <div class="fg"><label>Klant *</label><select id="ti-client"></select></div>
+      <div class="fg"><label>Teamlid *</label><select id="ti-emp"></select></div>
+    </div>
+  </div>
+  <div class="mf"><button class="btn" onclick="cMod()">Annuleren</button><button class="btn bta" onclick="startTimer()">▶ Start</button></div>
+</div></div>
+
+<!-- MODAL HANDMATIG -->
+<div class="mw" id="m-manual"><div class="mo">
+  <div class="mh"><h3>Uren handmatig toevoegen</h3><button class="btn btg bts" onclick="cMod()">✕</button></div>
+  <div class="mb">
+    <div class="fg"><label>Omschrijving *</label><input id="ma-desc" placeholder="Bijv. Strategie gesprek, Offerte schrijven..."></div>
+    <div class="fr">
+      <div class="fg"><label>Klant *</label><select id="ma-client"></select></div>
+      <div class="fg"><label>Teamlid</label><select id="ma-emp"></select></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>Datum</label><input type="date" id="ma-date"></div>
+      <div class="fg"><label>Aantal minuten *</label><input type="number" id="ma-mins" placeholder="60" min="1"></div>
+    </div>
+  </div>
+  <div class="mf"><button class="btn" onclick="cMod()">Annuleren</button><button class="btn bta" onclick="saveManual()">Opslaan</button></div>
+</div></div>
+
 <!-- SEARCH -->
 <div class="so" id="soverlay" onclick="mCS(event)">
   <div class="sx">
@@ -425,12 +482,12 @@ function renderLoginGrid(){
 }
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 
-let C=[],T=[],E=[],P=[],EV=[];
+let C=[],T=[],E=[],P=[],EV=[],TE=[];
 let eCid=null,eTid=null,ePid=null,eEvid=null,eEid=null;
 let logoD=null,avD=null;
 let cY=new Date().getFullYear(),cM=new Date().getMonth();
-const SECS=['dash','clients','projects','tasks','calendar','team','settings'];
-const TITLES={dash:'Dashboard',clients:'Klanten',projects:'Projecten',tasks:'Taken',calendar:'Kalender',team:'Team',settings:'Instellingen'};
+const SECS=['dash','clients','projects','tasks','calendar','team','timer','settings'];
+const TITLES={dash:'Dashboard',clients:'Klanten',projects:'Projecten',tasks:'Taken',calendar:'Kalender',team:'Team',timer:'Uren',settings:'Instellingen'};
 
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2500);}
 function ini(n){if(!n)return'?';const p=n.trim().split(' ');return(p[0][0]+(p[1]?p[1][0]:'')).toUpperCase();}
@@ -497,14 +554,15 @@ function prevLogo(input){const f=input.files[0];if(!f)return;const r=new FileRea
 function prevAv(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{avD=e.target.result;const p=document.getElementById('avPrev');p.src=e.target.result;p.style.display='block';};r.readAsDataURL(f);}
 
 async function loadAll(){
-  const[{data:c},{data:t},{data:e},{data:p},{data:ev}]=await Promise.all([
+  const[{data:c},{data:t},{data:e},{data:p},{data:ev},{data:te}]=await Promise.all([
     sb.from('clients').select('id,name,contact,email,phone,city,address,drive,notes,logo,created_at').order('name',{ascending:true}),
     sb.from('tasks').select('id,title,client_id,project_id,employee_id,deadline,prio,status,note,created_at').order('created_at',{ascending:false}),
     sb.from('employees').select('id,first,last,role,email,avatar,created_at').order('first',{ascending:true}),
     sb.from('projects').select('id,name,client_id,description,status,deadline,created_at').order('created_at',{ascending:false}),
-    sb.from('events').select('id,title,date,time,client_id,project_id,notes,created_at').order('date',{ascending:true})
+    sb.from('events').select('id,title,date,time,client_id,project_id,notes,created_at').order('date',{ascending:true}),
+    sb.from('time_entries').select('*').order('created_at',{ascending:false})
   ]);
-  C=c||[];T=t||[];E=e||[];P=p||[];EV=ev||[];
+  C=c||[];T=t||[];E=e||[];P=p||[];EV=ev||[];TE=te||[];
 }
 
 async function go(sec){
@@ -521,6 +579,7 @@ async function go(sec){
   if(sec==='tasks')rTasks();
   if(sec==='calendar')rCal();
   if(sec==='team')rTeam();
+  if(sec==='timer'){rTimer();rActiveTimers();}
 }
 function show(id){document.getElementById(id).classList.remove('hidden');}
 function hide(id){document.getElementById(id).classList.add('hidden');}
@@ -698,7 +757,7 @@ function rTeam(){
   }).join('');
 }
 
-function oMod(type){
+function _oMod(type){
   if(type==='client'){eCid=null;logoD=null;document.getElementById('mct').textContent='Klant toevoegen';['c-name','c-contact','c-email','c-phone','c-city','c-address','c-drive','c-notes'].forEach(i=>document.getElementById(i).value='');document.getElementById('clprev').style.display='none';}
   if(type==='project'){ePid=null;document.getElementById('mpt').textContent='Project toevoegen';['p-name','p-desc','p-deadline'].forEach(i=>document.getElementById(i).value='');document.getElementById('p-status').value='Actief';document.getElementById('p-client').innerHTML='<option value="">— Kies klant —</option>'+C.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');}
   if(type==='task'){eTid=null;document.getElementById('mtt').textContent='Taak toevoegen';fillTS(null,null,null);['t-title','t-deadline','t-note'].forEach(i=>document.getElementById(i).value='');document.getElementById('t-prio').value='Middel';document.getElementById('t-status').value='Open';}
@@ -794,6 +853,184 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){closeSearch();cMod();}
 });
 
+
+// ─── TIMER FUNCTIONS ─────────────────────────────────────────────────────────
+function fmtMins(m){const h=Math.floor(m/60);const mn=m%60;return h>0?`${h}u ${mn}m`:`${mn}m`;}
+function fmtElapsed(startedAt){const diff=Math.floor((Date.now()-new Date(startedAt))/1000);const h=Math.floor(diff/3600);const m=Math.floor((diff%3600)/60);const s=diff%60;return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
+
+function oMod(type){
+  if(type==='timer'){
+    document.getElementById('ti-client').innerHTML='<option value="">— Kies klant —</option>'+C.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+    document.getElementById('ti-emp').innerHTML='<option value="">— Kies teamlid —</option>'+E.map(e=>`<option value="${e.id}">${e.first} ${e.last}</option>`).join('');
+    document.getElementById('ti-desc').value='';
+    document.getElementById('m-timer').classList.add('on');
+    return;
+  }
+  if(type==='manual'){
+    document.getElementById('ma-client').innerHTML='<option value="">— Kies klant —</option>'+C.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+    document.getElementById('ma-emp').innerHTML='<option value="">— Kies teamlid —</option>'+E.map(e=>`<option value="${e.id}">${e.first} ${e.last}</option>`).join('');
+    document.getElementById('ma-desc').value='';
+    document.getElementById('ma-mins').value='';
+    document.getElementById('ma-date').value=new Date().toISOString().split('T')[0];
+    document.getElementById('m-manual').classList.add('on');
+    return;
+  }
+  // original oMod for other types handled below
+  _oMod(type);
+}
+
+function startTimer(){
+  const desc=document.getElementById('ti-desc').value.trim();
+  const cid=document.getElementById('ti-client').value;
+  const eid=document.getElementById('ti-emp').value;
+  if(!desc||!cid||!eid){alert('Vul alle velden in');return;}
+  const id='t_'+Date.now();
+  const startedAt=new Date().toISOString();
+  activeTimers[id]={clientId:cid,empId:eid,desc,startedAt};
+  // Start interval
+  activeTimers[id].interval=setInterval(()=>{
+    const el=document.getElementById('elapsed_'+id);
+    if(el)el.textContent=fmtElapsed(activeTimers[id].startedAt);
+  },1000);
+  cMod();
+  go('timer');
+  toast('Timer gestart!');
+}
+
+function rActiveTimers(){
+  const wrap=document.getElementById('active-timers');
+  if(!wrap)return;
+  const ids=Object.keys(activeTimers);
+  if(!ids.length){wrap.innerHTML='';return;}
+  wrap.innerHTML=`<div style="margin-bottom:16px;">
+    <div style="font-family:var(--fh);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txb);opacity:.5;margin-bottom:10px;">Actief</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;">
+    ${ids.map(id=>{
+      const ti=activeTimers[id];
+      const cl=C.find(c=>c.id===ti.clientId);
+      const em=E.find(e=>e.id===ti.empId);
+      return`<div style="background:var(--bg);border:2px solid var(--acc);padding:18px;box-shadow:0 2px 12px rgba(81,30,38,.12);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div style="font-family:var(--fh);font-size:13px;font-weight:700;color:var(--tx);">${ti.desc}</div>
+          <div id="elapsed_${id}" style="font-family:var(--fh);font-size:16px;font-weight:700;color:var(--acc);letter-spacing:.05em;">${fmtElapsed(ti.startedAt)}</div>
+        </div>
+        <div style="font-size:12px;color:var(--txb);margin-bottom:14px;">${cl?cl.name:'—'} · ${em?em.first+' '+em.last:'—'}</div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn bta bts" onclick="stopTimer('${id}')">■ Stop & opslaan</button>
+          <button class="btn btd bts" onclick="cancelTimer('${id}')">Annuleren</button>
+        </div>
+      </div>`;
+    }).join('')}
+    </div>
+  </div>`;
+}
+
+async function stopTimer(id){
+  const ti=activeTimers[id];
+  if(!ti)return;
+  clearInterval(ti.interval);
+  const endedAt=new Date();
+  const startedAt=new Date(ti.startedAt);
+  const mins=Math.round((endedAt-startedAt)/60000);
+  if(mins<1){alert('Timer is nog geen minuut actief.');return;}
+  await sb.from('time_entries').insert({
+    client_id:ti.clientId,employee_id:ti.empId,
+    description:ti.desc,started_at:ti.startedAt,
+    ended_at:endedAt.toISOString(),duration_minutes:mins,invoiced:false
+  });
+  delete activeTimers[id];
+  await loadAll();
+  rActiveTimers();
+  rTimer();
+  toast(`${fmtMins(mins)} opgeslagen!`);
+}
+
+function cancelTimer(id){
+  if(!confirm('Timer annuleren? Tijd wordt niet opgeslagen.'))return;
+  clearInterval(activeTimers[id].interval);
+  delete activeTimers[id];
+  rActiveTimers();
+}
+
+async function saveManual(){
+  const desc=document.getElementById('ma-desc').value.trim();
+  const cid=document.getElementById('ma-client').value;
+  const mins=parseInt(document.getElementById('ma-mins').value);
+  if(!desc||!cid||!mins){alert('Vul omschrijving, klant en minuten in');return;}
+  const eid=document.getElementById('ma-emp').value||null;
+  const date=document.getElementById('ma-date').value||new Date().toISOString().split('T')[0];
+  await sb.from('time_entries').insert({
+    client_id:cid,employee_id:eid,description:desc,
+    started_at:date+'T09:00:00',duration_minutes:mins,invoiced:false
+  });
+  await loadAll();cMod();rTimer();
+  toast('Uren toegevoegd!');
+}
+
+function rTimer(){
+  const cf=document.getElementById('timer-filter-client')?.value||'';
+  const inv=document.getElementById('timer-filter-invoiced')?.value||'';
+  // Fill client filter
+  const fc=document.getElementById('timer-filter-client');
+  if(fc&&fc.options.length<=1){
+    C.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.name;fc.appendChild(o);});
+  }
+  let list=TE;
+  if(cf)list=list.filter(e=>e.client_id===cf);
+  if(inv!=='')list=list.filter(e=>String(e.invoiced)===inv);
+  const tb=document.getElementById('timer-body');
+  if(!tb)return;
+  if(!list.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--txb);padding:32px;">Geen urenregistraties gevonden</td></tr>';return;}
+  const totalMins=list.filter(e=>!e.invoiced).reduce((s,e)=>s+(e.duration_minutes||0),0);
+  tb.innerHTML=list.map(e=>{
+    const cl=C.find(c=>c.id===e.client_id);
+    const em=E.find(x=>x.id===e.employee_id);
+    const date=e.started_at?new Date(e.started_at).toLocaleDateString('nl-NL',{day:'numeric',month:'short'}):'-';
+    return`<tr>
+      <td style="font-size:12px;color:var(--txb);white-space:nowrap;">${date}</td>
+      <td style="font-family:var(--fh);font-weight:600;">${cl?cl.name:'—'}</td>
+      <td>${em?em.first+' '+em.last:'—'}</td>
+      <td>${e.description||'—'}</td>
+      <td style="font-family:var(--fh);font-weight:600;white-space:nowrap;">${fmtMins(e.duration_minutes||0)}</td>
+      <td>${e.invoiced?'<span class="badge bk">Gefactureerd</span>':'<span class="badge bo">Open</span>'}</td>
+      <td style="white-space:nowrap;">
+        ${!e.invoiced?`<button class="btn bts bta" onclick="markInvoiced('${e.id}')">Gefactureerd</button>`:''}
+        <button class="btn bts btd" style="padding:4px 8px;margin-left:4px;" onclick="deleteEntry('${e.id}')">✕</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+async function markInvoiced(id){
+  if(!confirm('Markeer als gefactureerd? De registratie blijft zichtbaar maar wordt gemarkeerd.'))return;
+  await sb.from('time_entries').update({invoiced:true}).eq('id',id);
+  await loadAll();rTimer();toast('Gemarkeerd als gefactureerd');
+}
+
+async function deleteEntry(id){
+  if(!confirm('Urenregistratie verwijderen?'))return;
+  await sb.from('time_entries').delete().eq('id',id);
+  await loadAll();rTimer();toast('Verwijderd');
+}
+
+function rClientTimer(clientId){
+  const entries=TE.filter(e=>e.client_id===clientId);
+  if(!entries.length)return'<tr><td colspan="5" style="text-align:center;color:var(--txb);padding:16px;">Geen uren geregistreerd</td></tr>';
+  return entries.map(e=>{
+    const em=E.find(x=>x.id===e.employee_id);
+    const date=e.started_at?new Date(e.started_at).toLocaleDateString('nl-NL',{day:'numeric',month:'short'}):'-';
+    return`<tr>
+      <td style="font-size:12px;color:var(--txb);">${date}</td>
+      <td>${em?em.first+' '+em.last:'—'}</td>
+      <td>${e.description||'—'}</td>
+      <td style="font-family:var(--fh);font-weight:600;">${fmtMins(e.duration_minutes||0)}</td>
+      <td>${e.invoiced?'<span class="badge bk">Gefactureerd</span>':'<span class="badge bo">Open</span>'}
+        ${!e.invoiced?`<button class="btn bts bta" style="margin-left:6px;" onclick="markInvoiced('${e.id}')">Gefactureerd</button>`:''}
+      </td>
+    </tr>`;
+  }).join('');
+}
+// ─────────────────────────────────────────────────────────────────────────────
 async function init(){
   applyBrand();
   renderLoginGrid();
